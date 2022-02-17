@@ -11,6 +11,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _navbarIndex = 0;
+  void _itemOnTapped(index) {
+    setState(() {
+      _navbarIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -237,6 +244,19 @@ class _HomeState extends State<Home> {
           ),
         ),
         //TODO Define bottom navbar
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _itemOnTapped,
+        currentIndex: _navbarIndex,
+        selectedItemColor: const Color(0xFF080A33),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search_outlined), label: 'Search'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.list_outlined), label: 'Forecast'),
+        ],
       ),
     );
   }
