@@ -196,7 +196,7 @@ class _HomeState extends State<Home> {
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               // ignore: prefer_const_constructors
                               FlutterLogo(
