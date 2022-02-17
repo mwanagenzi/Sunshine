@@ -38,7 +38,6 @@ class _HomeState extends State<Home> {
               'May 28, 2021',
               style: TextStyle(fontSize: 12),
             ),
-            //TODO : Modify color to fit design
           ],
         ),
       ),
@@ -243,7 +242,6 @@ class _HomeState extends State<Home> {
             ),
           ),
         ),
-        //TODO Define bottom navbar
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _itemOnTapped,
