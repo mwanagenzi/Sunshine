@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
 
-class WeeklyForecastScreen extends StatelessWidget {
+import '../home.dart';
+
+class WeeklyForecastScreen extends StatefulWidget {
   const WeeklyForecastScreen({Key? key}) : super(key: key);
+
+  @override
+  State<WeeklyForecastScreen> createState() => _WeeklyForecastScreenState();
+}
+
+class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
+  int _navbarIndex = 0;
+  List<Widget> appPages = [const Home(), const WeeklyForecastScreen()];
+  void _itemOnTapped(index) {
+    setState(() {
+      _navbarIndex = index;
+    });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => appPages[_navbarIndex],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,42 +45,48 @@ class WeeklyForecastScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    // ignore: prefer_const_constructors
-                    Text(
-                      'Today',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                    // ignore: prefer_const_constructors
-                    InkWell(
-                      onTap: () {
-                        //TODO : Open week forecast screen
-                      },
+                Flexible(
+                  flex:1,
+                  fit: FlexFit.tight,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
                       // ignore: prefer_const_constructors
-                      child: Text(
-                        '${DateTime.now()}', //TODO : Format this date to match design
+                      Text(
+                        'Today',
                         style: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFF4286E8),
+                          fontWeight: FontWeight.normal,
+                          fontSize: 20,
+                          color: Colors.white,
                         ),
                       ),
-                    )
-                  ],
+                      // ignore: prefer_const_constructors
+                      InkWell(
+                        onTap: () {
+                          //TODO : Open week forecast screen
+                        },
+                        // ignore: prefer_const_constructors
+                        child: Text(
+                          '${DateTime.now()}', //TODO : Format this date to match design
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF4286E8),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(
-                  height: 80,
+                Flexible(
+                   flex:1,
+                  fit: FlexFit.tight,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
                           decoration: const BoxDecoration(
                             color: Color(0xFF4286E6),
                             shape: BoxShape.rectangle,
@@ -71,11 +98,15 @@ class WeeklyForecastScreen extends StatelessWidget {
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               // ignore: prefer_const_constructors
                               FlutterLogo(
                                 size: 50.0,
+                              ),
+                              // ignore: prefer_const_constructors
+                              SizedBox(
+                                width: 10,
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -98,9 +129,7 @@ class WeeklyForecastScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                width: 5,
-                              ),
+                              
                             ],
                           ),
                         );
@@ -113,32 +142,39 @@ class WeeklyForecastScreen extends StatelessWidget {
                       },
                       itemCount: todayForecastItems),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    // ignore: prefer_const_constructors
-                    Text(
-                      'This week',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 20,
+                Flexible(
+                   flex:1,
+                  fit: FlexFit.tight,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      // ignore: prefer_const_constructors
+                      Text(
+                        'This week',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                
+                      // ignore: prefer_const_constructors
+                      Icon(
+                        Icons.calendar_today,
                         color: Colors.white,
                       ),
-                    ),
-
-                    // ignore: prefer_const_constructors
-                    Icon(
-                      Icons.calendar_today,
-                      color: Colors.white,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Flexible(
+                   flex:6,
+                  fit: FlexFit.tight,
                   child: ListView.separated(
                       itemBuilder: ((context, index) {
                         return Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
                           decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.circular(10),
@@ -189,7 +225,7 @@ class WeeklyForecastScreen extends StatelessWidget {
                       separatorBuilder: (context, index) {
                         // ignore: prefer_const_constructors
                         return SizedBox(
-                          height: 10,
+                          height: 20,
                         );
                       },
                       itemCount: weeklyForecastItems),
@@ -198,6 +234,19 @@ class WeeklyForecastScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _itemOnTapped,
+        currentIndex: _navbarIndex,
+        selectedItemColor: const Color(0xFF080A33),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.list_outlined), label: 'Forecast'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search_outlined), label: 'Search'),
+        ],
       ),
     );
   }

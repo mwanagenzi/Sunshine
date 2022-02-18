@@ -194,6 +194,7 @@ class _HomeState extends State<Home> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: const BoxDecoration(
                             color: Color(0xFF4286E6),
                             shape: BoxShape.rectangle,
@@ -210,6 +211,10 @@ class _HomeState extends State<Home> {
                               // ignore: prefer_const_constructors
                               FlutterLogo(
                                 size: 50.0,
+                              ),
+                              // ignore: prefer_const_constructors
+                              SizedBox(
+                                width: 10,
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
