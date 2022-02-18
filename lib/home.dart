@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'package:sunshine/screens/weekly_forecast_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,10 +13,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _navbarIndex = 0;
+
+  List<Widget> appPages = [const Home(), const WeeklyForecastScreen()];
   void _itemOnTapped(index) {
     setState(() {
       _navbarIndex = index;
     });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => appPages[_navbarIndex],
+      ),
+    );
   }
 
   @override
@@ -251,9 +260,9 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.search_outlined), label: 'Search'),
-          BottomNavigationBarItem(
               icon: Icon(Icons.list_outlined), label: 'Forecast'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.search_outlined), label: 'Search'),
         ],
       ),
     );
