@@ -54,7 +54,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                           //   ),
                           // ),
                           filled: true,
-                          fillColor: const Color(0xFF222249), //TODO : Add this to the theme settings
+                          fillColor: const Color(
+                              0xFF222249), //TODO : Add this to the theme settings
                           focusedBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.blue),
                           )),
@@ -63,13 +64,15 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                     ),
                   ),
                   Flexible(
-                    flex: 1,
+                    flex: 2,
                     child: Container(
-                      padding: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(15),
+
                       decoration: BoxDecoration(
+                        color: const Color(0xFF222249),
                         // color: const Color(0XFF080A33),
                         borderRadius: BorderRadius.circular(5),
-                        border: Border.all(width: 0.5, color: Colors.white),
+                        // border: Border.all(width: 0.5, color: Colors.white),
                       ),
                       // ignore: prefer_const_constructors
                       child: Icon(
@@ -79,6 +82,26 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                     ),
                   )
                 ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    decoration:  BoxDecoration(
+                      color: const Color(0xFF4286E6),
+                      borderRadius: BorderRadius.circular(15),
+                      shape: BoxShape.rectangle
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
               )
             ],
           ),
@@ -86,4 +109,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
       ),
     );
   }
+  // Widget buildSavedLocations(){
+  //   return GridView.count(crossAxisCount:,)
+  // }
 }
