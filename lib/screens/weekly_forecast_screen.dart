@@ -46,7 +46,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Flexible(
-                  flex:1,
+                  flex: 1,
                   fit: FlexFit.tight,
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -80,7 +80,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                   ),
                 ),
                 Flexible(
-                   flex:1,
+                  flex: 1,
                   fit: FlexFit.tight,
                   child: ListView.separated(
                       scrollDirection: Axis.horizontal,
@@ -129,7 +129,6 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                                   ),
                                 ],
                               ),
-                              
                             ],
                           ),
                         );
@@ -143,7 +142,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                       itemCount: todayForecastItems),
                 ),
                 Flexible(
-                   flex:1,
+                  flex: 1,
                   fit: FlexFit.tight,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -159,7 +158,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                           color: Colors.white,
                         ),
                       ),
-                
+
                       // ignore: prefer_const_constructors
                       Icon(
                         Icons.calendar_today,
@@ -169,7 +168,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                   ),
                 ),
                 Flexible(
-                   flex:6,
+                  flex: 6,
                   fit: FlexFit.tight,
                   child: ListView.separated(
                       itemBuilder: ((context, index) {
@@ -178,7 +177,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                           decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.circular(10),
-                            color: const Color(0XFF080A33),
+                            color: const Color(0xFF080A33),
                             border: Border.all(
                               width: 1.0,
                               color: const Color(0xFF4286E6),

@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'package:sunshine/screens/search_screen.dart';
 import 'package:sunshine/screens/weekly_forecast_screen.dart';
 
 class Home extends StatefulWidget {
@@ -14,7 +15,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _navbarIndex = 0;
 
-  List<Widget> appPages = [const Home(), const WeeklyForecastScreen()];
+  List<Widget> appPages = [
+    const Home(),
+    const WeeklyForecastScreen(),
+    const SearchLocationScreen(),
+  ];
   void _itemOnTapped(index) {
     setState(() {
       _navbarIndex = index;
