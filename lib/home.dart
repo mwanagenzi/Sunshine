@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
   List<Widget> appPages = [
     const Home(),
     const WeeklyForecastScreen(),
-    const SearchLocationScreen(),
+    SearchLocationScreen(),
   ];
   void _itemOnTapped(index) {
     setState(() {
@@ -115,7 +115,7 @@ class _HomeState extends State<Home> {
                           '32\u2103',
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 18,
                           ),
                         ),
                       ],
