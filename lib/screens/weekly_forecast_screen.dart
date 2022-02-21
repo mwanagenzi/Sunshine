@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sunshine/screens/search_screen.dart';
 
 import '../home.dart';
+import '../widgets/widgets.dart';
 
 class WeeklyForecastScreen extends StatefulWidget {
   const WeeklyForecastScreen({Key? key}) : super(key: key);
@@ -11,7 +13,11 @@ class WeeklyForecastScreen extends StatefulWidget {
 
 class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
   int _navbarIndex = 0;
-  List<Widget> appPages = [const Home(), const WeeklyForecastScreen()];
+  List<Widget> appPages = [
+    const Home(),
+    const WeeklyForecastScreen(),
+    SearchLocationScreen()
+  ];
   void _itemOnTapped(index) {
     setState(() {
       _navbarIndex = index;
@@ -96,41 +102,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                             ),
                             // ),
                           ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              // ignore: prefer_const_constructors
-                              FlutterLogo(
-                                size: 50.0,
-                              ),
-                              // ignore: prefer_const_constructors
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                                  // ignore: prefer_const_constructors
-                                  Text(
-                                    '14:00',
-                                    // ignore: prefer_const_constructors
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                    // ignore: prefer_const_constructors
-                                  ),
-                                  // ignore: prefer_const_constructors
-                                  Text(
-                                    '32\u2103',
-                                    // ignore: prefer_const_constructors
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                          child: HourlyWeatherCard(),
                         );
                       },
                       separatorBuilder: (context, index) {

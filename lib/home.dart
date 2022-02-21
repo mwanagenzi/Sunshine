@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:sunshine/screens/search_screen.dart';
 import 'package:sunshine/screens/weekly_forecast_screen.dart';
 
+import 'widgets/widgets.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -58,7 +60,7 @@ class _HomeState extends State<Home> {
       body: Container(
         color: const Color(0xFF080A33),
         //Reference sunshine_app.jpg
-
+      
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Center(
@@ -209,44 +211,7 @@ class _HomeState extends State<Home> {
                             ),
                             // ),
                           ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              // ignore: prefer_const_constructors
-                              FlutterLogo(
-                                size: 50.0,
-                              ),
-                              // ignore: prefer_const_constructors
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                // ignore: prefer_const_literals_to_create_immutables
-                                children: [
-                                  // ignore: prefer_const_constructors
-                                  Text(
-                                    '14:00',
-                                    // ignore: prefer_const_constructors
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12),
-                                    // ignore: prefer_const_constructors
-                                  ),
-                                  // ignore: prefer_const_constructors
-                                  Text(
-                                    '32\u2103',
-                                    // ignore: prefer_const_constructors
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                            ],
-                          ),
+                          child: HourlyWeatherCard(),
                         );
                       },
                       separatorBuilder: (context, index) {
@@ -278,3 +243,4 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
