@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/home.dart';
 import 'package:sunshine/provider/navbar_tab_manager.dart';
+import 'package:sunshine/screens/screens.dart';
 
 void main() {
   runApp(const Sunshine());
@@ -20,7 +21,7 @@ class Sunshine extends StatelessWidget {
       ),
       home: ChangeNotifierProvider(
         create: ((context) => NavbarTabManager()),
-        child: const Home(),
+        child: const HomeScreen(),
       ),
     );
   }

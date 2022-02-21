@@ -1,8 +1,9 @@
 // ignore_for_file: unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sunshine/provider/navbar_tab_manager.dart';
 import 'screens/screens.dart';
-
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,24 +21,14 @@ class _HomeState extends State<Home> {
     const WeeklyForecastScreen(),
     SearchLocationScreen(),
   ];
-  void _itemOnTapped(index) {
-    setState(() {
-      _navbarIndex = index;
-    });
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => appPages[_navbarIndex],
-      ),
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: appPages[
-        //TODO: tab index
-      ],
+    return Consumer<NavbarTabManager>(
+      builder: ((context, navbarTabManager, child) {
+        return appPages[navbarTabManager.selectedTab];
+      }),
     );
   }
 }
