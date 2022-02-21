@@ -73,13 +73,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(color: Colors.white),
                             ),
-                            // enabledBorder: OutlineInputBorder(
-                            //   borderRadius: BorderRadius.circular(10),
-                            //   borderSide: const BorderSide(
-                            //     width: 1,
-                            //     color: Colors.white,
-                            //   ),
-                            // ),
                             filled: true,
                             fillColor: const Color(
                                 0xFF222249), //TODO : Add this to the theme settings
@@ -137,7 +130,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
 
   Widget buildSavedLocations() {
     return GridView.builder(
-      shrinkWrap: true,
+        shrinkWrap: true,
         itemCount: widget.itemsIndex,
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
