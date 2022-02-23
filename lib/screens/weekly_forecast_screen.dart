@@ -152,19 +152,6 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
               ),
             ),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (index) => navbarTabManager.goToTab(index),
-            currentIndex: navbarTabManager.selectedTab,
-            selectedItemColor: const Color(0xFF080A33),
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined), label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.list_outlined), label: 'Forecast'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.search_outlined), label: 'Search'),
-            ],
-          ),
         );
       },
     );

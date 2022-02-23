@@ -15,7 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Widget> appPages = [
-    const Home(),
+    const HomeScreen(),
     const WeeklyForecastScreen(),
     SearchLocationScreen(),
   ];
@@ -24,7 +24,24 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Consumer<NavbarTabManager>(
       builder: ((context, navbarTabManager, child) {
-        return appPages[navbarTabManager.selectedTab];
+        return Scaffold(
+          body: appPages[navbarTabManager.selectedTab],
+          bottomNavigationBar: BottomNavigationBar(
+            onTap: (index) {
+              navbarTabManager.goToTab(index);
+            },
+            currentIndex: navbarTabManager.selectedTab,
+            selectedItemColor: const Color(0xFF080A33),
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined), label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.list_outlined), label: 'Forecast'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.search_outlined), label: 'Search'),
+            ],
+          ),
+        );
       }),
     );
   }

@@ -14,223 +14,205 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<NavbarTabManager>(
-      builder: ((context, navbarTabManager, child) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: const Color(0XFF080A33),
-            toolbarHeight: 100,
-            centerTitle: true,
-            title: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                const Text('San Fransisco'),
-                // ignore: prefer_const_constructors
-                SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  'May 28, 2021',
-                  style: TextStyle(fontSize: 12),
-                ),
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0XFF080A33),
+        toolbarHeight: 100,
+        centerTitle: true,
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [
+            const Text('San Fransisco'),
+            // ignore: prefer_const_constructors
+            SizedBox(
+              height: 10,
             ),
-          ),
-          body: Container(
-            color: const Color(0xFF080A33),
-            //Reference sunshine_app.jpg
+            const Text(
+              'May 28, 2021',
+              style: TextStyle(fontSize: 12),
+            ),
+          ],
+        ),
+      ),
+      body: Container(
+        color: const Color(0xFF080A33),
+        //Reference sunshine_app.jpg
 
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        OutlinedButton(
-                          // ignore: prefer_const_constructors
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF4286E6),
-                            ),
-                          ),
-                          onPressed: () {
-                            //TODO : Forecast details
-                          },
-                          // ignore: prefer_const_constructors
-                          child: const Text('Forecast',
-                              style: TextStyle(color: Colors.white)),
+                    OutlinedButton(
+                      // ignore: prefer_const_constructors
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                          const Color(0xFF4286E6),
                         ),
-                        OutlinedButton(
-                          onPressed: () {
-                            //TODO : Air quality details, fetch from another design
-                          },
-                          child: const Text(
-                            'Air quality',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
+                      ),
+                      onPressed: () {
+                        //TODO : Forecast details
+                      },
+                      // ignore: prefer_const_constructors
+                      child: const Text('Forecast',
+                          style: TextStyle(color: Colors.white)),
                     ),
-                    const FlutterLogo(size: 400.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            const Text(
-                              'Temp',
-                              // ignore: unnecessary_const
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const Text(
-                              '32\u2103',
-                              // ignore: unnecessary_const
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            const Text(
-                              'Wind',
-                              // ignore: unnecessary_const
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const Text(
-                              '10 km/h',
-                              // ignore: unnecessary_const
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          // ignore: prefer_const_literals_to_create_immutables
-                          children: [
-                            const Text(
-                              'Humidity',
-                              // ignore: unnecessary_const
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const Text(
-                              '75%',
-                              // ignore: unnecessary_const
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                          ],
-                        )
-                      ],
+                    OutlinedButton(
+                      onPressed: () {
+                        //TODO : Air quality details, fetch from another design
+                      },
+                      child: const Text(
+                        'Air quality',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
+                  ],
+                ),
+                const FlutterLogo(size: 400.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        // ignore: prefer_const_constructors
-                        Text(
-                          'Today',
+                        const Text(
+                          'Temp',
+                          // ignore: unnecessary_const
                           style: const TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 20,
+                            fontSize: 12,
                             color: Colors.white,
                           ),
                         ),
-                        // ignore: prefer_const_constructors
-                        InkWell(
-                          onTap: () {
-                            //TODO : Open week forecast screen
-                          },
-                          // ignore: prefer_const_constructors
-                          child: Text(
-                            'View full report',
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF4286E8),
-                            ),
+                        const Text(
+                          '32\u2103',
+                          // ignore: unnecessary_const
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
                           ),
-                        )
+                        ),
                       ],
                     ),
-                    SizedBox(
-                      height: 80,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: const BoxDecoration(
-                              color: Color(0xFF4286E6),
-                              shape: BoxShape.rectangle,
-                              // RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                              // ),
-                            ),
-                            child: const HourlyWeatherCard(),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          // ignore: prefer_const_constructors
-                          return SizedBox(
-                            width: 10,
-                          );
-                        },
-                        itemCount: 10, //TODO : Supply an identifier as an index
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        const Text(
+                          'Wind',
+                          // ignore: unnecessary_const
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const Text(
+                          '10 km/h',
+                          // ignore: unnecessary_const
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        const Text(
+                          'Humidity',
+                          // ignore: unnecessary_const
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const Text(
+                          '75%',
+                          // ignore: unnecessary_const
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 20),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    // ignore: prefer_const_constructors
+                    Text(
+                      'Today',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    // ignore: prefer_const_constructors
+                    InkWell(
+                      onTap: () {
+                        //TODO : Open week forecast screen
+                      },
+                      // ignore: prefer_const_constructors
+                      child: Text(
+                        'View full report',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF4286E8),
+                        ),
                       ),
                     )
                   ],
                 ),
-              ),
+                SizedBox(
+                  height: 80,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF4286E6),
+                          shape: BoxShape.rectangle,
+                          // RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          // ),
+                        ),
+                        child: const HourlyWeatherCard(),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      // ignore: prefer_const_constructors
+                      return SizedBox(
+                        width: 10,
+                      );
+                    },
+                    itemCount: 10, //TODO : Supply an identifier as an index
+                  ),
+                )
+              ],
             ),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (index) {
-              navbarTabManager.goToTab(index);
-            },
-            currentIndex: navbarTabManager.selectedTab,
-            selectedItemColor: const Color(0xFF080A33),
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined), label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.list_outlined), label: 'Forecast'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.search_outlined), label: 'Search'),
-            ],
-          ),
-        );
-      }),
+        ),
+      ),
+      
     );
   }
 }
