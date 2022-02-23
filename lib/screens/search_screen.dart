@@ -104,8 +104,12 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
     return GridView.builder(
         shrinkWrap: true,
         itemCount: widget.itemsIndex,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 3 / 2,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 25,
+        ),
         itemBuilder: (context, index) {
           return const LocationWeatherCard();
         });

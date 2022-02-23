@@ -9,7 +9,7 @@ class LocationWeatherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       
-      margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+      // margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
       decoration: BoxDecoration(
           color: const Color(0xFF4286E6),
