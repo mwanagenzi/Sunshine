@@ -21,7 +21,7 @@ class Sunshine extends StatelessWidget {
       ),
       home: ChangeNotifierProvider(
         create: ((context) => NavbarTabManager()),
-        child: const HomeScreen(),
+        child: const Home(),
       ),
     );
   }

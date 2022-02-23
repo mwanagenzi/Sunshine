@@ -14,14 +14,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _navbarIndex = 0;
-
   List<Widget> appPages = [
     const Home(),
     const WeeklyForecastScreen(),
     SearchLocationScreen(),
   ];
-  
 
   @override
   Widget build(BuildContext context) {
