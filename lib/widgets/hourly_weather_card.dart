@@ -8,7 +8,7 @@ class HourlyWeatherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.max,
+      // mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // ignore: prefer_const_constructors
@@ -27,16 +27,14 @@ class HourlyWeatherCard extends StatelessWidget {
             Text(
               '14:00',
               // ignore: prefer_const_constructors
-              style: TextStyle(
-                  color: Colors.white, fontSize: 12),
+              style: TextStyle(color: Colors.white, fontSize: 12),
               // ignore: prefer_const_constructors
             ),
             // ignore: prefer_const_constructors
             Text(
               '32\u2103',
               // ignore: prefer_const_constructors
-              style: TextStyle(
-                  color: Colors.white, fontSize: 18),
+              style: TextStyle(color: Colors.white, fontSize: 18),
             ),
           ],
         ),
