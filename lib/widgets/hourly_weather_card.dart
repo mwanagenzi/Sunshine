@@ -27,14 +27,14 @@ class HourlyWeatherCard extends StatelessWidget {
             Text(
               '14:00',
               // ignore: prefer_const_constructors
-              style: TextStyle(color: Colors.white, fontSize: 12),
+              style: TextStyle(color: Colors.white, fontSize: 12), //TODO text theme - caption
               // ignore: prefer_const_constructors
             ),
             // ignore: prefer_const_constructors
             Text(
               '32\u2103',
               // ignore: prefer_const_constructors
-              style: TextStyle(color: Colors.white, fontSize: 18),
+              style: TextStyle(color: Colors.white, fontSize: 18),// TODO : text theme - headline6
             ),
           ],
         ),

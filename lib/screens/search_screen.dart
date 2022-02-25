@@ -20,7 +20,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
       builder: (context, navbarTabManager, child) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: const Color(0xFF080A33),
+            backgroundColor: const Color(0xFF080A33), //TODO : appbar background color
             toolbarHeight: 100,
             centerTitle: true,
             // ignore: prefer_const_constructors
@@ -29,7 +29,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
           body: Center(
             child: Container(
               decoration: const BoxDecoration(
-                color: Color(0xFF080A33),
+                color: Color(0xFF080A33), //TODo : scaffold background color
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -74,7 +74,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                             padding: const EdgeInsets.all(15),
 
                             decoration: BoxDecoration(
-                              color: const Color(0xFF222249),
+                              color: const Color(0xFF222249), //TODO : card background color
                               borderRadius: BorderRadius.circular(5),
                             ),
                             // ignore: prefer_const_constructors

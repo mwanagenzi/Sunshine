@@ -28,7 +28,7 @@ class DailyForecastCard extends StatelessWidget {
               const Text(
                 'Temp',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 20, //TODO : text theme headline6
                   color: Colors.white,
                 ),
               ),
@@ -36,7 +36,7 @@ class DailyForecastCard extends StatelessWidget {
                 '32\u2103',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 12,
+                  fontSize: 12, //TODO : texttheme caption
                 ),
               ),
             ],
@@ -45,7 +45,7 @@ class DailyForecastCard extends StatelessWidget {
             '32\u2103',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 30,
+              fontSize: 30, //TODO : texttheme headline 4
             ),
           ),
           // ignore: prefer_const_constructors

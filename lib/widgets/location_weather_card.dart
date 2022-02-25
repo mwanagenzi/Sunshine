@@ -12,7 +12,7 @@ class LocationWeatherCard extends StatelessWidget {
       // margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
       decoration: BoxDecoration(
-          color: const Color(0xFF4286E6),
+          color: const Color(0xFF4286E6),// TODO : highlighted button text color
           borderRadius: BorderRadius.circular(15),
           shape: BoxShape.rectangle),
       child: Column(
@@ -35,7 +35,7 @@ class LocationWeatherCard extends StatelessWidget {
                     // ignore: unnecessary_const
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
+                      fontSize: 22, //TODO textTheme headline5
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -43,7 +43,7 @@ class LocationWeatherCard extends StatelessWidget {
                     'Cloudy',
                     // ignore: unnecessary_const
                     style: const TextStyle(
-                      fontSize: 12,
+                      fontSize: 12, //TODO : textTheme caption
                       color: Colors.white,
                     ),
                   ),
@@ -65,7 +65,7 @@ class LocationWeatherCard extends StatelessWidget {
             'Carlifornia',
             // ignore: unnecessary_const
             style: const TextStyle(
-              fontSize: 15,
+              fontSize: 15, //TODO : textTheme body1
               color: Colors.white,
             ),
           ),
