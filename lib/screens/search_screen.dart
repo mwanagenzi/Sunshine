@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/provider/providers.dart';
 
+import '../sunshine_theme/theme.dart';
 import '../widgets/widgets.dart';
 
 // ignore: must_be_immutable
@@ -20,7 +21,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
       builder: (context, navbarTabManager, child) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: const Color(0xFF080A33), //TODO : appbar background color
+            backgroundColor:
+                Palette.primaryColor, //TODO : appbar background color
             toolbarHeight: 100,
             centerTitle: true,
             // ignore: prefer_const_constructors
@@ -29,7 +31,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
           body: Center(
             child: Container(
               decoration: const BoxDecoration(
-                color: Color(0xFF080A33), //TODo : scaffold background color
+                color: Palette.primaryColor, //TODo : scaffold background color
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -44,26 +46,27 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                           child: TextFormField(
                             // ignore: prefer_const_constructors
                             decoration: InputDecoration(
-                                hintText: 'Search',
-                                // ignore: prefer_const_constructors
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                prefixIcon: const Icon(
-                                  Icons.search_rounded,
-                                  color: Colors.white,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide:
-                                      const BorderSide(color: Colors.white),
-                                ),
-                                filled: true,
-                                fillColor: const Color(
-                                    0xFF222249), //TODO : Add this to the theme settings
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.blue),
-                                )),
+                              hintText: 'Search',
+                              // ignore: prefer_const_constructors
+                              hintStyle: TextStyle(
+                                color: Colors.white,
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.search_rounded,
+                                color: Colors.white,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                              ),
+                              filled: true,
+                              fillColor: Palette
+                                  .searchBarColor, //TODO : Add this to the theme settings
+                              focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue),
+                              ),
+                            ),
                             cursorColor: Colors.white,
                             //TODO: Validate input
                           ),
@@ -74,7 +77,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                             padding: const EdgeInsets.all(15),
 
                             decoration: BoxDecoration(
-                              color: const Color(0xFF222249), //TODO : card background color
+                              color: const Color(
+                                  0xFF222249), //TODO : card background color
                               borderRadius: BorderRadius.circular(5),
                             ),
                             // ignore: prefer_const_constructors

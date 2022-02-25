@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunshine/sunshine_theme/palette.dart';
 
 import '../widgets/widgets.dart';
 
@@ -14,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0XFF080A33), //TODO : appbar background color
+        backgroundColor: Palette.primaryColor, //TODO : appbar background color
         toolbarHeight: 100,
         centerTitle: true,
         title: Column(
@@ -28,13 +29,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const Text(
               'May 28, 2021',
-              style: TextStyle(fontSize: 12),//TODO : textTheme caption
+              style: TextStyle(fontSize: 12), //TODO : textTheme caption
             ),
           ],
         ),
       ),
       body: Container(
-        color: const Color(0xFF080A33),//TODO : container or card background color
+        color:
+            Palette.activeCardColor, //TODO : container or card background color
         //Reference sunshine_app.jpg
 
         child: Padding(
@@ -51,16 +53,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     OutlinedButton(
                       // ignore: prefer_const_constructors
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          const Color(0xFF4286E6), //TODO : highlighted button color
-                        ),
+                        backgroundColor: MaterialStateProperty.all(Palette
+                                .activeCardColor //TODO : highlighted button color
+                            ),
                       ),
                       onPressed: () {
                         //TODO : Forecast details
                       },
                       // ignore: prefer_const_constructors
-                      child: const Text('Forecast',
-                          style: TextStyle(color: Colors.white)),
+                      child: const Text(
+                        'Forecast',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                     OutlinedButton(
                       onPressed: () {
@@ -95,7 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           // ignore: unnecessary_const
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18, //TODO : textTheme headline6 or subtitle1
+                            fontSize:
+                                18, //TODO : textTheme headline6 or subtitle1
                           ),
                         ),
                       ],
@@ -108,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Wind',
                           // ignore: unnecessary_const
                           style: const TextStyle(
-                            fontSize: 12,//TODO textTheme - caption
+                            fontSize: 12, //TODO textTheme - caption
                             color: Colors.white,
                           ),
                         ),
@@ -117,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           // ignore: unnecessary_const
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 20,//TODO textTheme - headline 6
+                            fontSize: 20, //TODO textTheme - headline 6
                           ),
                         ),
                       ],
@@ -130,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Humidity',
                           // ignore: unnecessary_const
                           style: const TextStyle(
-                            fontSize: 12,//TODO textTheme - caption
+                            fontSize: 12, //TODO textTheme - caption
                             color: Colors.white,
                           ),
                         ),
@@ -138,7 +143,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           '75%',
                           // ignore: unnecessary_const
                           style: const TextStyle(
-                              color: Colors.white, fontSize: 20), //TODO textTheme - headline6
+                              color: Colors.white,
+                              fontSize: 20), //TODO textTheme - headline6
                         ),
                       ],
                     )
@@ -157,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       'Today',
                       style: const TextStyle(
                         fontWeight: FontWeight.normal,
-                        fontSize: 20,//TODO textTheme - headline6
+                        fontSize: 20, //TODO textTheme - headline6
                         color: Colors.white,
                       ),
                     ),
@@ -171,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         'View full report',
                         style: const TextStyle(
                           fontSize: 12, //TODO textTheme - caption
-                          color: Color(0xFF4286E8),
+                          color: Palette.highlightedTextColor,
                         ),
                       ),
                     )

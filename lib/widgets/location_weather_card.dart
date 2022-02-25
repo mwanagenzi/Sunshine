@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunshine/sunshine_theme/theme.dart';
 
 class LocationWeatherCard extends StatelessWidget {
   const LocationWeatherCard({
@@ -12,7 +13,7 @@ class LocationWeatherCard extends StatelessWidget {
       // margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
       decoration: BoxDecoration(
-          color: const Color(0xFF4286E6),// TODO : highlighted button text color
+          color: Palette.activeCardColor,// TODO : highlighted button text color
           borderRadius: BorderRadius.circular(15),
           shape: BoxShape.rectangle),
       child: Column(

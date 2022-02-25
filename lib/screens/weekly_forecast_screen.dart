@@ -58,7 +58,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                               fontWeight: FontWeight.normal,
                               fontSize: 20,
                               color: Colors.white,
-                            ),
+                            ), //TODO textTheme headline6
                           ),
                           // ignore: prefer_const_constructors
                           InkWell(

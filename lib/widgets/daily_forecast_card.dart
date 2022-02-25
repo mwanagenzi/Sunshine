@@ -26,14 +26,14 @@ class DailyForecastCard extends StatelessWidget {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               const Text(
-                'Temp',
+                'Friday',
                 style: TextStyle(
                   fontSize: 20, //TODO : text theme headline6
                   color: Colors.white,
                 ),
               ),
               const Text(
-                '32\u2103',
+                'May, 28',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 12, //TODO : texttheme caption
