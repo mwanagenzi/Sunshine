@@ -177,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         'View full report',
                         style: const TextStyle(
                           fontSize: 12, //TODO textTheme - caption
-                          color: Palette.highlightedTextColor,
+                          color: Color(0xFF4286E8),
                         ),
                       ),
                     )

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sunshine/home.dart';
 import 'package:sunshine/provider/navbar_tab_manager.dart';
 import 'package:sunshine/screens/screens.dart';
+import 'package:sunshine/sunshine_theme/theme.dart';
 
 void main() {
   runApp(const Sunshine());
@@ -16,9 +17,7 @@ class Sunshine extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: SunshineTheme.themeData(),
       home: ChangeNotifierProvider(
         create: ((context) => NavbarTabManager()),
         child: const Home(),

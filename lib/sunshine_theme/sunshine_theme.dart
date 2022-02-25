@@ -8,9 +8,12 @@ class SunshineTheme {
       appBarTheme: AppBarTheme(
         color: Palette.primaryColor,
         elevation: 2.0,
-        shadowColor: const Color(0xFF4286E6),
+        shadowColor: Palette.activeCardColor,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
-      scaffoldBackgroundColor: const Color(0XFF080A33),
+      scaffoldBackgroundColor: Palette.primaryColor,
+      textTheme: SunshineTheme.textTheme,
+
       // ignore: prefer_const_constructors
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         selectedItemColor: Colors.black,
@@ -40,7 +43,7 @@ class SunshineTheme {
     headline5: TextStyle(
       color: Colors.white,
       fontSize: 22, //TODO textTheme headline5
-    ),//location weather temperature
+    ), //location weather temperature
     // ignore: unnecessary_const
     bodyText1: const TextStyle(
       fontWeight: FontWeight.normal,
