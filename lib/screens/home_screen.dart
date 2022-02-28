@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Container(
         color:
-            Palette.activeCardColor, //TODO : container or card background color
+            Palette.primaryColor, //container or card background color
         //Reference sunshine_app.jpg
 
         child: Padding(
