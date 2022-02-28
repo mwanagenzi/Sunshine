@@ -18,6 +18,8 @@ class LocationWeatherCard extends StatelessWidget {
           shape: BoxShape.rectangle),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -61,7 +63,7 @@ class LocationWeatherCard extends StatelessWidget {
             ],
           ),
           // ignore: prefer_const_constructors
-          SizedBox(height: 20),
+          
           const Text(
             'Carlifornia',
             // ignore: unnecessary_const

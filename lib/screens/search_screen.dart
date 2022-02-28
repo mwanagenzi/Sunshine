@@ -23,7 +23,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
           appBar: AppBar(
             backgroundColor:
                 Palette.primaryColor, //TODO : appbar background color
-            toolbarHeight: 100,
+            
             centerTitle: true,
             // ignore: prefer_const_constructors
             title: Text('Pick Location'),
@@ -37,7 +37,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Flexible(
-                    flex: 2,
+                    flex: 1,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -92,9 +92,9 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                     ),
                   ),
                   Flexible(
-                    flex: 4,
+                    flex: 5,
                     child: buildSavedLocations(),
-                  )
+                  ),
                 ],
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/provider/navbar_tab_manager.dart';
 import 'screens/screens.dart';
+import 'services/location_service.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,6 +20,15 @@ class _HomeState extends State<Home> {
     const WeeklyForecastScreen(),
     SearchLocationScreen(),
   ];
+
+  LocationService locationService = LocationService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // locationService.checkLocationPermission();
+    locationService.getCurrentLocationCoordinates();
+  }
 
   @override
   Widget build(BuildContext context) {

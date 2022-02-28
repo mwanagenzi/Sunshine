@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 
+import '../services/location_service.dart';
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,12 +12,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // final LocationService _locationService = LocationService();
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _locationService.getCurrentLocationCoordinates();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Palette.primaryColor, //TODO : appbar background color
-        toolbarHeight: 100,
+        backgroundColor: Palette.primaryColor,
         centerTitle: true,
         title: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,8 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: Container(
-        color:
-            Palette.primaryColor, //container or card background color
+        color: Palette.primaryColor, //container or card background color
         //Reference sunshine_app.jpg
 
         child: Padding(
@@ -77,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                const FlutterLogo(size: 400.0),
+                const FlutterLogo(size: 200.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.max,
