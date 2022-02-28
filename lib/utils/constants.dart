@@ -1,2 +1,2 @@
-const String kApiKey = '937f3d8580d8f6729c7e59389fb0109a';
-const String kOpenWeatherUrl = ''; //TODO : find out the static part of the openWeatherUrl
+const String kApiKey = '71314b6f76f14c8eb1f90340222602';
+const String kWeatherApiUrl = 'http://api.weatherapi.com/v1'; //TODO : find out the static part of the openWeatherUrl
