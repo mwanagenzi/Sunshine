@@ -16,7 +16,7 @@ class LocationService {
     LocationPermission permission = await Geolocator.checkPermission();
 
     if (permission != LocationPermission.denied && serviceEnabled) {
-      print("Three conditions are enabled");
+      print("Two conditions are enabled");
       // return true;
     } else if (!serviceEnabled) {
       print("Location service is disabled");
@@ -24,7 +24,7 @@ class LocationService {
       // return true;
     } else {
       print("All conditions are down and out");
-      // return false;
+      
     }
   }
 
