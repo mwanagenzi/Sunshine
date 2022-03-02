@@ -29,73 +29,76 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
             title: Text('Pick Location'),
           ),
           body: Center(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Palette.primaryColor, //TODo : scaffold background color
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Flexible(
-                          flex: 5,
-                          child: TextFormField(
-                            // ignore: prefer_const_constructors
-                            decoration: InputDecoration(
-                              hintText: 'Search',
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Palette.primaryColor, //TODo : scaffold background color
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Flexible(
+                      flex: 1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Flexible(
+                            flex: 5,
+                            child: TextFormField(
                               // ignore: prefer_const_constructors
-                              hintStyle: TextStyle(
-                                color: Colors.white,
+                              decoration: InputDecoration(
+                                hintText: 'Search',
+                                // ignore: prefer_const_constructors
+                                hintStyle: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.search_rounded,
+                                  color: Colors.white,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                ),
+                                filled: true,
+                                fillColor: Palette
+                                    .searchBarColor, //TODO : Add this to the theme settings
+                                focusedBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.blue),
+                                ),
                               ),
-                              prefixIcon: const Icon(
-                                Icons.search_rounded,
-                                color: Colors.white,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                              ),
-                              filled: true,
-                              fillColor: Palette
-                                  .searchBarColor, //TODO : Add this to the theme settings
-                              focusedBorder: const UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue),
-                              ),
+                              cursorColor: Colors.white,
+                              //TODO: Validate input
                             ),
-                            cursorColor: Colors.white,
-                            //TODO: Validate input
                           ),
-                        ),
-                        Flexible(
-                          flex: 2,
-                          child: Container(
-                            padding: const EdgeInsets.all(15),
+                          Flexible(
+                            flex: 2,
+                            child: Container(
+                              padding: const EdgeInsets.all(15),
 
-                            decoration: BoxDecoration(
-                              color: const Color(
-                                  0xFF222249), //TODO : card background color
-                              borderRadius: BorderRadius.circular(5),
+                              decoration: BoxDecoration(
+                                color: const Color(
+                                    0xFF222249), //TODO : card background color
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              // ignore: prefer_const_constructors
+                              child: Icon(
+                                Icons.location_on_outlined,
+                                color: Colors.white,
+                              ),
                             ),
-                            // ignore: prefer_const_constructors
-                            child: Icon(
-                              Icons.location_on_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  Flexible(
-                    flex: 5,
-                    child: buildSavedLocations(),
-                  ),
-                ],
+                    Flexible(
+                      flex: 5,
+                      child: buildSavedLocations(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

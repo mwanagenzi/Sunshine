@@ -9,11 +9,13 @@ class LocationWeatherCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       // margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 25,
+      ),
       decoration: BoxDecoration(
-          color: Palette.activeCardColor,// TODO : highlighted button text color
+          color:
+              Palette.activeCardColor, // TODO : highlighted button text color
           borderRadius: BorderRadius.circular(15),
           shape: BoxShape.rectangle),
       child: Column(
@@ -23,14 +25,14 @@ class LocationWeatherCard extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    
+
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
-    
+
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   const Text(
@@ -63,7 +65,7 @@ class LocationWeatherCard extends StatelessWidget {
             ],
           ),
           // ignore: prefer_const_constructors
-          
+
           const Text(
             'Carlifornia',
             // ignore: unnecessary_const

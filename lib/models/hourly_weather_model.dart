@@ -10,6 +10,6 @@ class HourlyWeatherModel {
     required this.time,
     required this.temperature,
   });
-
+  
   //TODO : Incoroporate methods and more ...
 }

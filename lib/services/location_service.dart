@@ -24,11 +24,10 @@ class LocationService {
       // return true;
     } else {
       print("All conditions are down and out");
-      
     }
   }
 
-  Future<void> getCurrentLocationCoordinates() async {
+  Future<List<double>> getCurrentLocationCoordinates() async {
     print("This method is being accessed");
 
     try {
@@ -37,13 +36,16 @@ class LocationService {
               .best); //TODO test location accuracy improvements on later versions
       locationLatitude = position.latitude;
       locationLongitude = position.longitude;
-      print(locationLatitude);
+      return [locationLatitude!, locationLongitude!];
     } on Exception catch (e) {
       print("getCurrentPosition() error : $e");
+      return [4, 0, 4];
     } finally {
       print("This method was accessed");
+      print("${locationLatitude!}, ${locationLongitude!}");
+      // ignore: control_flow_in_finally
+      return [locationLatitude!, locationLongitude!];
     }
-    // List<double> coordinates = [locationLatitude!, locationLongitude!];
   }
 
   // Future<List<double>> _getCityCoordinates() async {

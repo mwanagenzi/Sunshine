@@ -19,7 +19,7 @@ class NetworkHelper {
       var errorApiData = response.body;
       print("response error code : $statusCode /n"
           "response body : $errorApiData");
-      return null;
+      return errorApiData;
     }
   }
 }
