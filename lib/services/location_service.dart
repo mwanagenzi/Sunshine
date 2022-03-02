@@ -27,7 +27,7 @@ class LocationService {
     }
   }
 
-  Future<List<double>> getCurrentLocationCoordinates() async {
+  Future<List<double>?> getCurrentLocationCoordinates() async {
     print("This method is being accessed");
 
     try {
@@ -42,7 +42,7 @@ class LocationService {
       return [4, 0, 4];
     } finally {
       print("This method was accessed");
-      print("${locationLatitude!}, ${locationLongitude!}");
+      print("${locationLatitude!},${locationLongitude!}");
       // ignore: control_flow_in_finally
       return [locationLatitude!, locationLongitude!];
     }

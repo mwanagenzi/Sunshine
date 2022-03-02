@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sunshine/models/current_weather_model.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 
-import '../services/location_service.dart';
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,12 +12,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // final LocationService _locationService = LocationService();
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _locationService.getCurrentLocationCoordinates();
-  // }
+  double? currentTemp;
+  double? currentWindSpeed;
+  int? currentHumidity;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Future<void> fetchCurrentWeatherData() async {
+      var currentWeatherData =
+          await CurrentWeatherModel().fetchCurrentWeatherData();
+      currentTemp = currentWeatherData['current']['temp_c'];
+      currentWindSpeed = currentWeatherData['current']['wind_kph'];
+      currentHumidity = currentWeatherData['current']['Humidity'];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,15 +103,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         const Text(
-                          'Temp',
+                          "Temp",
                           // ignore: unnecessary_const
                           style: const TextStyle(
                             fontSize: 12, //TODO textTheme - caption
                             color: Colors.white,
                           ),
                         ),
-                        const Text(
-                          '32\u2103',
+                        Text(
+                          "${currentTemp.toString()}\u2103",
                           // ignore: unnecessary_const
                           style: const TextStyle(
                             color: Colors.white,
@@ -123,8 +133,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        const Text(
-                          '10 km/h',
+                        Text(
+                          "${currentWindSpeed.toString()}% km/h",
                           // ignore: unnecessary_const
                           style: const TextStyle(
                             color: Colors.white,
@@ -145,8 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        const Text(
-                          '75%',
+                        Text(
+                          "${currentHumidity.toString()}%",
                           // ignore: unnecessary_const
                           style: const TextStyle(
                               color: Colors.white,
