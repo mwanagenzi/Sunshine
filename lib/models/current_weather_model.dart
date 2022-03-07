@@ -8,7 +8,7 @@ LocationService cLocationService = LocationService();
 class CurrentWeatherModel {
    int? windSpeed;
    int? humidity;
-   int? currentTemperature;
+   double? currentTemperature;
 
   CurrentWeatherModel({
      this.windSpeed,

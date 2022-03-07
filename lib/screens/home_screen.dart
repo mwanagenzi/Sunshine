@@ -15,18 +15,21 @@ class _HomeScreenState extends State<HomeScreen> {
   double? currentTemp;
   double? currentWindSpeed;
   int? currentHumidity;
+  Future<dynamic> fetchCurrentWeatherData() async {
+    return await CurrentWeatherModel().fetchCurrentWeatherData();
+    // currentTemp = currentWeatherData['current']['temp_c'];
+    // currentWindSpeed = currentWeatherData['current']['temp_f'];
+    // currentHumidity = currentWeatherData['current']['humidity'];
+    // print("windspeed : $currentWindSpeed, humidity: $currentHumidity");
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    Future<void> fetchCurrentWeatherData() async {
-      var currentWeatherData =
-          await CurrentWeatherModel().fetchCurrentWeatherData();
-      currentTemp = currentWeatherData['current']['temp_c'];
-      currentWindSpeed = currentWeatherData['current']['wind_kph'];
-      currentHumidity = currentWeatherData['current']['Humidity'];
-    }
+    setState(() {
+      fetchCurrentWeatherData();
+    });
   }
 
   @override
@@ -110,15 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        Text(
-                          "${currentTemp.toString()}\u2103",
-                          // ignore: unnecessary_const
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize:
-                                18, //TODO : textTheme headline6 or subtitle1
-                          ),
-                        ),
+                        buildFutureData(jsonField: 'temp_c')
                       ],
                     ),
                     Column(
@@ -133,14 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        Text(
-                          "${currentWindSpeed.toString()}% km/h",
-                          // ignore: unnecessary_const
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20, //TODO textTheme - headline 6
-                          ),
-                        ),
+                        buildFutureData(jsonField: 'wind_kph'),
                       ],
                     ),
                     Column(
@@ -155,13 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        Text(
-                          "${currentHumidity.toString()}%",
-                          // ignore: unnecessary_const
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20), //TODO textTheme - headline6
-                        ),
+                        buildFutureData(jsonField: 'humidity'),
                       ],
                     )
                   ],
@@ -206,11 +188,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: const BoxDecoration(
                           color: Color(0xFF4286E6),
                           shape: BoxShape.rectangle,
-                          // RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),
                           ),
-                          // ),
                         ),
                         child: const HourlyWeatherCard(),
                       );
@@ -229,6 +209,29 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildFutureData({required String jsonField}) {
+    return FutureBuilder(
+      future: fetchCurrentWeatherData(),
+      builder: (context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final jsonFieldName = snapshot.data?['current'][jsonField];
+          return Text(
+            jsonFieldName.toString(),
+            // ignore: unnecessary_const
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18, //TODO : textTheme headline6 or subtitle1
+            ),
+          );
+        } else {
+          return const CircularProgressIndicator(
+            color: Palette.activeCardColor,
+          );
+        }
+      },
     );
   }
 }
