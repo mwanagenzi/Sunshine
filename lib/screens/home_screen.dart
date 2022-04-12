@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sunshine/models/current_weather_model.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
-
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,21 +13,14 @@ class _HomeScreenState extends State<HomeScreen> {
   double? currentTemp;
   double? currentWindSpeed;
   int? currentHumidity;
-  Future<dynamic> fetchCurrentWeatherData() async {
-    return await CurrentWeatherModel().fetchCurrentWeatherData();
-    // currentTemp = currentWeatherData['current']['temp_c'];
-    // currentWindSpeed = currentWeatherData['current']['temp_f'];
-    // currentHumidity = currentWeatherData['current']['humidity'];
-    // print("windspeed : $currentWindSpeed, humidity: $currentHumidity");
-  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    setState(() {
-      fetchCurrentWeatherData();
-    });
+    // setState(() {
+    //   fetchCurrentWeatherData();
+    // });
+    //TODO Change accordingly
   }
 
   @override
@@ -215,6 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildFutureData({required String jsonField}) {
     return FutureBuilder(
       future: fetchCurrentWeatherData(),
+      //TODO Tweak the above future parameter value accordingly
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final jsonFieldName = snapshot.data?['current'][jsonField];

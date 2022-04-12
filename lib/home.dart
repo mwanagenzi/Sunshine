@@ -22,13 +22,10 @@ class _HomeState extends State<Home> {
     SearchLocationScreen(),
   ];
 
-  LocationService locationService = LocationService();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    locationService.getCurrentLocationCoordinates();
-
+    //TODO: Launch location service
   }
 
   @override

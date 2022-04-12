@@ -1,38 +1,27 @@
-import 'package:sunshine/services/location_service.dart';
-import 'package:sunshine/services/network_helper.dart';
-import 'package:sunshine/utils/constants.dart';
-
-const String kCurrentWeatherApiMethod = '/current.json';
-LocationService cLocationService = LocationService();
-
 class CurrentWeatherModel {
-   int? windSpeed;
-   int? humidity;
-   double? currentTemperature;
+  String locationName;
+  //TODO Configure and set the date format
+  //TODO Configure the image from its url
+  double temperature;
+  double windSpeed;
+  int humidity;
 
   CurrentWeatherModel({
-     this.windSpeed,
-     this.humidity,
-     this.currentTemperature,
+    required this.locationName,
+    required this.temperature,
+    required this.windSpeed,
+    required this.humidity,
   });
 
-  Future fetchCurrentWeatherData() async {
-    final List<double>? currentCoordinates =
-        await cLocationService.getCurrentLocationCoordinates();
-
-    final weatherData = await NetworkHelper(
-            apiUrl:
-                "$kWeatherApiUrl$kCurrentWeatherApiMethod?key=$kApiKey&q=${currentCoordinates![0]},${currentCoordinates[1]}")
-        .getData();
-    return weatherData;
+  factory CurrentWeatherModel.fromJson(Map<String, dynamic> json) {
+    final jLocation = json['location'] as String;
+    final jTemperature = json['current']['temp_c'] as double;
+    final jWindspeed = json['current']['wind_kph'] as double;
+    final jHumidity = json['current']['humidity'];
+    return CurrentWeatherModel(
+        locationName: jLocation,
+        temperature: jTemperature,
+        windSpeed: jWindspeed,
+        humidity: jHumidity);
   }
-
-  
-
-  // factory CurrentWeatherModel.weatherDetails(Map<String, dynamic> weatherData) {
-  //   return CurrentWeatherModel(
-  //       windSpeed: weatherData['current']['wind_kph'] ?? 0,
-  //       humidity: weatherData['current']['humidity'] ?? 0,
-  //       currentTemperature: weatherData['current']['temp_c'] ?? 0);
-  // }
 }
