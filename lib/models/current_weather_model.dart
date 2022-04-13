@@ -14,14 +14,10 @@ class CurrentWeatherModel {
   });
 
   factory CurrentWeatherModel.fromJson(Map<String, dynamic> json) {
-    final jLocation = json['location'] as String;
-    final jTemperature = json['current']['temp_c'] as double;
-    final jWindspeed = json['current']['wind_kph'] as double;
-    final jHumidity = json['current']['humidity'];
     return CurrentWeatherModel(
-        locationName: jLocation,
-        temperature: jTemperature,
-        windSpeed: jWindspeed,
-        humidity: jHumidity);
+        locationName: json['location']['name'] as String,
+        temperature: json['current']['temp_c'] as double,
+        windSpeed: json['current']['wind_kph'] as double,
+        humidity: json['current']['humidity'] as int);
   }
 }

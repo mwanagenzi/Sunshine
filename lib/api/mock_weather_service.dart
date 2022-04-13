@@ -12,11 +12,12 @@ class MockWeatherService {
     final weatherDataString = await _loadAssetSampleData(
         'assets/sample_data/current_weather_data.json');
 
-    final Map<String, dynamic> json = jsonDecode(weatherDataString);
+    final Map<String, dynamic> jsonMap = jsonDecode(weatherDataString);
+    print('The jsonMap data : $jsonMap');
 
-    if (json['location'] && json['current'] != null) {
-      final currentWeatherData = CurrentWeatherModel.fromJson(json);
-      print("from the mockweatherservice $currentWeatherData");
+    if (jsonMap['location']['name'].toString().isNotEmpty) {
+      final currentWeatherData = CurrentWeatherModel.fromJson(jsonMap);
+      print("from the mockweatherservice : ${currentWeatherData.locationName}");
       return currentWeatherData;
     } else {
       return CurrentWeatherModel(

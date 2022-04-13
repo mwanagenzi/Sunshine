@@ -12,9 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<CurrentWeatherModel> _fetchCurrentWeatherData() async {
-    return await MockWeatherService().getCurrentWeatherData();
-  }
+  final currentWeatherService = MockWeatherService();
 
   // double? currentTemp;
   // double? currentWindSpeed;
@@ -23,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _fetchCurrentWeatherData();
   }
 
   @override
@@ -107,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        buildFutureData(jsonField: 'temp_c')
+                        buildFutureData(weatherElement: 'temperature'),
                       ],
                     ),
                     Column(
@@ -122,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        buildFutureData(jsonField: 'wind_kph'),
+                        buildFutureData(weatherElement: 'wind_kph'),
                       ],
                     ),
                     Column(
@@ -137,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                         ),
-                        buildFutureData(jsonField: 'humidity'),
+                        buildFutureData(weatherElement: 'humidity'),
                       ],
                     )
                   ],
@@ -206,15 +203,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildFutureData({required String jsonField}) {
+  Widget buildFutureData({required String weatherElement}) {
     return FutureBuilder(
-      future: _fetchCurrentWeatherData(),
-      //TODO Change the above value to the future parameter
-      builder: (context, AsyncSnapshot snapshot) {
+      future: currentWeatherService.getCurrentWeatherData(),
+      builder: (context, AsyncSnapshot<CurrentWeatherModel> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          final jsonFieldName = snapshot.data?['current'][jsonField];
+          final weatherElementData = snapshot.data; 
           return Text(
-            jsonFieldName.toString(),
+            "${weatherElementData?.temperature.toString()}",
             // ignore: unnecessary_const
             style: const TextStyle(
               color: Colors.white,
