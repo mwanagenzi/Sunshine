@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-
-class HourlyWeatherModel {
-  Image? weatherIcon;
+class HourlyWeather {
+  // Image? weatherIcon; //TODO implement offline image loading
   String? time;
   String? temperature;
 
-  HourlyWeatherModel({
-    required this.weatherIcon,
+  HourlyWeather({
+    // required this.weatherIcon,
     required this.time,
     required this.temperature,
   });
-  
-  //TODO : Incoroporate methods and more ...
+
+  // factory HourlyWeather.fromJson(Map<String, dynamic> json) {
+  //   return HourlyWeather();
+  // }
 }
