@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:sunshine/api/mock_weather_service.dart';
 import 'package:sunshine/models/daily_weather_data.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
@@ -22,6 +21,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, AsyncSnapshot<DailyWeatherData> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final weatherElementData = snapshot.data?.currentWeatherData;
+
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Palette.primaryColor,
@@ -31,14 +31,14 @@ class HomeScreen extends StatelessWidget {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text(
-                      weatherElementData!.locationName.toString(),
+                      weatherElementData?.locationName.toString() ?? '',
                     ),
                     // ignore: prefer_const_constructors
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                      DateFormat.yMMMd().format(weatherElementData.currentDate),
+                      weatherElementData?.currentDate ?? '',
                       style: const TextStyle(
                           fontSize: 12), //TODO : textTheme caption
                     ),
@@ -107,7 +107,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  weatherElementData.temperature.toString(),
+                                  weatherElementData?.temperature.toString() ??
+                                      '',
                                   // ignore: unnecessary_const
                                   style: kElementTextStyle,
                                 ),
@@ -126,7 +127,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  weatherElementData.windSpeed.toString(),
+                                  weatherElementData?.windSpeed.toString() ??
+                                      '',
                                   // ignore: unnecessary_const
                                   style: kElementTextStyle,
                                 ),
@@ -145,7 +147,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  weatherElementData.humidity.toString(),
+                                  weatherElementData?.humidity.toString() ?? '',
                                   // ignore: unnecessary_const
                                   style: kElementTextStyle,
                                 ),
@@ -183,36 +185,12 @@ class HomeScreen extends StatelessWidget {
                             )
                           ],
                         ),
+                        // ignore: prefer_const_constructors
                         SizedBox(
                           height: 80,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF4286E6),
-                                  shape: BoxShape.rectangle,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                  ),
-                                ),
-                                child: const HourlyWeatherCard(
-                                  hour: '',
-                                  temperature: 0,
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              // ignore: prefer_const_constructors
-                              return SizedBox(
-                                width: 10,
-                              );
-                            },
-                            itemCount:
-                                10, //TODO : Supply an identifier as an index
-                          ),
+                          child: HourlyWeatherListView(
+                              hourlyWeatherData:
+                                  snapshot.data?.hourlyWeatherData ?? []),
                         )
                       ],
                     ),

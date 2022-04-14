@@ -5,6 +5,5 @@ class DailyWeatherData {
   final List<HourlyWeather> hourlyWeatherData;
   final CurrentWeatherModel currentWeatherData;
 
-  DailyWeatherData(
-      {required this.currentWeatherData, required this.hourlyWeatherData});
+  DailyWeatherData(this.currentWeatherData, this.hourlyWeatherData);
 }

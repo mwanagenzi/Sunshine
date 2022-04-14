@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/provider/navbar_tab_manager.dart';
-import 'package:sunshine/screens/search_screen.dart';
-
-import '../home.dart';
 import '../widgets/widgets.dart';
 
 class WeeklyForecastScreen extends StatefulWidget {
@@ -14,11 +11,6 @@ class WeeklyForecastScreen extends StatefulWidget {
 }
 
 class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
-  List<Widget> appPages = [
-    const Home(),
-    const WeeklyForecastScreen(),
-    SearchLocationScreen()
-  ];
   int todayForecastItems = 10;
   int weeklyForecastItems = 7;
 
