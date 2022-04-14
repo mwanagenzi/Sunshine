@@ -107,8 +107,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  weatherElementData?.temperature.toString() ??
-                                      '',
+                                  '${weatherElementData?.temperature.toString() ?? 0.toString()} \u2103',
                                   // ignore: unnecessary_const
                                   style: kElementTextStyle,
                                 ),
@@ -127,8 +126,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  weatherElementData?.windSpeed.toString() ??
-                                      '',
+                                  '${weatherElementData?.windSpeed.toString() ?? 0.toString()} kph' ??
+                                      '0 kph',
                                   // ignore: unnecessary_const
                                   style: kElementTextStyle,
                                 ),
@@ -147,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  weatherElementData?.humidity.toString() ?? '',
+                                  '${weatherElementData?.humidity.toString() ?? 0.toString()}%',
                                   // ignore: unnecessary_const
                                   style: kElementTextStyle,
                                 ),
