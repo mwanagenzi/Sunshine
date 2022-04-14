@@ -28,7 +28,8 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
       builder: (context, navbarTabManager, child) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: const Color(0XFF080A33), //TODO scaffold background color
+            backgroundColor:
+                const Color(0XFF080A33), //TODO scaffold background color
             toolbarHeight: 100,
             centerTitle: true,
             // ignore: prefer_const_constructors
@@ -69,8 +70,9 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                             child: Text(
                               '${DateTime.now()}', //TODO : Format this date to match design
                               style: const TextStyle(
-                                fontSize: 12,//TODO textTheme - caption
-                                color: Color(0xFF4286E8), //TODO textTheme - highlighted text color
+                                fontSize: 12, //TODO textTheme - caption
+                                color: Color(
+                                    0xFF4286E8), //TODO textTheme - highlighted text color
                               ),
                             ),
                           )
@@ -87,7 +89,8 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
                               decoration: const BoxDecoration(
-                                color: Color(0xFF4286E6), //TODO highlighted card color
+                                color: Color(
+                                    0xFF4286E6), //TODO highlighted card color
                                 shape: BoxShape.rectangle,
                                 // RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
@@ -95,7 +98,10 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                                 ),
                                 // ),
                               ),
-                              child: const HourlyWeatherCard(),
+                              child: const HourlyWeatherCard(
+                                hour: '',
+                                temperature: 0,
+                              ),
                             );
                           },
                           separatorBuilder: (context, index) {
@@ -119,7 +125,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                             'This week',
                             style: const TextStyle(
                               fontWeight: FontWeight.normal,
-                              fontSize: 20,//TODO textTheme - headline6
+                              fontSize: 20, //TODO textTheme - headline6
                               color: Colors.white,
                             ),
                           ),

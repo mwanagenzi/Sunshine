@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 class HourlyWeatherCard extends StatelessWidget {
+  final String hour;
+  final double temperature;
+  // String? iconUrl; //TODO implement an icon for every card
   const HourlyWeatherCard({
+    required this.hour,
+    required this.temperature,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      // mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // ignore: prefer_const_constructors
@@ -25,16 +29,20 @@ class HourlyWeatherCard extends StatelessWidget {
           children: [
             // ignore: prefer_const_constructors
             Text(
-              '14:00',
+              hour,
               // ignore: prefer_const_constructors
-              style: TextStyle(color: Colors.white, fontSize: 12), //TODO text theme - caption
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12), //TODO text theme - caption
               // ignore: prefer_const_constructors
             ),
             // ignore: prefer_const_constructors
             Text(
-              '32\u2103',
+              '$temperature\u2103',
               // ignore: prefer_const_constructors
-              style: TextStyle(color: Colors.white, fontSize: 18),// TODO : text theme - headline6
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18), // TODO : text theme - headline6
             ),
           ],
         ),

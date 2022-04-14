@@ -2,9 +2,20 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:sunshine/models/current_weather_model.dart';
+import 'package:sunshine/models/daily_weather_data.dart';
+import 'package:sunshine/models/hourly_weather_model.dart';
 
 class MockWeatherService {
-  Future<CurrentWeatherModel> getCurrentWeatherData() async {
+  Future<DailyWeatherData> getDailyWeatherData() async {
+    final currentWeather = await _getCurrentWeatherData();
+    final hourlyWeatherConditions = await _getHourlyWeatherData();
+
+    return DailyWeatherData(
+        currentWeatherData: currentWeather,
+        hourlyWeatherData: hourlyWeatherConditions);
+  }
+
+  Future<CurrentWeatherModel> _getCurrentWeatherData() async {
     await Future.delayed(
       const Duration(seconds: 2),
     );
@@ -24,6 +35,27 @@ class MockWeatherService {
           temperature: 0,
           windSpeed: 0,
           humidity: 0);
+    }
+  }
+
+  Future<List<HourlyWeather>> _getHourlyWeatherData() async {
+    final hourlyWeatherDataString = await _loadAssetSampleData(
+        'assets/sample_data/hourly_weather_data.json');
+
+    final Map<String, dynamic> jsonMap = jsonDecode(hourlyWeatherDataString);
+
+    if (jsonMap['forecast']['forecastday'][0]['hour'] != null) {
+      final hours = <HourlyWeather>[];
+      jsonMap['forecast']['forecastday'][0]['hour'].forEach(
+        (hour) {
+          hours.add(
+            HourlyWeather.fromJson(hour),
+          );
+        },
+      );
+      return hours;
+    } else {
+      return [];
     }
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sunshine/api/mock_weather_service.dart';
-import 'package:sunshine/models/current_weather_model.dart';
+import 'package:sunshine/models/daily_weather_data.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import '../widgets/widgets.dart';
 
@@ -18,10 +18,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: currentWeatherService.getCurrentWeatherData(),
-        builder: (context, AsyncSnapshot<CurrentWeatherModel> snapshot) {
+        future: currentWeatherService.getDailyWeatherData(),
+        builder: (context, AsyncSnapshot<DailyWeatherData> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            final weatherElementData = snapshot.data!;
+            final weatherElementData = snapshot.data?.currentWeatherData;
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Palette.primaryColor,
@@ -31,15 +31,14 @@ class HomeScreen extends StatelessWidget {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text(
-                      weatherElementData.locationName.toString(),
+                      weatherElementData!.locationName.toString(),
                     ),
                     // ignore: prefer_const_constructors
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                      DateFormat.yMMMd()
-                          .format(weatherElementData.currentDate),
+                      DateFormat.yMMMd().format(weatherElementData.currentDate),
                       style: const TextStyle(
                           fontSize: 12), //TODO : textTheme caption
                     ),
@@ -199,7 +198,10 @@ class HomeScreen extends StatelessWidget {
                                     Radius.circular(10),
                                   ),
                                 ),
-                                child: const HourlyWeatherCard(),
+                                child: const HourlyWeatherCard(
+                                  hour: '',
+                                  temperature: 0,
+                                ),
                               );
                             },
                             separatorBuilder: (context, index) {
