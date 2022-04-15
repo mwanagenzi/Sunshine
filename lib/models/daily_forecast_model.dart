@@ -19,12 +19,12 @@ class DailyWeatherModel {
     final unixTime = json['date_epoch'] as int;
     final dateTime = DateTime.fromMillisecondsSinceEpoch(unixTime * 1000);
     final shortDateFormat = DateFormat.MMMd().format(dateTime);
-    final dayFormat = DateFormat.d().format(dateTime);
+    final dayFormat = DateFormat.EEEE().format(dateTime);
 
     return DailyWeatherModel(
       shortDate: shortDateFormat,
       day: dayFormat,
-      averageTemperature: json['avgtemp_c'] as double,
+      averageTemperature: json['day']['avgtemp_c'] as double,
     );
   }
 }

@@ -63,7 +63,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                               InkWell(
                                 // ignore: prefer_const_constructors
                                 child: Text(
-                                  DateFormat.yMEd().format(
+                                  DateFormat.E().add_yMMMMd().format(
                                     DateTime.now(),
                                   ),
                                   style: const TextStyle(

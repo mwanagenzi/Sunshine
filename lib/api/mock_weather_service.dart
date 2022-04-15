@@ -6,7 +6,6 @@ import 'package:sunshine/models/models.dart';
 import 'package:sunshine/models/weekly_forecast_model.dart';
 
 class MockWeatherService {
-  
   Future<DailyWeatherData> getDailyWeatherData() async {
     final currentWeather = await _getCurrentWeatherData();
     final hourlyWeatherConditions = await _getHourlyWeatherData();
