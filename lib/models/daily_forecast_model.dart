@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class DailyWeatherModel {
+class DailyForecastModel {
   String shortDate;
   String day;
   String averageTemperature;
   Image dayWeatherIcon;
 
-  DailyWeatherModel({
+  DailyForecastModel({
     required this.shortDate,
     required this.day,
     required this.averageTemperature,
