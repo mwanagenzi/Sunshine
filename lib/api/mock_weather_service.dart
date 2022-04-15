@@ -2,15 +2,22 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:sunshine/models/current_weather_model.dart';
-import 'package:sunshine/models/daily_weather_data.dart';
-import 'package:sunshine/models/hourly_weather_model.dart';
+import 'package:sunshine/models/models.dart';
+import 'package:sunshine/models/weekly_forecast_model.dart';
 
 class MockWeatherService {
+  
   Future<DailyWeatherData> getDailyWeatherData() async {
     final currentWeather = await _getCurrentWeatherData();
     final hourlyWeatherConditions = await _getHourlyWeatherData();
     return DailyWeatherData(currentWeather, hourlyWeatherConditions);
+  }
+
+  Future<WeeklyForecastData> getWeeklyWeatherData() async {
+    final hourlyWeatherData = await _getHourlyWeatherData();
+    final dailyForecastData = await _getDailyForecastData();
+
+    return WeeklyForecastData(hourlyWeatherData, dailyForecastData);
   }
 
   Future<CurrentWeatherModel> _getCurrentWeatherData() async {
@@ -60,7 +67,30 @@ class MockWeatherService {
     }
   }
 
-  Future<>
+  Future<List<DailyWeatherModel>> _getDailyForecastData() async {
+    await Future.delayed(
+      const Duration(seconds: 2),
+    );
+
+    final weeklyForecastDataString = await _loadAssetSampleData(
+        'assets/sample_data/weekly_forecast_data.json');
+
+    final Map<String, dynamic> jsonMap = jsonDecode(weeklyForecastDataString);
+
+    if (jsonMap['forecast']['forecastday'] != null) {
+      final days = <DailyWeatherModel>[];
+      jsonMap['forecast']['forecastday'].forEach(
+        (day) {
+          days.add(
+            DailyWeatherModel.fromJson(day),
+          );
+        },
+      );
+      return days;
+    } else {
+      return [];
+    }
+  }
 
   Future<String> _loadAssetSampleData(String path) async {
     return rootBundle.loadString(path);

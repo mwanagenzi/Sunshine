@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
 class DailyForecastCard extends StatelessWidget {
-  const DailyForecastCard({
+  String dayOfWeek;
+  String date;
+  double averageTemp;
+
+  DailyForecastCard({
     Key? key,
+    required this.dayOfWeek,
+    required this.date,
+    required this.averageTemp,
   }) : super(key: key);
 
   @override
@@ -25,25 +32,25 @@ class DailyForecastCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             // ignore: prefer_const_literals_to_create_immutables
             children: [
-              const Text(
-                'Friday',
-                style: TextStyle(
+              Text(
+                dayOfWeek ,
+                style: const TextStyle(
                   fontSize: 20, //TODO : text theme headline6
                   color: Colors.white,
                 ),
               ),
-              const Text(
-                'May, 28',
-                style: TextStyle(
+               Text(
+                date,
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 12, //TODO : texttheme caption
                 ),
               ),
             ],
           ),
-          const Text(
-            '32\u2103',
-            style: TextStyle(
+           Text(
+            '$averageTemp\u2103',
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 30, //TODO : texttheme headline 4
             ),
