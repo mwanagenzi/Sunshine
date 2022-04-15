@@ -126,8 +126,7 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  '${weatherElementData?.windSpeed.toString() ?? 0.toString()} kph' ??
-                                      '0 kph',
+                                  '${weatherElementData?.windSpeed.toString() ?? 0.toString()} kph',
                                   // ignore: unnecessary_const
                                   style: kElementTextStyle,
                                 ),
