@@ -60,6 +60,8 @@ class MockWeatherService {
     }
   }
 
+  Future<>
+
   Future<String> _loadAssetSampleData(String path) async {
     return rootBundle.loadString(path);
   }
