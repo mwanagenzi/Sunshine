@@ -33,7 +33,10 @@ class _HomeState extends State<Home> {
     return Consumer<NavbarTabManager>(
       builder: ((context, navbarTabManager, child) {
         return Scaffold(
-          body: appPages[navbarTabManager.selectedTab],
+          body: IndexedStack(
+            index: navbarTabManager.selectedTab,
+            children: appPages,
+          ),
           bottomNavigationBar: BottomNavigationBar(
             onTap: (index) {
               navbarTabManager.goToTab(index);
