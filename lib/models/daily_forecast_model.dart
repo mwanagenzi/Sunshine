@@ -1,12 +1,12 @@
 import 'package:intl/intl.dart';
 
-class DailyForecastModel {
+class DailyWeatherModel {
   String shortDate;
   String day;
   double averageTemperature;
   // String dayWeatherIcon;
 
-  DailyForecastModel({
+  DailyWeatherModel({
     required this.shortDate,
     required this.day,
     required this.averageTemperature,
