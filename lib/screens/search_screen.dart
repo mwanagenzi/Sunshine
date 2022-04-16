@@ -23,7 +23,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
           appBar: AppBar(
             backgroundColor:
                 Palette.primaryColor, //TODO : appbar background color
-            
+
             centerTitle: true,
             // ignore: prefer_const_constructors
             title: Text('Pick Location'),
@@ -33,7 +33,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Palette.primaryColor, //TODo : scaffold background color
+                  color:
+                      Palette.primaryColor, //TODo : scaffold background color
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,6 +47,9 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                           Flexible(
                             flex: 5,
                             child: TextFormField(
+                              style: const TextStyle(
+                                color: Colors.white,
+                              ),
                               // ignore: prefer_const_constructors
                               decoration: InputDecoration(
                                 hintText: 'Search',
@@ -70,6 +74,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                                 ),
                               ),
                               cursorColor: Colors.white,
+
                               //TODO: Validate input
                             ),
                           ),
