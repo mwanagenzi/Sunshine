@@ -15,6 +15,19 @@ class SearchLocationScreen extends StatefulWidget {
 }
 
 class _SearchLocationScreenState extends State<SearchLocationScreen> {
+  late TextEditingController _searchFieldController;
+  @override
+  void initState() {
+    _searchFieldController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void deactivate() {
+    _searchFieldController.dispose();
+    super.deactivate();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<NavbarTabManager>(
@@ -47,11 +60,17 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                           Flexible(
                             flex: 5,
                             child: TextFormField(
+                              controller: _searchFieldController,
+                              onFieldSubmitted: (value) => {
+                                //TODO Insert autocomplete/search api function
+                                //TODO : as well as a dropdown with available locations
+                              },
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
                               // ignore: prefer_const_constructors
                               decoration: InputDecoration(
+                                focusColor: Palette.highlightedTextColor,
                                 hintText: 'Search',
                                 // ignore: prefer_const_constructors
                                 hintStyle: TextStyle(
