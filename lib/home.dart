@@ -3,9 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/provider/navbar_tab_manager.dart';
-import 'models/current_weather_model.dart';
 import 'screens/screens.dart';
-import 'services/location_service.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
