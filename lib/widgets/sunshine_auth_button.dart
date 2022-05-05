@@ -14,13 +14,18 @@ class SunshineAuthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: buttonFunction,
-        child: Text(buttonText),
-        style: TextButton.styleFrom(
-            onSurface: Palette.highlightedTextColor,
-            textStyle: const TextStyle(
-              color: Colors.white,
-            )));
+    return ListTile(
+      onTap: buttonFunction,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      tileColor: Palette.activeCardColor,
+      title: Center(
+        child: Text(
+          buttonText,
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+      ),
+    );
   }
 }
