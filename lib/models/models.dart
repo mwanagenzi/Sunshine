@@ -7,3 +7,5 @@ export 'daily_weather_data.dart';
 export 'hourly_weather_model.dart';
 
 export 'location_weather_model.dart';
+
+export 'search_result.dart';
