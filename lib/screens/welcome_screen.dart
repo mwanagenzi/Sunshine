@@ -57,7 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Flexible(
               flex: 3,
               child: Container(
-                // height: MediaQuery.of(context).size.height * 0.25,
+                
                 padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   // color: Palette.searchBarColor.withOpacity(0.5),
