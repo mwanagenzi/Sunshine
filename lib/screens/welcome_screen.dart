@@ -28,10 +28,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.primaryColor,
       //TODO : insert a global map-like background image (png, then later svg)
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
@@ -56,103 +55,111 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(height: 10),
             Flexible(
               flex: 3,
-              child: Container(
-                
-                padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  // color: Palette.searchBarColor.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextFormField(
-                      controller: _emailController,
-                      cursorColor: Colors.black,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                          focusColor: Palette.highlightedTextColor,
-                          hintText: 'Email Address',
-                          // ignore: prefer_const_constructors
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                          prefixIcon: const Icon(
-                            Icons.search_rounded,
-                            color: Colors.white,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(color: Colors.white),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white),
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Palette.highlightedTextColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    SunshineAuthButton(
-                      buttonText: 'Continue',
-                      buttonFunction: () {
-                        //TODO: check whether user exists or not
-                        //TODO:navigate to relevant screen (login or register)
-                      },
-                    ),
-                    Center(
-                      child: Text('or',
-                          style: Theme.of(context).textTheme.bodyText1),
-                    ),
-                    ListTile(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      tileColor: Colors.white,
-                      leading: const Icon(Icons.facebook_rounded),
-                      title: const Text('Continue with Facebook'),
-                      onTap: () {
-                        //TODO Open Facebook account api
-                      },
-                    ),
-                    ListTile(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      tileColor: Colors.white,
-                      leading: const Icon(Icons.search_outlined),
-                      title: const Text('Continue with Google'),
-                      onTap: () {
-                        //TODO Open Google account api
-                      },
-                    ),
-                    Row(
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const Text("Don't have an account?"),
-                        const SizedBox(width: 10),
+                        TextFormField(
+                          controller: _emailController,
+                          cursorColor: Colors.black,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                              focusColor: Palette.highlightedTextColor,
+                              hintText: 'Email Address',
+                              // ignore: prefer_const_constructors
+                              hintStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.search_rounded,
+                                color: Colors.white,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white),
+                        ),
+                        SunshineAuthButton(
+                          buttonText: 'Continue',
+                          buttonFunction: () {
+                            //TODO: check whether user exists or not
+                            //TODO:navigate to relevant screen (login or register)
+                          },
+                        ),
+                        Center(
+                          child: Text('or',
+                              style: Theme.of(context).textTheme.bodyText1),
+                        ),
+                        ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          tileColor: Colors.white,
+                          leading: const Icon(Icons.facebook_rounded),
+                          title: const Text('Continue with Facebook'),
+                          onTap: () {
+                            //TODO Open Facebook account api
+                          },
+                        ),
+                        ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          tileColor: Colors.white,
+                          leading: const Icon(Icons.search_outlined),
+                          title: const Text('Continue with Google'),
+                          onTap: () {
+                            //TODO Open Google account api
+                          },
+                        ),
+                        Row(
+                          children: [
+                            const Text("Don't have an account?"),
+                            const SizedBox(width: 10),
+                            InkWell(
+                              onTap: () {
+                                //TODO navigate to the registration page
+                              },
+                              child: const Text(
+                                'Sign Up',
+                                style: TextStyle(
+                                    color: Palette.highlightedTextColor),
+                              ),
+                            ),
+                          ],
+                        ),
                         InkWell(
                           onTap: () {
-                            //TODO navigate to the registration page
+                            //TODO: password reset functionality
                           },
                           child: const Text(
-                            'Sign Up',
+                            'Forgot your password',
                             style:
                                 TextStyle(color: Palette.highlightedTextColor),
+                            //
                           ),
                         ),
                       ],
                     ),
-                    InkWell(
-                      onTap: () {
-                        //TODO: password reset functionality
-                      },
-                      child: const Text(
-                        'Forgot your password',
-                        style: TextStyle(color: Palette.highlightedTextColor),
-                        //
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
