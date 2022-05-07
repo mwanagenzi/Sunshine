@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 
@@ -36,20 +37,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Flexible(
-              flex: 1,
-              child: SizedBox(
-                height: 10,
-              ),
-            ),
-            const Flexible(
-              flex: 1,
-              child: Text(
-                'Hi!',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2.0),
+            Flexible(
+              flex: 2,
+              child: SvgPicture.asset(
+                'assets/curve_left.svg',
+                color: Palette.activeCardColor,
               ),
             ),
             const SizedBox(height: 10),

@@ -20,6 +20,7 @@ dependencies:
   http: ^0.13.4
   intl: ^0.17.0
   dropdown_formfield: ^0.1.4
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +33,7 @@ flutter:
 
   assets:
     - assets/sample_data/
+    - assets/images/
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
 
