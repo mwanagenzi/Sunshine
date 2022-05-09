@@ -5,14 +5,14 @@ import 'package:sunshine/sunshine_theme/theme.dart';
 
 import '../widgets/sunshine_auth_button.dart';
 
-class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController _emailController;
   @override
   void initState() {
@@ -55,7 +55,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       children: [
                         Center(
                           child: Text(
-                            'Hi!',
+                            'Sign up',
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5!
@@ -70,11 +70,44 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           cursorColor: Colors.black,
                           autofocus: true,
                           decoration: InputDecoration(
+                              labelText: 'Name',
                               focusColor: Palette.highlightedTextColor,
-                              hintText: 'Email Address',
+                              hintText: 'Username',
                               // ignore: prefer_const_constructors
                               hintStyle: TextStyle(
                                 color: Colors.black,
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.account_circle_outlined,
+                                color: Colors.white,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white),
+                        ),
+                        TextFormField(
+                          controller: _emailController,
+                          cursorColor: Colors.black,
+                          autofocus: true,
+                          obscureText:
+                              true, //TODO: set state to obscure text or not depending on clickable icon
+                          //TODO: let clickable icon be a suffix icon
+                          decoration: InputDecoration(
+                              labelText: 'Password',
+                              focusColor: Palette.highlightedTextColor,
+                              hintText: 'Password',
+                              // ignore: prefer_const_constructors
+                              hintStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                              prefixIcon: const Icon(
+                                Icons
+                                    .password_outlined, //TODO: set a variable to toggle between visible & invisible
+                                color: Colors.white,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
