@@ -1,0 +1,193 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sunshine/sunshine_theme/palette.dart';
+import 'package:sunshine/sunshine_theme/theme.dart';
+
+import '../widgets/sunshine_auth_button.dart';
+
+class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
+}
+
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  late TextEditingController _newpassController, _confirmPassController;
+  @override
+  void initState() {
+    _newpassController = TextEditingController();
+    _confirmPassController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void deactivate() {
+    _newpassController.dispose();
+    _confirmPassController.dispose();
+    super.deactivate();
+  }
+
+  bool isNewPassObscured = true;
+  bool isConfirmPassObscured = true;
+  IconData confirmPassVisibleIcon = Icons.visibility_off;
+  IconData newPassVisibleIcon = Icons.visibility_off;
+
+  IconData _changePasswordSuffixIcon(IconData visibleIcon) {
+    if (visibleIcon == Icons.visibility) {
+      return visibleIcon = Icons.visibility_off;
+    } else {
+      return visibleIcon = Icons.visibility;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          // ignore: avoid_unnecessary_containers
+          child: Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SvgPicture.asset(
+                  'assets/images/curve_top.svg',
+                  color: Palette.activeCardColor,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.fill,
+                ),
+                const SizedBox(height: 50),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Center(
+                          child: Text(
+                            'Reset password',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        TextFormField(
+                          controller: _newpassController,
+                          cursorColor: Colors.black,
+                          autofocus: true,
+                          obscureText: isNewPassObscured,
+                          decoration: InputDecoration(
+                            labelText: 'New password',
+                            labelStyle: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(color: Colors.black),
+                            focusColor: Palette.highlightedTextColor,
+                            hintText: 'New password',
+                            // ignore: prefer_const_constructors
+                            hintStyle: TextStyle(
+                              color: Colors.black,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.password_rounded,
+                              color: Colors.black,
+                            ),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isNewPassObscured = !isNewPassObscured;
+                                  newPassVisibleIcon =
+                                      _changePasswordSuffixIcon(
+                                          newPassVisibleIcon);
+                                });
+                                // _changePasswordSuffixIcon(visibilityIcon);
+                              },
+                              child: Icon(
+                                newPassVisibleIcon,
+                                color: Colors.black,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          controller: _confirmPassController,
+                          cursorColor: Colors.black,
+                          autofocus: true,
+                          obscureText: isConfirmPassObscured,
+                          decoration: InputDecoration(
+                            labelText: 'Confirm Password',
+                            labelStyle: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(color: Colors.black),
+                            focusColor: Palette.highlightedTextColor,
+                            hintText: 'Confirm Password',
+                            // ignore: prefer_const_constructors
+                            hintStyle: TextStyle(
+                              color: Colors.black,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.password_rounded,
+                              color: Colors.black,
+                            ),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isConfirmPassObscured =
+                                      !isConfirmPassObscured;
+                                  confirmPassVisibleIcon =
+                                      _changePasswordSuffixIcon(
+                                          confirmPassVisibleIcon);
+                                });
+                                // _changePasswordSuffixIcon(visibilityIcon);
+                              },
+                              child: Icon(
+                                confirmPassVisibleIcon,
+                                color: Colors.black,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        SunshineAuthButton(
+                          buttonText: 'Continue',
+                          buttonFunction: () {
+                            //TODO: register the user to firebase
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -91,7 +91,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         const SizedBox(height: 20),
                         SunshineAuthButton(
                           buttonText: 'Continue',
-                          buttonFunction: () {
+                          buttonFunction: () 
                             //TODO: check whether user exists or not
                             //TODO:navigate to relevant screen (login or register)
                           },
@@ -174,7 +174,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             //
                           ),
                         ),
-                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
