@@ -13,17 +13,30 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  late TextEditingController _emailController;
+  late TextEditingController _usernameController, _passwordController;
   @override
   void initState() {
-    _emailController = TextEditingController();
+    _usernameController = TextEditingController();
+    _passwordController = TextEditingController();
     super.initState();
   }
 
   @override
   void deactivate() {
-    _emailController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
     super.deactivate();
+  }
+
+  bool isTextObscured = true;
+  IconData visibilityIcon = Icons.visibility_off;
+
+  IconData _changePasswordSuffixIcon(IconData visibleIcon) {
+    if (visibleIcon == Icons.visibility) {
+      return visibleIcon = Icons.visibility_off;
+    } else {
+      return visibleIcon = Icons.visibility;
+    }
   }
 
   @override
@@ -66,11 +79,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 10),
                         TextFormField(
-                          controller: _emailController,
+                          controller: _usernameController,
                           cursorColor: Colors.black,
                           autofocus: true,
                           decoration: InputDecoration(
                               labelText: 'Name',
+                              labelStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(color: Colors.black),
                               focusColor: Palette.highlightedTextColor,
                               hintText: 'Username',
                               // ignore: prefer_const_constructors
@@ -79,7 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                               prefixIcon: const Icon(
                                 Icons.account_circle_outlined,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -89,15 +106,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               filled: true,
                               fillColor: Colors.white),
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         TextFormField(
-                          controller: _emailController,
+                          controller: _passwordController,
                           cursorColor: Colors.black,
                           autofocus: true,
-                          obscureText:
-                              true, //TODO: set state to obscure text or not depending on clickable icon
-                          //TODO: let clickable icon be a suffix icon
+                          obscureText: isTextObscured,
                           decoration: InputDecoration(
                               labelText: 'Password',
+                              labelStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(color: Colors.black),
                               focusColor: Palette.highlightedTextColor,
                               hintText: 'Password',
                               // ignore: prefer_const_constructors
@@ -105,9 +127,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 color: Colors.black,
                               ),
                               prefixIcon: const Icon(
-                                Icons
-                                    .password_outlined, //TODO: set a variable to toggle between visible & invisible
-                                color: Colors.white,
+                                Icons.password_rounded,
+                                color: Colors.black,
+                              ),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isTextObscured = !isTextObscured;
+                                    visibilityIcon = _changePasswordSuffixIcon(
+                                        visibilityIcon);
+                                  });
+                                  // _changePasswordSuffixIcon(visibilityIcon);
+                                },
+                                child: Icon(
+                                  visibilityIcon,
+                                  color: Colors.black,
+                                ),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
@@ -119,73 +154,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 20),
                         SunshineAuthButton(
-                          buttonText: 'Continue',
+                          buttonText: 'Sign up',
                           buttonFunction: () {
-                            //TODO: check whether user exists or not
-                            //TODO:navigate to relevant screen (login or register)
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        Center(
-                          child: Text('or',
-                              style: Theme.of(context).textTheme.bodyText1),
-                        ),
-                        const SizedBox(height: 20),
-                        ListTile(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          tileColor: Colors.white,
-                          leading: const Icon(Icons.facebook_rounded),
-                          title: const Text('Continue with Facebook'),
-                          onTap: () {
-                            //TODO Open Facebook account api
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        ListTile(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          tileColor: Colors.white,
-                          leading: const Icon(Icons.search_outlined),
-                          title: const Text('Continue with Google'),
-                          onTap: () {
-                            //TODO Open Google account api
+                            //TODO: register the user to firebase
                           },
                         ),
                         const SizedBox(height: 20),
                         Row(
                           children: [
-                            const Text("Don't have an account?"),
+                            const Text("Already have an account?"),
                             const SizedBox(width: 10),
                             InkWell(
                               onTap: () {
-                                //TODO navigate to the registration page
+                                //TODO navigate to the login screen
                               },
                               child: const Text(
-                                'Sign Up',
+                                'Login',
                                 style: TextStyle(
                                     color: Palette.highlightedTextColor),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20),
-                        InkWell(
-                          onTap: () {
-                            //TODO: password reset functionality
-                          },
-                          child: Text(
-                            'Forgot your password?',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(color: Palette.highlightedTextColor),
-                            //
-                          ),
-                        ),
-                        const SizedBox(height: 20),
                       ],
                     ),
                   ),

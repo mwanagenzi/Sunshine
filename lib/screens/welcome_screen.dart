@@ -70,6 +70,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           cursorColor: Colors.black,
                           autofocus: true,
                           decoration: InputDecoration(
+                              prefixIcon: const Icon(
+                                Icons.email_outlined,
+                                color: Colors.black,
+                              ),
                               focusColor: Palette.highlightedTextColor,
                               hintText: 'Email Address',
                               // ignore: prefer_const_constructors
