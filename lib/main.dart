@@ -22,7 +22,7 @@ class Sunshine extends StatelessWidget {
       theme: SunshineTheme.themeData(),
       home: ChangeNotifierProvider(
         create: ((context) => NavbarTabManager()),
-        child: const LoginScreen(),
+        child: const WelcomeScreen(),
       ),
     );
   }

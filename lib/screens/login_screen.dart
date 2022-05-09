@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.fill,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Expanded(
@@ -82,42 +82,42 @@ class _LoginScreenState extends State<LoginScreen> {
                           autofocus: true,
                           obscureText: isTextObscured,
                           decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(color: Colors.black),
-                              focusColor: Palette.highlightedTextColor,
-                              hintText: 'Password',
-                              // ignore: prefer_const_constructors
-                              hintStyle: TextStyle(
+                            labelText: 'Password',
+                            labelStyle: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(color: Colors.black),
+                            focusColor: Palette.highlightedTextColor,
+                            hintText: 'Password',
+                            // ignore: prefer_const_constructors
+                            hintStyle: TextStyle(
+                              color: Colors.black,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.password_rounded,
+                              color: Colors.black,
+                            ),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isTextObscured = !isTextObscured;
+                                  visibilityIcon =
+                                      _changePasswordSuffixIcon(visibilityIcon);
+                                });
+                                // _changePasswordSuffixIcon(visibilityIcon);
+                              },
+                              child: Icon(
+                                visibilityIcon,
                                 color: Colors.black,
                               ),
-                              prefixIcon: const Icon(
-                                Icons.password_rounded,
-                                color: Colors.black,
-                              ),
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isTextObscured = !isTextObscured;
-                                    visibilityIcon = _changePasswordSuffixIcon(
-                                        visibilityIcon);
-                                  });
-                                  // _changePasswordSuffixIcon(visibilityIcon);
-                                },
-                                child: Icon(
-                                  visibilityIcon,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                              ),
-                              filled: true,
-                              fillColor: Colors.white),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
                         ),
                         const SizedBox(height: 20),
                         SunshineAuthButton(
@@ -144,7 +144,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
               ],
             ),
           ),

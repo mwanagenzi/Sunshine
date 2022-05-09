@@ -44,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.fill,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Expanded(
@@ -70,23 +70,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           cursorColor: Colors.black,
                           autofocus: true,
                           decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.email_outlined,
-                                color: Colors.black,
-                              ),
-                              focusColor: Palette.highlightedTextColor,
-                              hintText: 'Email Address',
-                              // ignore: prefer_const_constructors
-                              hintStyle: TextStyle(
-                                color: Colors.black,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                              ),
-                              filled: true,
-                              fillColor: Colors.white),
+                            prefixIcon: const Icon(
+                              Icons.email_outlined,
+                              color: Colors.black,
+                            ),
+                            focusColor: Palette.highlightedTextColor,
+                            hintText: 'Email Address',
+                            // ignore: prefer_const_constructors
+                            hintStyle: TextStyle(
+                              color: Colors.black,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
                         ),
                         const SizedBox(height: 20),
                         SunshineAuthButton(
@@ -107,8 +107,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           tileColor: Colors.white,
-                          leading: const Icon(Icons.facebook_rounded),
-                          title: const Text('Continue with Facebook'),
+                          leading: const Icon(
+                            Icons.facebook_rounded,
+                            color: Colors.black,
+                          ),
+                          title: Text(
+                            'Continue with Facebook',
+                            style:
+                                Theme.of(context).textTheme.bodyText2!.copyWith(
+                                      color: Colors.black,
+                                    ),
+                          ),
                           onTap: () {
                             //TODO Open Facebook account api
                           },
@@ -119,8 +128,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           tileColor: Colors.white,
-                          leading: const Icon(Icons.search_outlined),
-                          title: const Text('Continue with Google'),
+                          leading: const Icon(
+                            Icons.search_outlined,
+                            color: Colors.black,
+                          ),
+                          title: Text(
+                            'Continue with Google',
+                            style:
+                                Theme.of(context).textTheme.bodyText2!.copyWith(
+                                      color: Colors.black,
+                                    ),
+                          ),
                           onTap: () {
                             //TODO Open Google account api
                           },
@@ -161,7 +179,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
               ],
             ),
           ),
