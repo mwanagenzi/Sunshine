@@ -52,7 +52,7 @@ class SunshineTheme {
     ),
     // ignore: unnecessary_const
     bodyText2: const TextStyle(
-      fontSize: 15, //TODO : textTheme body2
+      fontSize: 17, //TODO : textTheme body2
       color: Colors.white,
     ),
   );
