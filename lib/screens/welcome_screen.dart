@@ -30,8 +30,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        // ignore: avoid_unnecessary_containers
         child: SafeArea(
+          // ignore: avoid_unnecessary_containers
           child: Container(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -82,7 +82,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide: const BorderSide(color: Colors.white),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                               ),
                               filled: true,
                               fillColor: Colors.white),
