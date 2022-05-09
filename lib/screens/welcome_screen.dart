@@ -29,7 +29,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //TODO : insert a global map-like background image (png, then later svg)
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -64,6 +63,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          Center(
+                            child: Text(
+                              'Hi!',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2),
+                            ),
+                          ),
                           TextFormField(
                             controller: _emailController,
                             cursorColor: Colors.black,
