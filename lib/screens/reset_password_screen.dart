@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
+import 'package:sunshine/widgets/auth_screen_svg.dart';
 
 import '../widgets/sunshine_auth_button.dart';
 
@@ -53,12 +54,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SvgPicture.asset(
-                  'assets/images/curve_top.svg',
-                  color: Palette.activeCardColor,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.fill,
-                ),
+                const AuthScreenSvg(),
                 const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),

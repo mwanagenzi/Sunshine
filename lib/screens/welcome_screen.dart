@@ -14,6 +14,7 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   late TextEditingController _emailController;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     _emailController = TextEditingController();
@@ -24,6 +25,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void deactivate() {
     _emailController.dispose();
     super.deactivate();
+  }
+
+  String? _emailValidator(String? textFieldValue) {
+    if (textFieldValue == null || textFieldValue.isEmpty) {
+      return 'This value is required';
+    } else if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(textFieldValue)) {
+      return 'Enter a valid email address';
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -38,12 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SvgPicture.asset(
-                  'assets/images/curve_top.svg',
-                  color: Palette.activeCardColor,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.fill,
-                ),
+                const AuthScreenSvg(),
                 const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -69,6 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           controller: _emailController,
                           cursorColor: Colors.black,
                           autofocus: true,
+                          validator: _emailValidator,
                           decoration: InputDecoration(
                             prefixIcon: const Icon(
                               Icons.email_outlined,

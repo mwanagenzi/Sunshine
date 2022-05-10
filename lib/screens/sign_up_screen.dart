@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunshine/screens/login_screen.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 
@@ -14,6 +15,8 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   late TextEditingController _usernameController, _passwordController;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     _usernameController = TextEditingController();
@@ -36,6 +39,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return visibleIcon = Icons.visibility_off;
     } else {
       return visibleIcon = Icons.visibility;
+    }
+  }
+
+  String? _fieldValidator(String? textFieldValue) {
+    if (textFieldValue == null || textFieldValue.isEmpty) {
+      return 'This value is required';
+    } else if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(textFieldValue)) {
+      return 'Username can only consist of alphabets and numbers';
+    } else {
+      return null;
+    }
+  }
+
+  void _handleSubmit(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      // Navigator.of(context)
+      //     .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 
@@ -73,34 +93,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        TextFormField(
-                          controller: _usernameController,
-                          cursorColor: Colors.black,
-                          autofocus: true,
-                          keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                              labelText: 'Name',
-                              labelStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(color: Colors.black),
-                              focusColor: Palette.highlightedTextColor,
-                              hintText: 'Username',
-                              // ignore: prefer_const_constructors
-                              hintStyle: TextStyle(
-                                color: Colors.black,
-                              ),
-                              prefixIcon: const Icon(
-                                Icons.account_circle_outlined,
-                                color: Colors.black,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                              ),
-                              filled: true,
-                              fillColor: Colors.white),
+                        Form(
+                          key: _formKey,
+                          child: TextFormField(
+                            controller: _usernameController,
+                            cursorColor: Colors.black,
+                            autofocus: true,
+                            keyboardType: TextInputType.name,
+                            validator: _fieldValidator,
+                            decoration: InputDecoration(
+                                labelText: 'Name',
+                                labelStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(color: Colors.black),
+                                focusColor: Palette.highlightedTextColor,
+                                hintText: 'Username',
+                                // ignore: prefer_const_constructors
+                                hintStyle: TextStyle(
+                                  color: Colors.black,
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.account_circle_outlined,
+                                  color: Colors.black,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                ),
+                                filled: true,
+                                fillColor: Colors.white),
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
@@ -152,7 +176,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SunshineAuthButton(
                           buttonText: 'Sign up',
                           buttonFunction: () {
-                            //TODO: register the user to firebase
+                            _handleSubmit(context);
                           },
                         ),
                         const SizedBox(height: 20),
