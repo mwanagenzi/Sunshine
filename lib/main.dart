@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sunshine/provider/navbar_tab_manager.dart';
 import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 
