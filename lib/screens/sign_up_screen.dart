@@ -54,8 +54,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _handleSubmit(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      // Navigator.of(context)
-      //     .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
+      //TODO; Check if user exists 
+      //TODO: If new,register user to firebase
+      //TODO: If user exists,=> error message,=> route to login screen
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 

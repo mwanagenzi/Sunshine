@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 import 'package:sunshine/widgets/auth_screen_svg.dart';
@@ -15,6 +16,8 @@ class ResetPasswordScreen extends StatefulWidget {
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   late TextEditingController _newpassController, _confirmPassController;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     _newpassController = TextEditingController();
@@ -42,6 +45,27 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     }
   }
 
+  String? _fieldValidator(String? passFieldValue) {
+    if (passFieldValue == null || passFieldValue.isEmpty) {
+      return 'This field must contain a value';
+    } else if (passFieldValue.length <= 8) {
+      return 'Password must contain more than 8 characters';
+    } else if (_newpassController.text != _confirmPassController.text) {
+      return 'Passwords must be similar';
+    } else {
+      return null;
+    }
+  }
+
+  void _handleSubmit(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,123 +83,131 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Center(
-                          child: Text(
-                            'Reset password',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Center(
+                            child: Text(
+                              'Reset password',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 10),
-                        TextFormField(
-                          controller: _newpassController,
-                          cursorColor: Colors.black,
-                          autofocus: true,
-                          obscureText: isNewPassObscured,
-                          decoration: InputDecoration(
-                            labelText: 'New password',
-                            labelStyle: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(color: Colors.black),
-                            focusColor: Palette.highlightedTextColor,
-                            hintText: 'New password',
-                            // ignore: prefer_const_constructors
-                            hintStyle: TextStyle(
-                              color: Colors.black,
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.password_rounded,
-                              color: Colors.black,
-                            ),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isNewPassObscured = !isNewPassObscured;
-                                  newPassVisibleIcon =
-                                      _changePasswordSuffixIcon(
-                                          newPassVisibleIcon);
-                                });
-                                // _changePasswordSuffixIcon(visibilityIcon);
-                              },
-                              child: Icon(
-                                newPassVisibleIcon,
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: _newpassController,
+                            cursorColor: Colors.black,
+                            autofocus: true,
+                            obscureText: isNewPassObscured,
+                            validator: _fieldValidator,
+                            decoration: InputDecoration(
+                              labelText: 'New password',
+                              labelStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(color: Colors.black),
+                              focusColor: Palette.highlightedTextColor,
+                              hintText: 'New password',
+                              // ignore: prefer_const_constructors
+                              hintStyle: TextStyle(
                                 color: Colors.black,
                               ),
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(color: Colors.white),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: _confirmPassController,
-                          cursorColor: Colors.black,
-                          autofocus: true,
-                          obscureText: isConfirmPassObscured,
-                          decoration: InputDecoration(
-                            labelText: 'Confirm Password',
-                            labelStyle: Theme.of(context)
-                                .textTheme
-                                .bodyText2!
-                                .copyWith(color: Colors.black),
-                            focusColor: Palette.highlightedTextColor,
-                            hintText: 'Confirm Password',
-                            // ignore: prefer_const_constructors
-                            hintStyle: TextStyle(
-                              color: Colors.black,
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.password_rounded,
-                              color: Colors.black,
-                            ),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isConfirmPassObscured =
-                                      !isConfirmPassObscured;
-                                  confirmPassVisibleIcon =
-                                      _changePasswordSuffixIcon(
-                                          confirmPassVisibleIcon);
-                                });
-                                // _changePasswordSuffixIcon(visibilityIcon);
-                              },
-                              child: Icon(
-                                confirmPassVisibleIcon,
+                              prefixIcon: const Icon(
+                                Icons.password_rounded,
                                 color: Colors.black,
                               ),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isNewPassObscured = !isNewPassObscured;
+                                    newPassVisibleIcon =
+                                        _changePasswordSuffixIcon(
+                                            newPassVisibleIcon);
+                                  });
+                                  // _changePasswordSuffixIcon(visibilityIcon);
+                                },
+                                child: Icon(
+                                  newPassVisibleIcon,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
                             ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(color: Colors.white),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        SunshineAuthButton(
-                          buttonText: 'Continue',
-                          buttonFunction: () {
-                            //TODO: register the user to firebase
-                          },
-                        ),
-                      ],
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextFormField(
+                            controller: _confirmPassController,
+                            cursorColor: Colors.black,
+                            autofocus: true,
+                            obscureText: isConfirmPassObscured,
+                            validator: _fieldValidator,
+                            decoration: InputDecoration(
+                              labelText: 'Confirm Password',
+                              labelStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(color: Colors.black),
+                              focusColor: Palette.highlightedTextColor,
+                              hintText: 'Confirm Password',
+                              // ignore: prefer_const_constructors
+                              hintStyle: TextStyle(
+                                color: Colors.black,
+                              ),
+                              prefixIcon: const Icon(
+                                Icons.password_rounded,
+                                color: Colors.black,
+                              ),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isConfirmPassObscured =
+                                        !isConfirmPassObscured;
+                                    confirmPassVisibleIcon =
+                                        _changePasswordSuffixIcon(
+                                            confirmPassVisibleIcon);
+                                  });
+                                  // _changePasswordSuffixIcon(visibilityIcon);
+                                },
+                                child: Icon(
+                                  confirmPassVisibleIcon,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          SunshineAuthButton(
+                            buttonText: 'Continue',
+                            buttonFunction: () {
+                              _handleSubmit(context);
+                              //TODO: reset the password in firebase
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

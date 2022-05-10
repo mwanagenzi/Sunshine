@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 
 import '../widgets/sunshine_auth_button.dart';
@@ -36,6 +37,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       return 'Enter a valid email address';
     } else {
       return null;
+    }
+  }
+
+  void _handleSubmit(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      //TODO; Check if user exists
+      //TODO: If new,register user to firebase
+      //TODO: If user exists,=> error message,=> route to login screen
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 
@@ -103,6 +114,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           buttonFunction: () {
                             //TODO: check whether user exists or not
                             //TODO:navigate to relevant screen (login or register)
+                            _handleSubmit(context);
                           },
                         ),
                         const SizedBox(height: 20),
@@ -121,6 +133,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             const SizedBox(width: 10),
                             InkWell(
                               onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignUpScreen()));
                                 //TODO navigate to the registration page
                               },
                               child: const Text(
@@ -135,6 +152,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         InkWell(
                           onTap: () {
                             //TODO: password reset functionality
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ResetPasswordScreen()));
                           },
                           child: Text(
                             'Forgot your password?',
