@@ -66,7 +66,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Expanded(
+                  child: Form(
+                    key:_formKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.max,

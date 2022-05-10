@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sunshine/home.dart';
+import 'package:sunshine/provider/providers.dart';
 import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
@@ -56,8 +58,14 @@ class _LoginScreenState extends State<LoginScreen> {
       //TODO; Check if user exists
       //TODO: If new,register user to firebase
       //TODO: If user exists,=> error message,=> route to login screen
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => HomeScreen()));
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider(
+            create: (context) => NavbarTabManager(),
+            child: const Home(),
+          ),
+        ),
+      );
     }
   }
 
@@ -77,97 +85,94 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Center(
-                          child: Text(
-                            'Login',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5!
-                                .copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2),
-                          ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Login',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 2),
                         ),
-                        const SizedBox(height: 20),
-                        Form(
-                          key: _formKey,
-                          child: TextFormField(
-                            controller: _passwordController,
-                            cursorColor: Colors.black,
-                            autofocus: true,
-                            obscureText: isTextObscured,
-                            validator: _fieldValidator,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(color: Colors.black),
-                              focusColor: Palette.highlightedTextColor,
-                              hintText: 'Password',
-                              // ignore: prefer_const_constructors
-                              hintStyle: TextStyle(
-                                color: Colors.black,
-                              ),
-                              prefixIcon: const Icon(
-                                Icons.password_rounded,
-                                color: Colors.black,
-                              ),
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isTextObscured = !isTextObscured;
-                                    visibilityIcon = _changePasswordSuffixIcon(
-                                        visibilityIcon);
-                                  });
-                                  // _changePasswordSuffixIcon(visibilityIcon);
-                                },
-                                child: Icon(
-                                  visibilityIcon,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    const BorderSide(color: Colors.white),
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        SunshineAuthButton(
-                          buttonText: 'Continue',
-                          buttonFunction: () {
-                            _handleSubmit(context);
-                            //TODO: authenticate the user with firebase
-                            //TODO : then navigate to the home screen
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        InkWell(
-                          onTap: () {
-                            //TODO: password reset functionality
-                          },
-                          child: Text(
-                            'Forgot your password?',
-                            style: Theme.of(context)
+                      ),
+                      const SizedBox(height: 20),
+                      Form(
+                        key: _formKey,
+                        child: TextFormField(
+                          controller: _passwordController,
+                          cursorColor: Colors.black,
+                          autofocus: true,
+                          obscureText: isTextObscured,
+                          validator: _fieldValidator,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            labelStyle: Theme.of(context)
                                 .textTheme
                                 .bodyText2!
-                                .copyWith(color: Palette.highlightedTextColor),
-                            //
+                                .copyWith(color: Colors.black),
+                            focusColor: Palette.highlightedTextColor,
+                            hintText: 'Password',
+                            // ignore: prefer_const_constructors
+                            hintStyle: TextStyle(
+                              color: Colors.black,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.password_rounded,
+                              color: Colors.black,
+                            ),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isTextObscured = !isTextObscured;
+                                  visibilityIcon =
+                                      _changePasswordSuffixIcon(visibilityIcon);
+                                });
+                                // _changePasswordSuffixIcon(visibilityIcon);
+                              },
+                              child: Icon(
+                                visibilityIcon,
+                                color: Colors.black,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(color: Colors.white),
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(height: 20),
+                      SunshineAuthButton(
+                        buttonText: 'Continue',
+                        buttonFunction: () {
+                          _handleSubmit(context);
+                          //TODO: authenticate the user with firebase
+                          //TODO : then navigate to the home screen
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      InkWell(
+                        onTap: () {
+                          //TODO: password reset functionality
+                        },
+                        child: Text(
+                          'Forgot your password?',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2!
+                              .copyWith(color: Palette.highlightedTextColor),
+                          //
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
