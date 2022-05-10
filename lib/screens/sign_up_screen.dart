@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 
 import '../widgets/sunshine_auth_button.dart';
+import '../widgets/widgets.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -51,12 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SvgPicture.asset(
-                  'assets/images/curve_top.svg',
-                  color: Palette.activeCardColor,
-                  width: MediaQuery.of(context).size.width,
-                  fit: BoxFit.fill,
-                ),
+                const AuthScreenSvg(),
                 const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -82,6 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           controller: _usernameController,
                           cursorColor: Colors.black,
                           autofocus: true,
+                          keyboardType: TextInputType.name,
                           decoration: InputDecoration(
                               labelText: 'Name',
                               labelStyle: Theme.of(context)
