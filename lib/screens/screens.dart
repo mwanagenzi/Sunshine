@@ -6,3 +6,4 @@ export 'reset_password_screen.dart';
 export 'welcome_screen.dart';
 export 'sign_up_screen.dart';
 export 'login_screen.dart';
+export 'error_screen.dart';
