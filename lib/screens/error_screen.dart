@@ -5,15 +5,19 @@ class ErrorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          const Image(image: AssetImage('assets/images/error_icon.png')),
-          Text(
-            'Request not found \n Try again.',
-            style: Theme.of(context).textTheme.bodyText2,
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              const Image(image: AssetImage('assets/images/error_icon.png')),
+              Text(
+                'Request not found \n Try again.',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
