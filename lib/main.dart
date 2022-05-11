@@ -15,7 +15,7 @@ class Sunshine extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: SunshineTheme.themeData(),
-      home: const WelcomeScreen(),
+      home: const ErrorScreen(),
     );
   }
 }
