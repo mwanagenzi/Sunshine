@@ -91,6 +91,26 @@ class MockWeatherService {
     }
   }
 
+  Future<List<SearchResult>> getSearchResultData() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    final searchResultDataString = await _loadAssetSampleData(
+        'assets/sample_data/search_result_data.json');
+
+    final Map<String, dynamic> jsonMap = jsonDecode(searchResultDataString);
+
+    if (jsonMap[0]['name'] != null) {
+      final searchResultListData = <SearchResult>[];
+
+      for (var searchResult in jsonMap['']) {
+        searchResultListData.add(SearchResult.fromJson(searchResult));
+      }
+      return searchResultListData;
+    } else {
+      return [];
+    }
+  }
+
   Future<String> _loadAssetSampleData(String path) async {
     return rootBundle.loadString(path);
   }
