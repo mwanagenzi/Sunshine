@@ -47,7 +47,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               child: Container(
                 decoration: const BoxDecoration(
                   color:
-                      Palette.primaryColor, //TODo : scaffold background color
+                      Palette.primaryColor, //TODO : scaffold background color
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -129,6 +129,15 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
         );
       },
     );
+  }
+
+  Widget buildSearchResultList() {
+    return ListView.builder(scrollDirection: Axis.vertical,
+
+      itemBuilder: (context, index) {
+        
+        //TODO: Return the search result data
+      });
   }
 
   Widget buildSavedLocations() {

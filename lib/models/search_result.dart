@@ -2,15 +2,19 @@ class SearchResult {
   String name;
   String region;
   String country;
-  double latitude;
-  double longitude;
 
-  SearchResult(
-      {required this.name,
-      required this.region,
-      required this.country,
-      required this.latitude,
-      required this.longitude});
+  SearchResult({
+    required this.name,
+    required this.region,
+    required this.country,
+  });
 
-  //TODO factory constructor for the above model
+  factory SearchResult.fromJson(Map<String, dynamic> jsonData) {
+    return SearchResult(
+        name: jsonData[''] as String,
+        region: jsonData[''] as String,
+        country: jsonData[''] as String);
+  }
+
+  //TODO map the corresponding json data values
 }

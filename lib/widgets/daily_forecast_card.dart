@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DailyForecastCard extends StatelessWidget {
-  String dayOfWeek;
-  String date;
-  double averageTemp;
+  final String dayOfWeek;
+  final String date;
+  final double averageTemp;
 
-  DailyForecastCard({
+  const DailyForecastCard({
     Key? key,
     required this.dayOfWeek,
     required this.date,
