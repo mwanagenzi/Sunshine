@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sunshine/api/mock_weather_service.dart';
 import 'package:sunshine/provider/providers.dart';
+import 'package:sunshine/widgets/search_result_tile.dart';
 
+import '../models/models.dart';
 import '../sunshine_theme/theme.dart';
 import '../widgets/widgets.dart';
 
@@ -16,6 +19,8 @@ class SearchLocationScreen extends StatefulWidget {
 
 class _SearchLocationScreenState extends State<SearchLocationScreen> {
   late TextEditingController _searchFieldController;
+  final searchService = MockWeatherService();
+
   @override
   void initState() {
     _searchFieldController = TextEditingController();
@@ -61,10 +66,25 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                             flex: 5,
                             child: TextFormField(
                               controller: _searchFieldController,
-                              onFieldSubmitted: (value) => {
-                                //TODO Insert autocomplete/search api function
-                                //TODO : as well as a dropdown with available locations
-                              },
+                              onFieldSubmitted: (value) => FutureBuilder(
+                                  //TODO: on handle submit to return widget and validate input
+                                  future: searchService.getSearchResultData(),
+                                  builder: (context,
+                                      AsyncSnapshot<List<SearchResult>>
+                                          snapshot) {
+                                    final searchResultData = snapshot.data;
+
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return SearchResultListView(
+                                          searchResultData: searchResultData);
+                                    } else {
+                                      return const CircularProgressIndicator(
+                                        color: Palette.activeCardColor,
+                                      );
+                                    }
+                                  }),
+
                               style: const TextStyle(
                                 color: Colors.white,
                               ),
@@ -86,15 +106,12 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                                       const BorderSide(color: Colors.white),
                                 ),
                                 filled: true,
-                                fillColor: Palette
-                                    .searchBarColor, //TODO : Add this to the theme settings
+                                fillColor: Palette.searchBarColor,
                                 focusedBorder: const UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.blue),
                                 ),
                               ),
                               cursorColor: Colors.white,
-
-                              //TODO: Validate input
                             ),
                           ),
                           Flexible(
@@ -103,8 +120,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                               padding: const EdgeInsets.all(15),
 
                               decoration: BoxDecoration(
-                                color: const Color(
-                                    0xFF222249), //TODO : card background color
+                                color: const Color(0xFF222249),
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               // ignore: prefer_const_constructors
@@ -129,15 +145,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
         );
       },
     );
-  }
-
-  Widget buildSearchResultList() {
-    return ListView.builder(scrollDirection: Axis.vertical,
-
-      itemBuilder: (context, index) {
-        
-        //TODO: Return the search result data
-      });
   }
 
   Widget buildSavedLocations() {
