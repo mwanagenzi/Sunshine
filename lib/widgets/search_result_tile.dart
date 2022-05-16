@@ -15,19 +15,42 @@ class SearchResultTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: (() {
-        //TODO; Open current weaher screen with relevant weather data
-      }),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: const BorderSide(
-          color: Palette.activeCardColor,
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            width: 1.0,
+            color: Palette.activeCardColor,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Location : $searchName ',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+                Text(
+                  'Region : $searchRegion ',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ],
+            ),
+            Text(
+              'Country : $searchCountry ',
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+            // ignore: prefer_const_constructors
+          ],
         ),
       ),
-      title: Text('Name : $searchName '),
-      subtitle: Text('Region : $searchRegion'),
-      trailing: Text('Country : $searchCountry'),
     );
   }
 }
