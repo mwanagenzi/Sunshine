@@ -91,24 +91,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                               child: TextFormField(
                                 validator: _searchFieldValidator,
                                 controller: _searchFieldController,
-                                onFieldSubmitted: (value) => FutureBuilder(
-                                    //TODO: on handle submit to return widget and validate input
-                                    future: searchService.getSearchResultData(),
-                                    builder: (context,
-                                        AsyncSnapshot<List<SearchResult>>
-                                            snapshot) {
-                                      final searchResultData = snapshot.data;
-
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.done) {
-                                        return SearchResultListView(
-                                            searchResultData: searchResultData);
-                                      } else {
-                                        return const CircularProgressIndicator(
-                                          color: Palette.activeCardColor,
-                                        );
-                                      }
-                                    }),
+                                onFieldSubmitted: (value) { _handleSearchFieldSubmit();
+                                buildSearchResult(value);},
 
                                 style: const TextStyle(
                                   color: Colors.white,
@@ -162,7 +146,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                     ),
                     Flexible(
                       flex: 5,
-                      child: currentScreenState == SearchScreenState.savedLocations? buildSavedLocations()://TODO: build search result data,
+                      child: currentScreenState == SearchScreenState.savedLocations? buildSavedLocations():buildSearchResult(value);
                     ),
                   ],
                 ),
@@ -187,6 +171,27 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
         itemBuilder: (context, index) {
           return const LocationWeatherCard();
         });
+  }
+
+  Widget buildSearchResult(String value){
+    return FutureBuilder(
+                                    //TODO: on handle submit to return widget and validate input
+                                    future: searchService.getSearchResultData(),
+                                    builder: (context,
+                                        AsyncSnapshot<List<SearchResult>>
+                                            snapshot) {
+                                      final searchResultData = snapshot.data;
+
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        return SearchResultListView(
+                                            searchResultData: searchResultData);
+                                      } else {
+                                        return const CircularProgressIndicator(
+                                          color: Palette.activeCardColor,
+                                        );
+                                      }
+                                    });
   }
 
   
