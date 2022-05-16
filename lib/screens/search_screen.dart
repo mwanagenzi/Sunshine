@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/api/mock_weather_service.dart';
 import 'package:sunshine/provider/providers.dart';
-import 'package:sunshine/widgets/search_result_tile.dart';
 
 import '../models/models.dart';
 import '../sunshine_theme/theme.dart';
@@ -17,9 +16,13 @@ class SearchLocationScreen extends StatefulWidget {
   _SearchLocationScreenState createState() => _SearchLocationScreenState();
 }
 
+enum SearchScreenState { searchResults, savedLocations }
+
 class _SearchLocationScreenState extends State<SearchLocationScreen> {
   late TextEditingController _searchFieldController;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final searchService = MockWeatherService();
+  SearchScreenState currentState = SearchScreenState.savedLocations;
 
   @override
   void initState() {
@@ -31,6 +34,25 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
   void deactivate() {
     _searchFieldController.dispose();
     super.deactivate();
+  }
+
+  String? _searchFieldValidator(String? searchFieldValue) {
+    if (searchFieldValue == null || searchFieldValue.isEmpty) {
+      return 'This field requires a value';
+    } else {
+      setState(() {
+        currentState = SearchScreenState.searchResults;
+      });
+      return null;
+    }
+  }
+
+  void _handleSearchFieldSubmit() {
+    if (_formKey.currentState!.validate()) {
+      //TODO: call the network service to handle search
+      //TODO: display the result
+      //TODO: enum to handle switching between results and saved locations
+    }
   }
 
   @override
@@ -64,54 +86,59 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                         children: [
                           Flexible(
                             flex: 5,
-                            child: TextFormField(
-                              controller: _searchFieldController,
-                              onFieldSubmitted: (value) => FutureBuilder(
-                                  //TODO: on handle submit to return widget and validate input
-                                  future: searchService.getSearchResultData(),
-                                  builder: (context,
-                                      AsyncSnapshot<List<SearchResult>>
-                                          snapshot) {
-                                    final searchResultData = snapshot.data;
+                            child: Form(
+                              key: _formKey,
+                              child: TextFormField(
+                                validator: _searchFieldValidator,
+                                controller: _searchFieldController,
+                                onFieldSubmitted: (value) => FutureBuilder(
+                                    //TODO: on handle submit to return widget and validate input
+                                    future: searchService.getSearchResultData(),
+                                    builder: (context,
+                                        AsyncSnapshot<List<SearchResult>>
+                                            snapshot) {
+                                      final searchResultData = snapshot.data;
 
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.done) {
-                                      return SearchResultListView(
-                                          searchResultData: searchResultData);
-                                    } else {
-                                      return const CircularProgressIndicator(
-                                        color: Palette.activeCardColor,
-                                      );
-                                    }
-                                  }),
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        return SearchResultListView(
+                                            searchResultData: searchResultData);
+                                      } else {
+                                        return const CircularProgressIndicator(
+                                          color: Palette.activeCardColor,
+                                        );
+                                      }
+                                    }),
 
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              // ignore: prefer_const_constructors
-                              decoration: InputDecoration(
-                                focusColor: Palette.highlightedTextColor,
-                                hintText: 'Search',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
                                 // ignore: prefer_const_constructors
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
+                                decoration: InputDecoration(
+                                  focusColor: Palette.highlightedTextColor,
+                                  hintText: 'Search',
+                                  // ignore: prefer_const_constructors
+                                  hintStyle: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                  prefixIcon: const Icon(
+                                    Icons.search_rounded,
+                                    color: Colors.white,
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide:
+                                        const BorderSide(color: Colors.white),
+                                  ),
+                                  filled: true,
+
+                                  fillColor: Palette.searchBarColor,
+                                  focusedBorder: const UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.blue),
+                                  ),
                                 ),
-                                prefixIcon: const Icon(
-                                  Icons.search_rounded,
-                                  color: Colors.white,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide:
-                                      const BorderSide(color: Colors.white),
-                                ),
-                                filled: true,
-                                fillColor: Palette.searchBarColor,
-                                focusedBorder: const UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.blue),
-                                ),
+                                cursorColor: Colors.white,
                               ),
-                              cursorColor: Colors.white,
                             ),
                           ),
                           Flexible(
@@ -135,7 +162,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                     ),
                     Flexible(
                       flex: 5,
-                      child: buildSavedLocations(),
+                      child: currentScreenState == SearchScreenState.savedLocations? buildSavedLocations()://TODO: build search result data,
                     ),
                   ],
                 ),
@@ -161,4 +188,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
           return const LocationWeatherCard();
         });
   }
+
+  
 }
