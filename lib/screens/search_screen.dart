@@ -182,7 +182,12 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
         future: searchService.getSearchResultData(),
         builder: (context, AsyncSnapshot<List<SearchResult>> snapshot) {
           final searchResultData = snapshot.data;
-
+          print('This is json data from search screen : $searchResultData');
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          }
           if (snapshot.connectionState == ConnectionState.done) {
             return SearchResultListView(searchResultData: searchResultData);
           } else {

@@ -97,14 +97,17 @@ class MockWeatherService {
     final searchResultDataString = await _loadAssetSampleData(
         'assets/sample_data/search_result_data.json');
 
-    final Map<String, dynamic> jsonMap = jsonDecode(searchResultDataString);
+    final List jsonMap = jsonDecode(searchResultDataString);
+
+    print("This is the jsonMap : $jsonMap");
 
     if (jsonMap[0]['name'] != null) {
       final searchResultListData = <SearchResult>[];
 
-      for (var searchResult in jsonMap['']) {
+      for (var searchResult in jsonMap) {
         searchResultListData.add(SearchResult.fromJson(searchResult));
       }
+
       return searchResultListData;
     } else {
       return [];
