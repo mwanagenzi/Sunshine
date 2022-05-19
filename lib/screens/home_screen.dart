@@ -65,9 +65,7 @@ class HomeScreen extends StatelessWidget {
                               // ignore: prefer_const_constructors
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
-                                    Palette
-                                        .activeCardColor //TODO : highlighted button color
-                                    ),
+                                    Palette.activeCardColor),
                               ),
                               onPressed: () {
                                 //TODO : Forecast details
@@ -89,7 +87,15 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const FlutterLogo(size: 200.0),
+                        Image(
+                          width: 100,
+                          height: 100,
+                          image: NetworkImage(
+                            weatherElementData?.imageUrl.toString() ??
+                                'https://imgs.search.brave.com/NmwONYNXckjeLWZ-6QxOU0uhTGg0flhVIoQLzi-ycUM/rs:fit:416:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/ZXZoRHhPVFhnTzZN/OGdNc00tMWFBSGFJ/YiZwaWQ9QXBp',
+                            //loads flutter logo as default image
+                          ),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           mainAxisSize: MainAxisSize.max,

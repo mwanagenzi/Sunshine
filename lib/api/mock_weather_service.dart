@@ -36,6 +36,9 @@ class MockWeatherService {
           locationName: 'unavailable',
           currentDate: DateFormat.yMEd().format(DateTime.now()),
           temperature: 0,
+          imageUrl:
+              'https://imgs.search.brave.com/NmwONYNXckjeLWZ-6QxOU0uhTGg0flhVIoQLzi-ycUM/rs:fit:416:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/ZXZoRHhPVFhnTzZN/OGdNc00tMWFBSGFJ/YiZwaWQ9QXBp',
+          // provides a flutter logo as default image
           windSpeed: 0,
           humidity: 0);
     }

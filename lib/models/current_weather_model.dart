@@ -5,6 +5,7 @@ class CurrentWeatherModel {
   String currentDate;
   //TODO Configure and set the date format
   //TODO Configure the image from its url
+  String imageUrl;
   double temperature;
   double windSpeed;
   int humidity;
@@ -12,7 +13,9 @@ class CurrentWeatherModel {
   CurrentWeatherModel({
     required this.locationName,
     required this.currentDate,
+    required this.imageUrl,
     required this.temperature,
+  
     required this.windSpeed,
     required this.humidity,
   });
@@ -26,6 +29,7 @@ class CurrentWeatherModel {
         locationName: json['location']['name'] as String,
         currentDate: dateFormat,
         temperature: json['current']['temp_c'] as double,
+        imageUrl: json['current']['condition']['icon'] as String,
         windSpeed: json['current']['wind_kph'] as double,
         humidity: json['current']['humidity'] as int);
   }
