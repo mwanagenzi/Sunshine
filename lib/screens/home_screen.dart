@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
                     Text(
-                      weatherElementData?.locationName.toString() ?? '',
+                      weatherElementData?.locationName ?? '',
                     ),
                     // ignore: prefer_const_constructors
                     SizedBox(
@@ -91,7 +91,7 @@ class HomeScreen extends StatelessWidget {
                           width: 100,
                           height: 100,
                           image: NetworkImage(
-                            weatherElementData?.imageUrl.toString() ??
+                            weatherElementData?.imageUrl ??
                                 'https://imgs.search.brave.com/NmwONYNXckjeLWZ-6QxOU0uhTGg0flhVIoQLzi-ycUM/rs:fit:416:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/ZXZoRHhPVFhnTzZN/OGdNc00tMWFBSGFJ/YiZwaWQ9QXBp',
                             //loads flutter logo as default image
                           ),

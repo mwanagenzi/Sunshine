@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class HourlyWeatherCard extends StatelessWidget {
   final String hour;
+  final String weatherIconUrl;
   final double temperature;
   // String? iconUrl; //TODO implement an icon for every card
   const HourlyWeatherCard({
+    required this.weatherIconUrl,
     required this.hour,
     required this.temperature,
     Key? key,
@@ -16,8 +18,10 @@ class HourlyWeatherCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         // ignore: prefer_const_constructors
-        FlutterLogo(
-          size: 50.0,
+        Image(
+          width: 50,
+          height: 50,
+          image: NetworkImage(weatherIconUrl),
         ),
         // ignore: prefer_const_constructors
         SizedBox(

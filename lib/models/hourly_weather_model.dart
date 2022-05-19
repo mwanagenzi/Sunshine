@@ -1,12 +1,12 @@
 import 'package:intl/intl.dart';
 
 class HourlyWeather {
-  // String weatherIconUrl;
+  String weatherIconUrl;
   String time;
   double temperature;
 
   HourlyWeather({
-    // required this.weatherIconUrl,
+    required this.weatherIconUrl,
     required this.time,
     required this.temperature,
   });
@@ -17,7 +17,7 @@ class HourlyWeather {
     final hourOfDay = DateFormat.jm().format(dateTime);
 
     return HourlyWeather(
-        // weatherIconUrl: json[0]['condition']['icon'] ?? '',
+        weatherIconUrl: json['condition']['icon'] ?? '',
         time: hourOfDay,
         temperature: json['temp_c'] ?? 0);
   }

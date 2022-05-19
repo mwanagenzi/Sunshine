@@ -23,6 +23,7 @@ class HourlyWeatherListView extends StatelessWidget {
             ),
           ),
           child:  HourlyWeatherCard(
+            weatherIconUrl: hourlyWeatherData[index].weatherIconUrl,
             hour: hourlyWeatherData[index].time,
             temperature: hourlyWeatherData[index].temperature,
           ),
