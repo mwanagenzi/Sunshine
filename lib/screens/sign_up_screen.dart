@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunshine/screens/login_screen.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
@@ -14,19 +15,19 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  late TextEditingController _usernameController, _passwordController;
+  late TextEditingController _emailController, _passwordController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    _usernameController = TextEditingController();
+    _emailController = TextEditingController();
     _passwordController = TextEditingController();
     super.initState();
   }
 
   @override
   void deactivate() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.deactivate();
   }
@@ -45,16 +46,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String? _fieldValidator(String? textFieldValue) {
     if (textFieldValue == null || textFieldValue.isEmpty) {
       return 'This value is required';
-    } else if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(textFieldValue)) {
-      return 'Username can only consist of alphabets and numbers';
+    } else if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(textFieldValue)) {
+      textFieldValue.toLowerCase();
+      return 'Enter a valid email address';
     } else {
+      textFieldValue.toLowerCase();
       return null;
     }
   }
 
-  void _handleSubmit(BuildContext context) {
+  void _handleSubmit(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      //TODO; Check if user exists 
+      try {
+  final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: _emailController.text,
+    password: _passwordController.text,
+  );
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'weak-password') {
+    print('The password provided is too weak.');
+  } else if (e.code == 'email-already-in-use') {
+    print('The account already exists for that email.');
+  }
+} catch (e) {
+  print(e);
+}
+
+//TODO: Return an error or toast upon an error
+      //TODO; Check if user exists
       //TODO: If new,register user to firebase
       //TODO: If user exists,=> error message,=> route to login screen
       Navigator.of(context)
@@ -75,9 +96,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const AuthScreenSvg(),
-                const SizedBox(height: 50),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
@@ -98,19 +118,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Form(
                         key: _formKey,
                         child: TextFormField(
-                          controller: _usernameController,
+                          controller: _emailController,
                           cursorColor: Colors.black,
                           autofocus: true,
                           keyboardType: TextInputType.name,
                           validator: _fieldValidator,
                           decoration: InputDecoration(
-                              labelText: 'Name',
+                              labelText: 'Email',
                               labelStyle: Theme.of(context)
                                   .textTheme
                                   .bodyText2!
                                   .copyWith(color: Colors.black),
                               focusColor: Palette.highlightedTextColor,
-                              hintText: 'Username',
+                              hintText: 'Email Address',
                               // ignore: prefer_const_constructors
                               hintStyle: TextStyle(
                                 color: Colors.black,
