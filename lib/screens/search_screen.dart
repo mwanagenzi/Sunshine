@@ -27,12 +27,21 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
   @override
   void initState() {
     _searchFieldController = TextEditingController();
+
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant SearchLocationScreen oldWidget) {
+    currentState == SearchScreenState.savedLocations;
+    print('Did update widget is called');
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
   void deactivate() {
     _searchFieldController.dispose();
+
     super.deactivate();
   }
 
@@ -131,7 +140,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                             flex: 2,
                             child: Container(
                               padding: const EdgeInsets.all(15),
-
                               decoration: BoxDecoration(
                                 color: const Color(0xFF222249),
                                 borderRadius: BorderRadius.circular(5),
@@ -198,3 +206,4 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
         });
   }
 }
+//TODO: debug the saved locations render issue after navaigating awawy from screen

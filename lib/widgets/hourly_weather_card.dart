@@ -19,14 +19,12 @@ class HourlyWeatherCard extends StatelessWidget {
       children: [
         // ignore: prefer_const_constructors
         Image(
-          width: 50,
-          height: 50,
+          height: 80,
+          fit: BoxFit.fitWidth,
           image: NetworkImage(weatherIconUrl),
         ),
         // ignore: prefer_const_constructors
-        SizedBox(
-          width: 10,
-        ),
+
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           // ignore: prefer_const_literals_to_create_immutables
@@ -37,7 +35,7 @@ class HourlyWeatherCard extends StatelessWidget {
               // ignore: prefer_const_constructors
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 12), //TODO text theme - caption
+                  fontSize: 13), //TODO text theme - caption
               // ignore: prefer_const_constructors
             ),
             // ignore: prefer_const_constructors

@@ -18,6 +18,7 @@ class WeeklyForecastListView extends StatelessWidget {
             date: weeklyWeatherData[index].shortDate,
             averageTemp: weeklyWeatherData[index].averageTemperature,
             dayOfWeek: weeklyWeatherData[index].day,
+            weatherIconUrl: weeklyWeatherData[index].weatherIconUrl,
           );
         }),
         separatorBuilder: (context, index) {

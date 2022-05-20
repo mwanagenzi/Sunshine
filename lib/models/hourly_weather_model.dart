@@ -16,8 +16,11 @@ class HourlyWeather {
     final dateTime = DateTime.fromMillisecondsSinceEpoch(unixTime * 1000);
     final hourOfDay = DateFormat.jm().format(dateTime);
 
+    final apiImageUrl = json['condition']['icon'] ?? '';
+    String appendedImageUrl = ('https:$apiImageUrl');
+
     return HourlyWeather(
-        weatherIconUrl: json['condition']['icon'] ?? '',
+        weatherIconUrl: appendedImageUrl,
         time: hourOfDay,
         temperature: json['temp_c'] ?? 0);
   }

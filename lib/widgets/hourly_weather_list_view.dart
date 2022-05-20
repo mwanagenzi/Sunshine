@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:sunshine/sunshine_theme/theme.dart';
 
 import '../models/hourly_weather_model.dart';
 import 'widgets.dart';
@@ -15,12 +16,13 @@ class HourlyWeatherListView extends StatelessWidget {
       itemBuilder: (context, index) {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: const BoxDecoration(
-            color: Color(0xFF4286E6),
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(
+          decoration:  BoxDecoration(
+            color: Palette.inactiveCardColor,
+            // shape: BoxShape.rectangle,
+            borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
+             border: Border.all(color: Palette.activeCardColor, width: 1.0),
           ),
           child:  HourlyWeatherCard(
             weatherIconUrl: hourlyWeatherData[index].weatherIconUrl,

@@ -87,14 +87,14 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Image(
-                          width: 100,
-                          height: 100,
+                        const Image(
+                          height: 200,
+                          fit: BoxFit.fitWidth,
                           image: NetworkImage(
-                            weatherElementData?.imageUrl ??
-                                'https://imgs.search.brave.com/NmwONYNXckjeLWZ-6QxOU0uhTGg0flhVIoQLzi-ycUM/rs:fit:416:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/ZXZoRHhPVFhnTzZN/OGdNc00tMWFBSGFJ/YiZwaWQ9QXBp',
-                            //loads flutter logo as default image
-                          ),
+                              'https://cdn.weatherapi.com/weather/64x64/day/113.png'
+                              // 'https://imgs.search.brave.com/NmwONYNXckjeLWZ-6QxOU0uhTGg0flhVIoQLzi-ycUM/rs:fit:416:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/ZXZoRHhPVFhnTzZN/OGdNc00tMWFBSGFJ/YiZwaWQ9QXBp',
+                              //loads flutter logo as default image
+                              ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,

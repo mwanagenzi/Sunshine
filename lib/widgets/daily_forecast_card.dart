@@ -4,13 +4,15 @@ class DailyForecastCard extends StatelessWidget {
   final String dayOfWeek;
   final String date;
   final double averageTemp;
+  final String weatherIconUrl;
 
-  const DailyForecastCard({
-    Key? key,
-    required this.dayOfWeek,
-    required this.date,
-    required this.averageTemp,
-  }) : super(key: key);
+  const DailyForecastCard(
+      {Key? key,
+      required this.dayOfWeek,
+      required this.date,
+      required this.averageTemp,
+      required this.weatherIconUrl})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +35,22 @@ class DailyForecastCard extends StatelessWidget {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               Text(
-                dayOfWeek ,
+                dayOfWeek,
                 style: const TextStyle(
                   fontSize: 20, //TODO : text theme headline6
                   color: Colors.white,
                 ),
               ),
-               Text(
+              Text(
                 date,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 12, //TODO : texttheme caption
+                  fontSize: 13, //TODO : texttheme caption
                 ),
               ),
             ],
           ),
-           Text(
+          Text(
             '$averageTemp\u2103',
             style: const TextStyle(
               color: Colors.white,
@@ -56,9 +58,11 @@ class DailyForecastCard extends StatelessWidget {
             ),
           ),
           // ignore: prefer_const_constructors
-          FlutterLogo(
-            size: 40,
-          )
+          Image(
+            width: 40,
+            fit: BoxFit.fitHeight,
+            image: NetworkImage(weatherIconUrl),
+          ),
         ],
       ),
     );

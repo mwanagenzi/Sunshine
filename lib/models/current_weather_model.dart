@@ -15,7 +15,6 @@ class CurrentWeatherModel {
     required this.currentDate,
     required this.imageUrl,
     required this.temperature,
-  
     required this.windSpeed,
     required this.humidity,
   });
@@ -25,11 +24,14 @@ class CurrentWeatherModel {
     final dateTime = DateTime.fromMillisecondsSinceEpoch(unixTime * 1000);
     final dateFormat = DateFormat.yMEd().format(dateTime);
 
+    final apiImageUrl = json['current']['condition']['icon'] as String;
+    String appendedImageUrl = ('https:$apiImageUrl');
+
     return CurrentWeatherModel(
         locationName: json['location']['name'] as String,
         currentDate: dateFormat,
         temperature: json['current']['temp_c'] as double,
-        imageUrl: json['current']['condition']['icon'] as String,
+        imageUrl: appendedImageUrl,
         windSpeed: json['current']['wind_kph'] as double,
         humidity: json['current']['humidity'] as int);
   }
