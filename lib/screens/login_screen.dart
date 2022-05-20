@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const AuthScreenSvg(),
                 const SizedBox(height: 50),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 40.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
