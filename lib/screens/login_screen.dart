@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/home.dart';
 import 'package:sunshine/provider/providers.dart';
-import 'package:sunshine/screens/screens.dart';
+import 'package:sunshine/app_routing.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
+import 'package:sunshine/utils/constants.dart';
 import 'package:sunshine/widgets/auth_screen_svg.dart';
 
 import '../widgets/sunshine_auth_button.dart';
@@ -161,6 +162,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(height: 20),
                       InkWell(
                         onTap: () {
+                          Navigator.popAndPushNamed(
+                              context, AppRoutes.resetPassword);
                           //TODO: password reset functionality
                         },
                         child: Text(

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:sunshine/screens/login_screen.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
+import 'package:sunshine/utils/constants.dart';
 
 import '../widgets/sunshine_auth_button.dart';
 import '../widgets/widgets.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
-
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
@@ -58,28 +58,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _handleSubmit(BuildContext context) async {
+    SnackBar _showSnackBarMessage(String errorMessage) {
+      return SnackBar(content: Text(errorMessage));
+    }
+
     if (_formKey.currentState!.validate()) {
       try {
-  final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: _emailController.text,
-    password: _passwordController.text,
-  );
-} on FirebaseAuthException catch (e) {
-  if (e.code == 'weak-password') {
-    print('The password provided is too weak.');
-  } else if (e.code == 'email-already-in-use') {
-    print('The account already exists for that email.');
-  }
-} catch (e) {
-  print(e);
-}
+        final credential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
 
-//TODO: Return an error or toast upon an error
-      //TODO; Check if user exists
-      //TODO: If new,register user to firebase
-      //TODO: If user exists,=> error message,=> route to login screen
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
+        ScaffoldMessenger.of(context).showSnackBar(_showSnackBarMessage(
+            "${credential.user?.displayName} You've signed up successfully"));
+
+        Navigator.popAndPushNamed(context, AppRoutes.login);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+
+          ScaffoldMessenger.of(context).showSnackBar(
+              _showSnackBarMessage("The password provided is too weak."));
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+
+          ScaffoldMessenger.of(context).showSnackBar(_showSnackBarMessage(
+              "The account already exists for that email."));
+        }
+      } catch (e) {
+        print(e);
+      }
     }
   }
 

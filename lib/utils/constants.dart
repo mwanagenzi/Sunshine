@@ -6,7 +6,7 @@ class AppRoutes {
   static const search = '/search';
   static const signUp = '/signUp';
   static const weeklyForecast = '/weeklyForecast';
-  static const welcome = '/welcome';
+  static const welcome = '/';
 }
 
 const String kApiKey = '1cf2f5276d1b444093434825221204';

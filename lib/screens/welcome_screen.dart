@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
+import 'package:sunshine/utils/constants.dart';
 
 import '../widgets/sunshine_auth_button.dart';
 import '../widgets/widgets.dart';
@@ -44,8 +45,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       //TODO; Check if user exists
       //TODO: If new,register user to firebase
       //TODO: If user exists,=> error message,=> route to login screen
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
+      Navigator.popAndPushNamed(context, AppRoutes.login);
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunshine/app_routing.dart';
 import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,6 +20,8 @@ class Sunshine extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: SunshineTheme.themeData(),
       home: const WelcomeScreen(),
+      onGenerateRoute: generateAppRoutes,
     );
+    
   }
 }
