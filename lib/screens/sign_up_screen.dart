@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 import 'package:sunshine/utils/constants.dart';
 

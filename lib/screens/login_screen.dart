@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/home.dart';
 import 'package:sunshine/provider/providers.dart';
-import 'package:sunshine/app_routing.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 import 'package:sunshine/utils/constants.dart';

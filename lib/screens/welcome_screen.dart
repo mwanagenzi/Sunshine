@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunshine/utils/constants.dart';
 
@@ -12,85 +11,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  late TextEditingController _emailController, _passwordController;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void deactivate() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.deactivate();
-  }
-
-  bool isTextObscured = true;
-  IconData visibilityIcon = Icons.visibility_off;
-
-  IconData _changePasswordSuffixIcon(IconData visibleIcon) {
-    if (visibleIcon == Icons.visibility) {
-      return visibleIcon = Icons.visibility_off;
-    } else {
-      return visibleIcon = Icons.visibility;
-    }
-  }
-
-  
-
-  String? _fieldValidator(String? textFieldValue) {
-    if (textFieldValue == null || textFieldValue.isEmpty) {
-      return 'This value is required';
-    } else if (!RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(textFieldValue)) {
-      textFieldValue.toLowerCase();
-      return 'Enter a valid email address';
-    } else {
-      textFieldValue.toLowerCase();
-      return null;
-    }
-  }
-
-  void _handleSubmit(BuildContext context) async {
-    SnackBar _showSnackBarMessage(String errorMessage) {
-      return SnackBar(content: Text(errorMessage));
-    }
-
-    if (_formKey.currentState!.validate()) {
-      try {
-        final credential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
-
-        ScaffoldMessenger.of(context).showSnackBar(_showSnackBarMessage(
-            "${credential.user?.displayName} You've signed up successfully"));
-
-        Navigator.pushNamed(context, AppRoutes.login);
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
-
-          ScaffoldMessenger.of(context).showSnackBar(
-              _showSnackBarMessage("The password provided is too weak."));
-        } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
-
-          ScaffoldMessenger.of(context).showSnackBar(_showSnackBarMessage(
-              "The account already exists for that email."));
-        }
-      } catch (e) {
-        print(e);
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
