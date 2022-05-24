@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 import 'package:sunshine/utils/constants.dart';
@@ -64,11 +65,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  void _handleSubmit(BuildContext context) {
+  SnackBar _showErrorSnackBar(String errorMessage) {
+    return SnackBar(
+      backgroundColor: Palette.inactiveCardColor,
+      elevation: 2.0,
+        content: Text(
+      errorMessage,
+      style: Theme.of(context).textTheme.bodyText2,
+    ));
+  }
+
+  void _handleSubmit(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      //TODO; Check if user exists
-      //TODO: If new,register user to firebase
-      //TODO: If user exists,=> error message,=> route to login screen
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+              _showErrorSnackBar('The password provided is too weak.'));
+        } else if (e.code == 'email-already-in-use') {
+          ScaffoldMessenger.of(context).showSnackBar(
+              _showErrorSnackBar('The account already exists for that email.'));
+        }
+      } catch (e) {
+        print(e);
+      }
       Navigator.popAndPushNamed(context, AppRoutes.login);
     }
   }
@@ -180,8 +204,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SunshineAuthButton(
                           buttonText: 'Continue',
                           buttonFunction: () {
-                            //TODO: check whether user exists or not
-                            //TODO:navigate to relevant screen (login or register)
                             _handleSubmit(context);
                           },
                         ),
@@ -202,7 +224,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             InkWell(
                               onTap: () {
                                 Navigator.popAndPushNamed(
-                                    context,AppRoutes.login);
+                                    context, AppRoutes.login);
                                 //TODO navigate to the registration page
                               },
                               child: const Text(

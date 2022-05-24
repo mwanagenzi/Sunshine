@@ -130,7 +130,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                       _changePasswordSuffixIcon(
                                           newPassVisibleIcon);
                                 });
-                                // _changePasswordSuffixIcon(visibilityIcon);
                               },
                               child: Icon(
                                 newPassVisibleIcon,
@@ -139,8 +138,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: Colors.white),
+                              borderSide: const BorderSide(color: Colors.white),
                             ),
                             filled: true,
                             fillColor: Colors.white,
@@ -180,7 +178,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                       _changePasswordSuffixIcon(
                                           confirmPassVisibleIcon);
                                 });
-                                // _changePasswordSuffixIcon(visibilityIcon);
                               },
                               child: Icon(
                                 confirmPassVisibleIcon,
@@ -189,8 +186,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: Colors.white),
+                              borderSide: const BorderSide(color: Colors.white),
                             ),
                             filled: true,
                             fillColor: Colors.white,

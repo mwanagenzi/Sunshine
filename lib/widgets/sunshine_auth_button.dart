@@ -20,6 +20,10 @@ class SunshineAuthButton extends StatelessWidget {
         onTap: buttonFunction,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
+          side: const BorderSide(
+            color: Colors.white,
+            width: 1.0
+          )
         ),
         tileColor: Palette.activeCardColor,
         title: Center(

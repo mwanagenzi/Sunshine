@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/home.dart';
@@ -68,11 +69,32 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _handleSubmit(BuildContext context) {
+  SnackBar _showErrorSnackBar(String errorMessage) {
+    return SnackBar(
+        backgroundColor: Palette.inactiveCardColor,
+        elevation: 2.0,
+        content: Text(
+          errorMessage,
+          style: Theme.of(context).textTheme.bodyText2,
+        ));
+  }
+
+  void _handleSubmit(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      //TODO; Check if user exists
-      //TODO: If new,register user to firebase
-      //TODO: If user exists,=> error message,=> route to login screen
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: _emailController.text, password: _passwordController.text);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          ScaffoldMessenger.of(context).showSnackBar(
+              _showErrorSnackBar('No user found for that email.'));
+        } else if (e.code == 'wrong-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+              _showErrorSnackBar('Wrong password provided for that user.'));
+        }
+      } catch (e) {
+        print(e);
+      }
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ChangeNotifierProvider(
@@ -125,6 +147,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           autofocus: true,
                           validator: _emailValidator,
                           decoration: InputDecoration(
+                            labelText: 'Email Address',
+                            labelStyle: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(color: Colors.black),
                             prefixIcon: const Icon(
                               Icons.email_outlined,
                               color: Colors.black,

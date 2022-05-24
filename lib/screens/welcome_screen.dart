@@ -47,7 +47,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       const SizedBox(height: 20),
                       SunshineAuthButton(
-                        buttonText: 'Register',
+                        buttonText: 'Sign Up',
                         buttonFunction: () {
                           Navigator.pushNamed(context, AppRoutes.signUp);
                         },
