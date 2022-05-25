@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/home.dart';
 import 'package:sunshine/provider/providers.dart';
+import 'package:sunshine/screens/home_screen.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 import 'package:sunshine/utils/constants.dart';
@@ -36,8 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
     super.deactivate();
   }
 
-  bool isTextObscured = true;
-  IconData visibilityIcon = Icons.visibility_off;
+  bool _isTextObscured = true;
+  IconData _visibilityIcon = Icons.visibility_off;
 
   IconData _changePasswordSuffixIcon(IconData visibleIcon) {
     if (visibleIcon == Icons.visibility) {
@@ -79,30 +80,43 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 
-  void _handleSubmit(BuildContext context) async {
+  Future<bool> _handleSubmit(BuildContext context) async {
+    bool _isLogin = true;
     if (_formKey.currentState!.validate()) {
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text);
       } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
-          ScaffoldMessenger.of(context).showSnackBar(
-              _showErrorSnackBar('No user found for that email.'));
-        } else if (e.code == 'wrong-password') {
-          ScaffoldMessenger.of(context).showSnackBar(
-              _showErrorSnackBar('Wrong password provided for that user.'));
+        switch (e.code) {
+          case 'user-not-found':
+            ScaffoldMessenger.of(context).showSnackBar(
+                _showErrorSnackBar('No user found for that email.'));
+            !_isLogin;
+            break;
+
+          case 'wrong-password':
+            ScaffoldMessenger.of(context).showSnackBar(
+                _showErrorSnackBar('Wrong password provided for that user.'));
+            !_isLogin;
+            break;
+
+          default:
+            _isLogin;
         }
+
+        // if (e.code == 'user-not-found') {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       _showErrorSnackBar('No user found for that email.'));
+        // } else if (e.code == 'wrong-password') {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //       _showErrorSnackBar('Wrong password provided for that user.'));
+        // }
       } catch (e) {
         print(e);
       }
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => ChangeNotifierProvider(
-            create: (context) => NavbarTabManager(),
-            child: const Home(),
-          ),
-        ),
-      );
+      return _isLogin;
+    } else {
+      return !_isLogin;
     }
   }
 
@@ -175,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: _passwordController,
                           cursorColor: Colors.black,
                           autofocus: true,
-                          obscureText: isTextObscured,
+                          obscureText: _isTextObscured,
                           validator: _fieldValidator,
                           decoration: InputDecoration(
                             labelText: 'Password',
@@ -196,14 +210,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             suffixIcon: GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  isTextObscured = !isTextObscured;
-                                  visibilityIcon =
-                                      _changePasswordSuffixIcon(visibilityIcon);
+                                  _isTextObscured = !_isTextObscured;
+                                  _visibilityIcon = _changePasswordSuffixIcon(
+                                      _visibilityIcon);
                                 });
-                                // _changePasswordSuffixIcon(visibilityIcon);
+                                // _changePasswordSuffixIcon(_visibilityIcon);
                               },
                               child: Icon(
-                                visibilityIcon,
+                                _visibilityIcon,
                                 color: Colors.black,
                               ),
                             ),
@@ -218,8 +232,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(height: 20),
                         SunshineAuthButton(
                           buttonText: 'Continue',
-                          buttonFunction: () {
-                            _handleSubmit(context);
+                          buttonFunction: () async {
+                            bool _loginState = await _handleSubmit(context);
+                            if (_loginState) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChangeNotifierProvider<
+                                            NavbarTabManager>(
+                                      create: (context) => NavbarTabManager(),
+                                      child: HomeScreen(),
+                                    ),
+                                  ));
+                            } else {
+                              print('Error! Can\'t navigate to HomeScreen');
+                            }
                             //TODO: authenticate the user with firebase
                             //TODO : then navigate to the home screen
                           },
