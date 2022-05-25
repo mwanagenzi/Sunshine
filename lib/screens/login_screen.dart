@@ -81,9 +81,9 @@ class _LoginScreenState extends State<LoginScreen> {
       if (_formKey.currentState!.validate()) {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text);
-        // print('Routing to home screen');
-        // Navigator.popAndPushNamed(context, AppRoutes.home);
-        // print('Routed to home screen');
+        print('Routing to home screen');
+        Navigator.popAndPushNamed(context, AppRoutes.home);
+        print('Routed to home screen');
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
