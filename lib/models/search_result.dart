@@ -2,6 +2,8 @@ class SearchResult {
   String name;
   String region;
   String country;
+  double latitude = 0;
+  double longitude = 0;
 
   SearchResult({
     required this.name,
@@ -15,6 +17,4 @@ class SearchResult {
         region: jsonData['region'] as String,
         country: jsonData['country'] as String);
   }
-
-  //TODO map the corresponding json data values
 }

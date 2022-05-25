@@ -22,26 +22,21 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
   late TextEditingController _searchFieldController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final searchService = MockWeatherService();
-  SearchScreenState currentState = SearchScreenState.savedLocations;
+  late SearchScreenState currentState;
 
   @override
   void initState() {
     _searchFieldController = TextEditingController();
-
+    print('Running the search screen state');
+    currentState = SearchScreenState.savedLocations;
     super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant SearchLocationScreen oldWidget) {
-    currentState == SearchScreenState.savedLocations;
-    print('Did update widget is called');
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
   void deactivate() {
     _searchFieldController.dispose();
-
+    print('searchScreen deactivated');
+    currentState = SearchScreenState.savedLocations;
     super.deactivate();
   }
 
