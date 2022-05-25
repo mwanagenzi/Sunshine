@@ -1,9 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sunshine/home.dart';
-import 'package:sunshine/provider/providers.dart';
-import 'package:sunshine/screens/home_screen.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 import 'package:sunshine/utils/constants.dart';
@@ -80,43 +76,25 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 
-  Future<bool> _handleSubmit(BuildContext context) async {
-    bool _isLogin = true;
-    if (_formKey.currentState!.validate()) {
-      try {
+  void _userLogin(BuildContext context) async {
+    try {
+      if (_formKey.currentState!.validate()) {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text);
-      } on FirebaseAuthException catch (e) {
-        switch (e.code) {
-          case 'user-not-found':
-            ScaffoldMessenger.of(context).showSnackBar(
-                _showErrorSnackBar('No user found for that email.'));
-            !_isLogin;
-            break;
-
-          case 'wrong-password':
-            ScaffoldMessenger.of(context).showSnackBar(
-                _showErrorSnackBar('Wrong password provided for that user.'));
-            !_isLogin;
-            break;
-
-          default:
-            _isLogin;
-        }
-
-        // if (e.code == 'user-not-found') {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //       _showErrorSnackBar('No user found for that email.'));
-        // } else if (e.code == 'wrong-password') {
-        //   ScaffoldMessenger.of(context).showSnackBar(
-        //       _showErrorSnackBar('Wrong password provided for that user.'));
-        // }
-      } catch (e) {
-        print(e);
+        // print('Routing to home screen');
+        // Navigator.popAndPushNamed(context, AppRoutes.home);
+        // print('Routed to home screen');
       }
-      return _isLogin;
-    } else {
-      return !_isLogin;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(_showErrorSnackBar('No user found for that email.'));
+      } else if (e.code == 'wrong-pasword') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            _showErrorSnackBar('Wrong password provided for that user.'));
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -232,22 +210,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(height: 20),
                         SunshineAuthButton(
                           buttonText: 'Continue',
-                          buttonFunction: () async {
-                            bool _loginState = await _handleSubmit(context);
-                            if (_loginState) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ChangeNotifierProvider<
-                                            NavbarTabManager>(
-                                      create: (context) => NavbarTabManager(),
-                                      child: HomeScreen(),
-                                    ),
-                                  ));
-                            } else {
-                              print('Error! Can\'t navigate to HomeScreen');
-                            }
+                          buttonFunction: () {
+                            _userLogin(context);
+
                             //TODO: authenticate the user with firebase
                             //TODO : then navigate to the home screen
                           },

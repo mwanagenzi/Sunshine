@@ -67,21 +67,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   SnackBar _showErrorSnackBar(String errorMessage) {
     return SnackBar(
-      backgroundColor: Palette.inactiveCardColor,
-      elevation: 2.0,
+        backgroundColor: Palette.inactiveCardColor,
+        elevation: 2.0,
         content: Text(
-      errorMessage,
-      style: Theme.of(context).textTheme.bodyText2,
-    ));
+          errorMessage,
+          style: Theme.of(context).textTheme.bodyText2,
+        ));
   }
 
-  void _handleSubmit(BuildContext context) async {
+  void _userSignUp(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text,
           password: _passwordController.text,
         );
+        Navigator.popAndPushNamed(context, AppRoutes.login);
+        
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -204,7 +206,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SunshineAuthButton(
                           buttonText: 'Continue',
                           buttonFunction: () {
-                            _handleSubmit(context);
+                            _userSignUp(context);
                           },
                         ),
                         const SizedBox(height: 20),

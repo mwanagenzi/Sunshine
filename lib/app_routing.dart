@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sunshine/provider/providers.dart';
 import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/utils/constants.dart';
+
+import 'home.dart';
 
 Route<dynamic> generateAppRoutes(RouteSettings settings) {
   switch (settings.name) {
@@ -23,7 +27,12 @@ Route<dynamic> generateAppRoutes(RouteSettings settings) {
       }
     case AppRoutes.home:
       {
-        return MaterialPageRoute(builder: (context) => HomeScreen());
+        return MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider<NavbarTabManager>(
+            create: (context) => NavbarTabManager(),
+            child: const Home(),
+          ),
+        );
       }
     case AppRoutes.weeklyForecast:
       {
