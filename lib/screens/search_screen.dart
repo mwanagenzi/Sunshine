@@ -31,14 +31,15 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
     currentState = SearchScreenState.savedLocations;
     super.initState();
   }
-
-  @override
-  void deactivate() {
+@override
+  void dispose() {
     _searchFieldController.dispose();
     print('searchScreen deactivated');
     currentState = SearchScreenState.savedLocations;
-    super.deactivate();
+    // TODO: implement dispose
+    super.dispose();
   }
+  
 
   String? _searchFieldValidator(String? searchFieldValue) {
     if (searchFieldValue == null || searchFieldValue.isEmpty) {

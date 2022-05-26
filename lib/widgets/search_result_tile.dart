@@ -16,7 +16,10 @@ class SearchResultTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        //TODO: capture the location coordinates
+        //TODO: Launch geolocation service 
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
