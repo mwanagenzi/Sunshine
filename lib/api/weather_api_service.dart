@@ -4,10 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sunshine/models/models.dart';
 import 'package:sunshine/models/weekly_forecast_model.dart';
+import 'package:sunshine/services/network_helper.dart';
 
-class MockWeatherService {
+class WeatherAPIService {
+  late final NetworkHelperService _networkHelperService;
 
-  
   Future<DailyWeatherData> getDailyWeatherData() async {
     final currentWeather = await _getCurrentWeatherData();
     final hourlyWeatherConditions = await _getHourlyWeatherData();
@@ -22,13 +23,9 @@ class MockWeatherService {
   }
 
   Future<CurrentWeatherModel> _getCurrentWeatherData() async {
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
-    final weatherDataString = await _loadAssetSampleData(
-        'assets/sample_data/current_weather_data.json');
-
-    final Map<String, dynamic> jsonMap = jsonDecode(weatherDataString);
+    _networkHelperService = NetworkHelperService(apiUrl: )
+    var currentWeatherApiData = await _networkHelperService.getData();
+    final Map<String, dynamic> jsonMap = jsonDecode(currentWeatherApiData);
 
     if (jsonMap['location']['name'].toString().isNotEmpty) {
       final currentWeatherData = CurrentWeatherModel.fromJson(jsonMap);

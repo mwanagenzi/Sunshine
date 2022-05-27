@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-class NetworkHelper {
+class NetworkHelperService {
   final String apiUrl;
-  NetworkHelper({required this.apiUrl});
+  NetworkHelperService({required this.apiUrl});
 
   Future getData() async {
     Response response = await http.get(Uri.parse(apiUrl));
