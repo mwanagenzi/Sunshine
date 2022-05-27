@@ -4,10 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sunshine/models/models.dart';
 import 'package:sunshine/models/weekly_forecast_model.dart';
+import 'package:sunshine/services/location_service.dart';
 import 'package:sunshine/services/network_helper.dart';
+import 'package:sunshine/utils/constants.dart';
 
 class WeatherAPIService {
   late final NetworkHelperService _networkHelperService;
+  late final LocationService _locationService;
 
   Future<DailyWeatherData> getDailyWeatherData() async {
     final currentWeather = await _getCurrentWeatherData();
@@ -23,9 +26,14 @@ class WeatherAPIService {
   }
 
   Future<CurrentWeatherModel> _getCurrentWeatherData() async {
-    _networkHelperService = NetworkHelperService(apiUrl: )
-    var currentWeatherApiData = await _networkHelperService.getData();
-    final Map<String, dynamic> jsonMap = jsonDecode(currentWeatherApiData);
+    List<double>? locationCoordinates =
+        await _locationService.getCurrentLocationCoordinates();
+    _networkHelperService = NetworkHelperService(
+        apiUrl:
+            "{$kWeatherApiUrl$kCurrentWeatherApiMethod}key={$kApiKey}&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&aqi=no");
+    var currentWeatherData = await _networkHelperService.getData();
+    
+    final Map<String, dynamic> jsonMap = jsonDecode(currentWeatherData);
 
     if (jsonMap['location']['name'].toString().isNotEmpty) {
       final currentWeatherData = CurrentWeatherModel.fromJson(jsonMap);

@@ -12,5 +12,5 @@ class AppRoutes {
 const String kApiKey = '2c6737e592f84561bda90108221504';
 const String kWeatherApiUrl = 'https://api.weatherapi.com/v1';
 const String kForecastApiMethod = '/forecast.json';
-const String kCurrentWeatherApirMethod = '/current.json';
+const String kCurrentWeatherApiMethod = '/current.json';
 const String kSearchApiMethod = '/search.json';

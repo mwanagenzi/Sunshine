@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:sunshine/api/mock_weather_service.dart';
+import 'package:sunshine/api/weather_api_service.dart';
 import 'package:sunshine/models/daily_weather_data.dart';
+import 'package:sunshine/services/location_service.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import '../widgets/widgets.dart';
 
-const kElementTextStyle = TextStyle(
-  color: Colors.white,
-  fontSize: 18, //TODO : set this on the text theme
-);
-
-class HomeScreen extends StatelessWidget {
-  final currentWeatherService = MockWeatherService();
-
+class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final currentWeatherService = WeatherAPIService();
+
+  @override
+  void initState() async {
+    await LocationService().checkLocationPermission();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +30,6 @@ class HomeScreen extends StatelessWidget {
         builder: (context, AsyncSnapshot<DailyWeatherData> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final weatherElementData = snapshot.data?.currentWeatherData;
-
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Palette.primaryColor,
@@ -87,14 +95,17 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Image(
+                        Image(
                           height: 200,
                           fit: BoxFit.fitWidth,
                           image: NetworkImage(
-                              'https://cdn.weatherapi.com/weather/64x64/day/113.png'
-                              // 'https://imgs.search.brave.com/NmwONYNXckjeLWZ-6QxOU0uhTGg0flhVIoQLzi-ycUM/rs:fit:416:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/ZXZoRHhPVFhnTzZN/OGdNc00tMWFBSGFJ/YiZwaWQ9QXBp',
-                              //loads flutter logo as default image
-                              ),
+                            //TODO: Implement cache network image package
+                            weatherElementData?.imageUrl ??
+                                'https://img.icons8.com/pastel-glyph/2x/error--v3.png',
+                            // 'https://cdn.weatherapi.com/weather/64x64/day/113.png'
+                            // 'https://imgs.search.brave.com/NmwONYNXckjeLWZ-6QxOU0uhTGg0flhVIoQLzi-ycUM/rs:fit:416:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/ZXZoRHhPVFhnTzZN/OGdNc00tMWFBSGFJ/YiZwaWQ9QXBp',
+                            //loads flutter logo as default image
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -115,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                                 Text(
                                   '${weatherElementData?.temperature.toString() ?? 0.toString()} \u2103',
                                   // ignore: unnecessary_const
-                                  style: kElementTextStyle,
+                                  style: Theme.of(context).textTheme.headline3,
                                 ),
                               ],
                             ),
@@ -134,7 +145,7 @@ class HomeScreen extends StatelessWidget {
                                 Text(
                                   '${weatherElementData?.windSpeed.toString() ?? 0.toString()} kph',
                                   // ignore: unnecessary_const
-                                  style: kElementTextStyle,
+                                  style: Theme.of(context).textTheme.headline3,
                                 ),
                               ],
                             ),
@@ -153,7 +164,7 @@ class HomeScreen extends StatelessWidget {
                                 Text(
                                   '${weatherElementData?.humidity.toString() ?? 0.toString()}%',
                                   // ignore: unnecessary_const
-                                  style: kElementTextStyle,
+                                  style: Theme.of(context).textTheme.headline3,
                                 ),
                               ],
                             )
@@ -205,6 +216,7 @@ class HomeScreen extends StatelessWidget {
           } else {
             return const Center(
               child: CircularProgressIndicator(
+                //TODO : implement spinkit progress indicator
                 color: Palette.activeCardColor,
               ),
             );
