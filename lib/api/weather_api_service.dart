@@ -32,8 +32,9 @@ class WeatherAPIService {
         apiUrl:
             "{$kWeatherApiUrl$kCurrentWeatherApiMethod}key={$kApiKey}&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&aqi=no");
     var currentWeatherData = await _networkHelperService.getData();
-    
+
     final Map<String, dynamic> jsonMap = jsonDecode(currentWeatherData);
+    print("Real-time weather data from json API : $jsonMap");
 
     if (jsonMap['location']['name'].toString().isNotEmpty) {
       final currentWeatherData = CurrentWeatherModel.fromJson(jsonMap);
@@ -50,12 +51,14 @@ class WeatherAPIService {
   }
 
   Future<List<HourlyWeather>> _getHourlyWeatherData() async {
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
+    List<double>? locationCoordinates =
+        await _locationService.getCurrentLocationCoordinates();
 
-    final hourlyWeatherDataString = await _loadAssetSampleData(
-        'assets/sample_data/hourly_weather_data.json');
+    _networkHelperService = NetworkHelperService(
+        apiUrl:
+            "{$kWeatherApiUrl$kForecastApiMethod}key={$kApiKey}&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&days=3&aqi=no&alerts=no");
+
+    final hourlyWeatherDataString = await _networkHelperService.getData();
 
     final Map<String, dynamic> jsonMap = jsonDecode(hourlyWeatherDataString);
 

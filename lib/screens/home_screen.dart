@@ -1,28 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sunshine/api/mock_weather_service.dart';
 import 'package:sunshine/api/weather_api_service.dart';
 import 'package:sunshine/models/daily_weather_data.dart';
-import 'package:sunshine/services/location_service.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import '../widgets/widgets.dart';
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
+   HomeScreen({Key? key}) : super(key: key);
   final currentWeatherService = WeatherAPIService();
-
-  @override
-  void initState() async {
-    await LocationService().checkLocationPermission();
-    // TODO: implement initState
-    super.initState();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -30,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, AsyncSnapshot<DailyWeatherData> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final weatherElementData = snapshot.data?.currentWeatherData;
+            print("Accessing home screen currentWeatherData $weatherElementData");
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Palette.primaryColor,

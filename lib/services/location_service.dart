@@ -13,7 +13,7 @@ class LocationService {
 
   Future<void> checkLocationPermission() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    LocationPermission permission = await Geolocator.checkPermission();
+    LocationPermission permission = await Geolocator.requestPermission();
 
     if (permission != LocationPermission.denied && serviceEnabled) {
       print("Two conditions are enabled");
