@@ -13,7 +13,7 @@ class NetworkHelperService {
 
     if (statusCode == 200) {
       var apiData = response.body;
-      print(apiData);
+      print("API data from Network Helper class $apiData");
       return jsonDecode(apiData);
     } else {
       var errorApiData = response.body;

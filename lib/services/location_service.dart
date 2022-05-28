@@ -41,7 +41,7 @@ class LocationService {
       print("getCurrentPosition() error : $e");
       return [4, 0, 4];
     } finally {
-      print("This method was accessed");
+      print("getCurrentLocationCoordinates() was accessed");
       print("${locationLatitude!},${locationLongitude!}");
       // ignore: control_flow_in_finally
       return [locationLatitude!, locationLongitude!];

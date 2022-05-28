@@ -9,10 +9,13 @@ import 'package:sunshine/services/network_helper.dart';
 import 'package:sunshine/utils/constants.dart';
 
 class WeatherAPIService {
-  late final NetworkHelperService _networkHelperService;
-  late final LocationService _locationService;
+  late final NetworkHelperService _currentWeatherNetworkHelperService,
+      _hourlyWeatherNetworkHelperService,
+      _dailyForecastNetworkHelperService;
+  final LocationService _locationService = LocationService();
 
   Future<DailyWeatherData> getDailyWeatherData() async {
+    print("from getDailyWeather()");
     final currentWeather = await _getCurrentWeatherData();
     final hourlyWeatherConditions = await _getHourlyWeatherData();
     return DailyWeatherData(currentWeather, hourlyWeatherConditions);
@@ -26,14 +29,16 @@ class WeatherAPIService {
   }
 
   Future<CurrentWeatherModel> _getCurrentWeatherData() async {
+    print("from _getCurrentWeatherData()");
     List<double>? locationCoordinates =
         await _locationService.getCurrentLocationCoordinates();
-    _networkHelperService = NetworkHelperService(
+    _currentWeatherNetworkHelperService = NetworkHelperService(
         apiUrl:
-            "{$kWeatherApiUrl$kCurrentWeatherApiMethod}key={$kApiKey}&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&aqi=no");
-    var currentWeatherData = await _networkHelperService.getData();
+            "$kWeatherApiUrl$kCurrentWeatherApiMethod?key=$kApiKey&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&aqi=no");
 
-    final Map<String, dynamic> jsonMap = jsonDecode(currentWeatherData);
+    final Map<String, dynamic> jsonMap =
+        await _currentWeatherNetworkHelperService.getData();
+
     print("Real-time weather data from json API : $jsonMap");
 
     if (jsonMap['location']['name'].toString().isNotEmpty) {
@@ -54,13 +59,12 @@ class WeatherAPIService {
     List<double>? locationCoordinates =
         await _locationService.getCurrentLocationCoordinates();
 
-    _networkHelperService = NetworkHelperService(
+    _hourlyWeatherNetworkHelperService = NetworkHelperService(
         apiUrl:
-            "{$kWeatherApiUrl$kForecastApiMethod}key={$kApiKey}&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&days=3&aqi=no&alerts=no");
+            "$kWeatherApiUrl$kForecastApiMethod?key=$kApiKey&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&days=3&aqi=no&alerts=no");
 
-    final hourlyWeatherDataString = await _networkHelperService.getData();
-
-    final Map<String, dynamic> jsonMap = jsonDecode(hourlyWeatherDataString);
+    final Map<String, dynamic> jsonMap =
+        await _hourlyWeatherNetworkHelperService.getData();
 
     if (jsonMap['forecast']['forecastday'][0]['hour'] != null) {
       final hours = <HourlyWeather>[];
@@ -78,14 +82,14 @@ class WeatherAPIService {
   }
 
   Future<List<DailyWeatherModel>> _getDailyForecastData() async {
-    await Future.delayed(
-      const Duration(seconds: 2),
-    );
+    List<double>? locationCoordinates =
+        await _locationService.getCurrentLocationCoordinates();
+    _dailyForecastNetworkHelperService = NetworkHelperService(
+        apiUrl:
+            "$kWeatherApiUrl$kForecastApiMethod?key=$kApiKey&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&days=3&aqi=no&alerts=no");
 
-    final weeklyForecastDataString = await _loadAssetSampleData(
-        'assets/sample_data/weekly_forecast_data.json');
-
-    final Map<String, dynamic> jsonMap = jsonDecode(weeklyForecastDataString);
+    final Map<String, dynamic> jsonMap =
+        await _dailyForecastNetworkHelperService.getData();
 
     if (jsonMap['forecast']['forecastday'] != null) {
       final days = <DailyWeatherModel>[];

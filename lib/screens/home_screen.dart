@@ -5,17 +5,30 @@ import 'package:sunshine/sunshine_theme/palette.dart';
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
-   HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+
   final currentWeatherService = WeatherAPIService();
-  
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: currentWeatherService.getDailyWeatherData(),
         builder: (context, AsyncSnapshot<DailyWeatherData> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                //TODO : implement spinkit progress indicator
+                color: Palette.activeCardColor,
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error.toString()),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
             final weatherElementData = snapshot.data?.currentWeatherData;
-            print("Accessing home screen currentWeatherData $weatherElementData");
+            print(
+                "Accessing home screen currentWeatherData ${weatherElementData.toString()}");
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Palette.primaryColor,
@@ -40,10 +53,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               body: Container(
-                color:
-                    Palette.primaryColor, //container or card background color
-                //Reference sunshine_app.jpg
-
+                color: Palette.primaryColor,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Center(
@@ -88,9 +98,6 @@ class HomeScreen extends StatelessWidget {
                             //TODO: Implement cache network image package
                             weatherElementData?.imageUrl ??
                                 'https://img.icons8.com/pastel-glyph/2x/error--v3.png',
-                            // 'https://cdn.weatherapi.com/weather/64x64/day/113.png'
-                            // 'https://imgs.search.brave.com/NmwONYNXckjeLWZ-6QxOU0uhTGg0flhVIoQLzi-ycUM/rs:fit:416:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/ZXZoRHhPVFhnTzZN/OGdNc00tMWFBSGFJ/YiZwaWQ9QXBp',
-                            //loads flutter logo as default image
                           ),
                         ),
                         Row(
@@ -200,12 +207,11 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator(
-                //TODO : implement spinkit progress indicator
-                color: Palette.activeCardColor,
-              ),
-            );
+            return Center(
+                child: Text(
+              'Still loading',
+              style: Theme.of(context).textTheme.headline3,
+            ));
           }
         });
   }

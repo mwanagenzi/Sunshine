@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sunshine/api/mock_weather_service.dart';
+import 'package:sunshine/api/weather_api_service.dart';
 import 'package:sunshine/models/weekly_forecast_model.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/widgets/weekly_forecast_list_view.dart';
@@ -14,16 +15,30 @@ class WeeklyForecastScreen extends StatefulWidget {
 }
 
 class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
-  final weatherService = MockWeatherService();
+  final weeklyWeatherDataService = WeatherAPIService();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: weatherService.getWeeklyWeatherData(),
+        future: weeklyWeatherDataService.getWeeklyWeatherData(),
         builder: (context, AsyncSnapshot<WeeklyForecastData> snapshot) {
           final weatherData = snapshot.data;
-
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Palette.activeCardColor,
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text(
+                snapshot.error.toString(),
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            print(
+                "Hourly Weather Data from weekly forecast screen : ${weatherData.toString()}");
             return Scaffold(
               appBar: AppBar(
                 backgroundColor:
@@ -64,8 +79,8 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                                 // ignore: prefer_const_constructors
                                 child: Text(
                                   DateFormat.E().add_yMMMMd().format(
-                                    DateTime.now(),
-                                  ),
+                                        DateTime.now(),
+                                      ),
                                   style: const TextStyle(
                                     fontSize: 12, //TODO textTheme - caption
                                     color: Color(
@@ -125,11 +140,11 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
               ),
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Palette.activeCardColor,
-              ),
-            );
+            return Center(
+                child: Text(
+              'Still loading',
+              style: Theme.of(context).textTheme.headline3,
+            ));
           }
         });
   }
