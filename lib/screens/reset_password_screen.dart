@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
@@ -131,7 +130,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                       _changePasswordSuffixIcon(
                                           newPassVisibleIcon);
                                 });
-                                // _changePasswordSuffixIcon(visibilityIcon);
                               },
                               child: Icon(
                                 newPassVisibleIcon,
@@ -140,8 +138,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: Colors.white),
+                              borderSide: const BorderSide(color: Colors.white),
                             ),
                             filled: true,
                             fillColor: Colors.white,
@@ -181,7 +178,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                       _changePasswordSuffixIcon(
                                           confirmPassVisibleIcon);
                                 });
-                                // _changePasswordSuffixIcon(visibilityIcon);
                               },
                               child: Icon(
                                 confirmPassVisibleIcon,
@@ -190,8 +186,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: Colors.white),
+                              borderSide: const BorderSide(color: Colors.white),
                             ),
                             filled: true,
                             fillColor: Colors.white,
