@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sunshine/app_routing.dart';
-import 'package:sunshine/screens/screens.dart';
+import 'package:sunshine/home.dart';
+import 'package:sunshine/provider/providers.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -19,9 +21,11 @@ class Sunshine extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: SunshineTheme.themeData(),
-      home: const WelcomeScreen(),
+      home: ChangeNotifierProvider<NavbarTabManager>(
+        create: (context) => NavbarTabManager(),
+        child: const Home(),
+      ),
       onGenerateRoute: generateAppRoutes,
     );
-    
   }
 }
