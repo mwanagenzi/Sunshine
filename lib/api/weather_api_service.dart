@@ -16,6 +16,7 @@ class WeatherAPIService {
 
   Future<DailyWeatherData> getDailyWeatherData() async {
     print("from getDailyWeather()");
+    await _locationService.checkLocationPermission();
     final currentWeather = await _getCurrentWeatherData();
     final hourlyWeatherConditions = await _getHourlyWeatherData();
     return DailyWeatherData(currentWeather, hourlyWeatherConditions);
@@ -30,6 +31,7 @@ class WeatherAPIService {
 
   Future<CurrentWeatherModel> _getCurrentWeatherData() async {
     print("from _getCurrentWeatherData()");
+    
     List<double>? locationCoordinates =
         await _locationService.getCurrentLocationCoordinates();
     _currentWeatherNetworkHelperService = NetworkHelperService(

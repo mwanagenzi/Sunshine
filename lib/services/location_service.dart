@@ -28,7 +28,7 @@ class LocationService {
   }
 
   Future<List<double>?> getCurrentLocationCoordinates() async {
-    print("This method is being accessed");
+    print("getCurrentLocationCoordinates() is being accessed");
 
     try {
       Position position = await Geolocator.getCurrentPosition(
