@@ -5,8 +5,8 @@ import 'package:sunshine/sunshine_theme/palette.dart';
 import '../widgets/widgets.dart';
 
 class LocationScreen extends StatefulWidget {
-  final List<double> searchDataLocationCoordinates;
-  const LocationScreen({Key? key, required this.searchDataLocationCoordinates})
+  final List<double> searchLocationCoordinatesData;
+  const LocationScreen({Key? key, required this.searchLocationCoordinatesData})
       : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class _LocationScreenState extends State<LocationScreen> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: searchLocationWeatherService
-            .getSearchLocationWeatherData(widget.searchDataLocationCoordinates),
+            .getSearchLocationWeatherData(widget.searchLocationCoordinatesData),
         builder: (context, AsyncSnapshot<SearchLocationWeatherData> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final weatherElementData = snapshot.data?.currentWeatherData;
@@ -49,10 +49,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 ),
               ),
               body: Container(
-                color:
-                    Palette.primaryColor, //container or card background color
-                //Reference sunshine_app.jpg
-
+                color: Palette.primaryColor,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Center(
@@ -90,14 +87,13 @@ class _LocationScreenState extends State<LocationScreen> {
                             ),
                           ],
                         ),
-                        const Image(
+                        Image(
                           height: 200,
                           fit: BoxFit.fitWidth,
                           image: NetworkImage(
-                              'https://cdn.weatherapi.com/weather/64x64/day/113.png'
-                              // 'https://imgs.search.brave.com/NmwONYNXckjeLWZ-6QxOU0uhTGg0flhVIoQLzi-ycUM/rs:fit:416:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5j/ZXZoRHhPVFhnTzZN/OGdNc00tMWFBSGFJ/YiZwaWQ9QXBp',
-                              //loads flutter logo as default image
-                              ),
+                            weatherElementData?.imageUrl ??
+                                'https://img.icons8.com/pastel-glyph/2x/error--v3.png',
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,

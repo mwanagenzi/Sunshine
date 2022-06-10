@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
-import 'package:sunshine/utils/constants.dart';
+
+import '../screens/location_screen.dart';
 
 class SearchResultTile extends StatelessWidget {
   final String searchName;
@@ -26,7 +27,15 @@ class SearchResultTile extends StatelessWidget {
       child: GestureDetector(
         onTap: () async {
           final searchLocationCoordinates = [this.latitude, this.longitude];
-          Navigator.popAndPushNamed(context, AppRoutes.location);
+          print("Some coordinates for you to use : $searchLocationCoordinates");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LocationScreen(
+                searchLocationCoordinatesData: searchLocationCoordinates,
+              ),
+            ),
+          );
 
           //TODO: capture the location coordinates
           //TODO: Launch geolocation service

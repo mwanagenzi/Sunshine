@@ -50,7 +50,7 @@ class WeatherAPIService {
     final Map<String, dynamic> jsonMap =
         await _currentWeatherNetworkHelperService.getData();
 
-    print("Real-time weather data from json API : $jsonMap");
+    print("Search Location weather data from API Service : $jsonMap");
 
     if (jsonMap['location']['name'].toString().isNotEmpty) {
       final currentWeatherData = CurrentWeatherModel.fromJson(jsonMap);

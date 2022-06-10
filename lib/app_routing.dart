@@ -12,10 +12,6 @@ Route<dynamic> generateAppRoutes(RouteSettings settings) {
       {
         return MaterialPageRoute(builder: (context) => const WelcomeScreen());
       }
-      case AppRoutes.location:
-      {
-        return MaterialPageRoute(builder: (context) =>  LocationScreen(searchDataLocationCoordinates: [],));
-      }
     case AppRoutes.signUp:
       {
         return MaterialPageRoute(builder: (context) => const SignUpScreen());
