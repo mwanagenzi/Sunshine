@@ -16,9 +16,12 @@ class SearchResultListView extends StatelessWidget {
     return ListView.separated(
         itemBuilder: (context, index) {
           return SearchResultTile(
-              searchName: searchResultData?[index].name ?? 'N/A',
-              searchRegion: searchResultData?[index].region ?? 'N/A',
-              searchCountry: searchResultData?[index].country ?? 'N/A');
+            searchName: searchResultData?[index].name ?? 'N/A',
+            searchRegion: searchResultData?[index].region ?? 'N/A',
+            searchCountry: searchResultData?[index].country ?? 'N/A',
+            latitude: searchResultData?[index].latitude ?? 0.0,
+            longitude: searchResultData?[index].longitude ?? 0.0,
+          );
         },
         separatorBuilder: (context, index) {
           return const SizedBox(height: 25);

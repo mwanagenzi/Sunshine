@@ -29,9 +29,71 @@ class WeatherAPIService {
     return WeeklyForecastData(hourlyWeatherData, dailyForecastData);
   }
 
+  Future<SearchLocationWeatherData> getSearchLocationWeatherData(
+      List<double> locationCoordinates) async {
+    final currentSearchLocationWeatherData =
+        await _getCurrentSearchLocationWeatherData(locationCoordinates);
+    final searchLocationHourlyWeatherData =
+        await _getsearchLocationHourlyWeatherConditions(locationCoordinates);
+    return SearchLocationWeatherData(
+        currentWeatherData: currentSearchLocationWeatherData,
+        hourlyWeatherData: searchLocationHourlyWeatherData);
+  }
+
+  Future<CurrentWeatherModel> _getCurrentSearchLocationWeatherData(
+      List<double> coordinates) async {
+    print("from _getCurrentSearchLocationWeatherData()");
+    _currentWeatherNetworkHelperService = NetworkHelperService(
+        apiUrl:
+            "$kWeatherApiUrl$kCurrentWeatherApiMethod?key=$kApiKey&q=${coordinates[0]},${coordinates[1]}&aqi=no");
+
+    final Map<String, dynamic> jsonMap =
+        await _currentWeatherNetworkHelperService.getData();
+
+    print("Real-time weather data from json API : $jsonMap");
+
+    if (jsonMap['location']['name'].toString().isNotEmpty) {
+      final currentWeatherData = CurrentWeatherModel.fromJson(jsonMap);
+      return currentWeatherData;
+    } else {
+      return CurrentWeatherModel(
+          locationName: 'unavailable',
+          currentDate: DateFormat.yMEd().format(DateTime.now()),
+          temperature: 0,
+          imageUrl: '',
+          windSpeed: 0,
+          humidity: 0);
+    }
+  }
+
+  Future<List<HourlyWeather>> _getsearchLocationHourlyWeatherConditions(
+      List<double> coordinates) async {
+    print("from _getsearchLocationHourlyWeatherConditions()");
+    _hourlyWeatherNetworkHelperService = NetworkHelperService(
+        apiUrl:
+            "$kWeatherApiUrl$kForecastApiMethod?key=$kApiKey&q=${coordinates[0]},${coordinates[1]}&days=3&aqi=no&alerts=no");
+
+    final Map<String, dynamic> jsonMap =
+        await _hourlyWeatherNetworkHelperService.getData();
+
+    if (jsonMap['forecast']['forecastday'][0]['hour'] != null) {
+      final hours = <HourlyWeather>[];
+      jsonMap['forecast']['forecastday'][0]['hour'].forEach(
+        (hour) {
+          hours.add(
+            HourlyWeather.fromJson(hour),
+          );
+        },
+      );
+      return hours;
+    } else {
+      return [];
+    }
+  }
+
   Future<CurrentWeatherModel> _getCurrentWeatherData() async {
     print("from _getCurrentWeatherData()");
-    
+
     List<double>? locationCoordinates =
         await _locationService.getCurrentLocationCoordinates();
     _currentWeatherNetworkHelperService = NetworkHelperService(
@@ -109,6 +171,7 @@ class WeatherAPIService {
   }
 
   Future<List<SearchResult>> getSearchResultData() async {
+    //TODO; Tis fetches data based on the keyword in the search box
     await Future.delayed(const Duration(seconds: 2));
 
     final searchResultDataString = await _loadAssetSampleData(
