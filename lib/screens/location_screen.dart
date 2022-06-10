@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:sunshine/api/mock_weather_service.dart';
-import 'package:sunshine/models/daily_weather_data.dart';
+import 'package:sunshine/api/weather_api_service.dart';
+import 'package:sunshine/models/models.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
 import '../widgets/widgets.dart';
 
-class LocationScreen extends StatelessWidget {
-  final currentWeatherService = MockWeatherService();
+class LocationScreen extends StatefulWidget {
+  final List<double> searchDataLocationCoordinates;
+  const LocationScreen({Key? key, required this.searchDataLocationCoordinates})
+      : super(key: key);
 
-  LocationScreen({Key? key}) : super(key: key);
+  @override
+  State<LocationScreen> createState() => _LocationScreenState();
+}
+
+class _LocationScreenState extends State<LocationScreen> {
+  final searchLocationWeatherService = WeatherAPIService();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: currentWeatherService.getDailyWeatherData(),
-        builder: (context, AsyncSnapshot<DailyWeatherData> snapshot) {
+        future: searchLocationWeatherService
+            .getSearchLocationWeatherData(widget.searchDataLocationCoordinates),
+        builder: (context, AsyncSnapshot<SearchLocationWeatherData> snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final weatherElementData = snapshot.data?.currentWeatherData;
 

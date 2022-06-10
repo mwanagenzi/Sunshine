@@ -1,5 +1,8 @@
+// ignore_for_file: unnecessary_this
+
 import 'package:flutter/material.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
+import 'package:sunshine/utils/constants.dart';
 
 class SearchResultTile extends StatelessWidget {
   final String searchName;
@@ -21,8 +24,10 @@ class SearchResultTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: () async{
-          
+        onTap: () async {
+          final searchLocationCoordinates = [this.latitude, this.longitude];
+          Navigator.popAndPushNamed(context, AppRoutes.location);
+
           //TODO: capture the location coordinates
           //TODO: Launch geolocation service
         },
