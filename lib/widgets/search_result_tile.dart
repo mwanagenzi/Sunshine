@@ -23,56 +23,74 @@ class SearchResultTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () async {
-          final searchLocationCoordinates = [this.latitude, this.longitude];
-          print("Some coordinates for you to use : $searchLocationCoordinates");
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LocationScreen(
-                searchLocationCoordinatesData: searchLocationCoordinates,
-              ),
-            ),
-          );
-
-          //TODO: capture the location coordinates
-          //TODO: Launch geolocation service
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              width: 1.0,
-              color: Palette.activeCardColor,
+    return GestureDetector(
+      onTap: () async {
+        final searchLocationCoordinates = [this.latitude, this.longitude];
+        print("Some coordinates for you to use : $searchLocationCoordinates");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LocationScreen(
+              searchLocationCoordinatesData: searchLocationCoordinates,
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Location : $searchName ',
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                  Text(
-                    'Region : $searchRegion ',
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                ],
-              ),
-              Text(
-                'Country : $searchCountry ',
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
-              // ignore: prefer_const_constructors
-            ],
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            width: 1.0,
+            color: Palette.activeCardColor,
           ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const Icon(
+                  Icons.location_on_outlined,
+                  color: Colors.white,
+                ),
+                const SizedBox(width: 5),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      searchName,
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    Text(
+                      searchRegion,
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const Icon(
+                  Icons.flag,
+                  color: Colors.white,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  searchCountry,
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
+              ],
+            ),
+            // ignore: prefer_const_constructors
+          ],
         ),
       ),
     );

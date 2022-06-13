@@ -33,22 +33,24 @@ class _LocationScreenState extends State<LocationScreen> {
                   PopupMenuButton<Menu>(
                     position: PopupMenuPosition.under,
                     elevation: 1.0,
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                        color: Palette.activeCardColor,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                     child: const Icon(Icons.more_vert),
                     itemBuilder: (context) => <PopupMenuEntry<Menu>>[
-                      const PopupMenuItem<Menu>(
-                        child: Text(
+                      PopupMenuItem<Menu>(
+                        child: const Text(
                           'Save',
                           // style: Theme.of(context).textTheme.bodyText2
                         ),
-                        value: Menu.save,
-                      ),
-                      const PopupMenuDivider(),
-                      const PopupMenuItem<Menu>(
-                        child: Text(
-                          'Discard',
-                          // style: Theme.of(context).textTheme.bodyText2
-                        ),
-                        value: Menu.discard,
+                        onTap: () {
+                          //TODO: capture the current coordinates
+                          //TODO: save the coordinates on user's list of saved locations
+                          Navigator.pop(context);
+                        },
                       ),
                     ],
                   )
@@ -240,3 +242,4 @@ class _LocationScreenState extends State<LocationScreen> {
 
 //TODO include an option to save or discard
 //TODO Let there be an alert after 5 seconds upon loading the searched location data
+//TODO: choose one of the above options
