@@ -34,5 +34,59 @@
         "lat": -1.3,
         "lon": 36.77,
         "url": "dagoretti-nairobi-area-kenya"
+    },
+    {
+        "id": 1312892,
+        "name": "Jamhuri Park",
+        "region": "Nairobi Area",
+        "country": "Kenya",
+        "lat": -1.3,
+        "lon": 36.77,
+        "url": "jamhuri-park-nairobi-area-kenya"
+    },
+    {
+        "id": 1312404,
+        "name": "City Estate",
+        "region": "Nairobi Area",
+        "country": "Kenya",
+        "lat": -1.28,
+        "lon": 36.77,
+        "url": "city-estate-nairobi-area-kenya"
+    },
+    {
+        "id": 1314897,
+        "name": "Thomson Estate",
+        "region": "Nairobi Area",
+        "country": "Kenya",
+        "lat": -1.28,
+        "lon": 36.77,
+        "url": "thomson-estate-nairobi-area-kenya"
+    },
+    {
+        "id": 1313422,
+        "name": "Kibera",
+        "region": "Nairobi Area",
+        "country": "Kenya",
+        "lat": -1.32,
+        "lon": 36.78,
+        "url": "kibera-nairobi-area-kenya"
+    },
+    {
+        "id": 1314171,
+        "name": "Moi",
+        "region": "Nairobi Area",
+        "country": "Kenya",
+        "lat": -1.32,
+        "lon": 36.78,
+        "url": "moi-nairobi-area-kenya"
+    },
+    {
+        "id": 1313423,
+        "name": "Kibera Special Settlement Area",
+        "region": "Nairobi Area",
+        "country": "Kenya",
+        "lat": -1.32,
+        "lon": 36.78,
+        "url": "kibera-special-settlement-area-nairobi-area-kenya"
     }
 ]

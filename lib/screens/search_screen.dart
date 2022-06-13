@@ -54,7 +54,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
 
   void _handleSearchFieldSubmit() {
     if (_formKey.currentState!.validate()) {
-      
       //TODO: call the network service to handle search
       //TODO: display the result
       //TODO: enum to handle switching between results and saved locations

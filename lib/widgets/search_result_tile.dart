@@ -64,6 +64,7 @@ class SearchResultTile extends StatelessWidget {
                   children: [
                     Text(
                       searchName,
+                      overflow: TextOverflow.clip,
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                     Text(
@@ -96,3 +97,5 @@ class SearchResultTile extends StatelessWidget {
     );
   }
 }
+//TODO: truncate the text from the search result to 15 characters before 
+//TODO: before rendering them on this tile

@@ -180,7 +180,8 @@ class WeatherAPIService {
     final searchResultDataString =
         await _searchLocationNetworkHelperService.getData();
 
-    final List jsonMap = jsonDecode(searchResultDataString);
+    final List<Map<String, Object>> jsonMap =
+        jsonDecode(searchResultDataString);
 
     print("This is the jsonMap from getSearchResultData : $jsonMap");
 
@@ -190,7 +191,6 @@ class WeatherAPIService {
       for (var searchResult in jsonMap) {
         searchResultListData.add(SearchResult.fromJson(searchResult));
       }
-
       return searchResultListData;
     } else {
       return [];

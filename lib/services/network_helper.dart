@@ -8,7 +8,7 @@ class NetworkHelperService {
   final String apiUrl;
   NetworkHelperService({required this.apiUrl});
   final errorLogFile = 'errorFile.txt';
-      
+
   Future getData() async {
     Response response = await http.get(Uri.parse(apiUrl));
     int statusCode = response.statusCode;
@@ -16,9 +16,11 @@ class NetworkHelperService {
     if (statusCode == 200) {
       var apiData = response.body;
       print("API data from Network Helper class $apiData");
-      new File(errorLogFile).writeAsString("API Data : $apiData").then((File file){
-        
-      })
+      File(errorLogFile)
+          .writeAsString("API Data : $apiData")
+          .onError<FileSystemException>((error, stackTrace) {
+        return File.new('/errorFile.txt');
+      });
       return jsonDecode(apiData);
     } else {
       var errorApiData = response.body;
