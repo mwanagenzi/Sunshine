@@ -14,3 +14,4 @@ const String kWeatherApiUrl = 'https://api.weatherapi.com/v1';
 const String kForecastApiMethod = '/forecast.json';
 const String kCurrentWeatherApiMethod = '/current.json';
 const String kSearchApiMethod = '/search.json';
+

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sunshine/api/mock_weather_service.dart';
+import 'package:sunshine/api/weather_api_service.dart';
 import 'package:sunshine/provider/providers.dart';
 
 import '../models/models.dart';
@@ -21,7 +21,7 @@ enum SearchScreenState { searchResults, savedLocations }
 class _SearchLocationScreenState extends State<SearchLocationScreen> {
   late TextEditingController _searchFieldController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final searchService = MockWeatherService();
+  final searchService = WeatherAPIService();
   late SearchScreenState currentState;
 
   @override
@@ -31,7 +31,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
     currentState = SearchScreenState.savedLocations;
     super.initState();
   }
-@override
+
+  @override
   void dispose() {
     _searchFieldController.dispose();
     print('searchScreen deactivated');
@@ -39,7 +40,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
     // TODO: implement dispose
     super.dispose();
   }
-  
 
   String? _searchFieldValidator(String? searchFieldValue) {
     if (searchFieldValue == null || searchFieldValue.isEmpty) {
@@ -54,7 +54,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
 
   void _handleSearchFieldSubmit() {
     if (_formKey.currentState!.validate()) {
-      _searchFieldController.clear();
+      
       //TODO: call the network service to handle search
       //TODO: display the result
       //TODO: enum to handle switching between results and saved locations
@@ -183,7 +183,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
 
   Widget buildSearchResult() {
     return FutureBuilder(
-        future: searchService.getSearchResultData(),
+        future: searchService.getSearchResultData(_searchFieldController.text),
         builder: (context, AsyncSnapshot<List<SearchResult>> snapshot) {
           final searchResultData = snapshot.data;
           print('This is json data from search screen : $searchResultData');

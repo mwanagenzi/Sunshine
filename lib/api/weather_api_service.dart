@@ -11,7 +11,8 @@ import 'package:sunshine/utils/constants.dart';
 class WeatherAPIService {
   late final NetworkHelperService _currentWeatherNetworkHelperService,
       _hourlyWeatherNetworkHelperService,
-      _dailyForecastNetworkHelperService;
+      _dailyForecastNetworkHelperService,
+      _searchLocationNetworkHelperService;
   final LocationService _locationService = LocationService();
 
   Future<DailyWeatherData> getDailyWeatherData() async {
@@ -170,16 +171,18 @@ class WeatherAPIService {
     }
   }
 
-  Future<List<SearchResult>> getSearchResultData() async {
+  Future<List<SearchResult>> getSearchResultData(String searchKeyword) async {
     //TODO; Tis fetches data based on the keyword in the search box
-    await Future.delayed(const Duration(seconds: 2));
+    _searchLocationNetworkHelperService = NetworkHelperService(
+        apiUrl:
+            "$kWeatherApiUrl$kSearchApiMethod?key=$kApiKey&q=$searchKeyword");
 
-    final searchResultDataString = await _loadAssetSampleData(
-        'assets/sample_data/search_result_data.json');
+    final searchResultDataString =
+        await _searchLocationNetworkHelperService.getData();
 
     final List jsonMap = jsonDecode(searchResultDataString);
 
-    print("This is the jsonMap : $jsonMap");
+    print("This is the jsonMap from getSearchResultData : $jsonMap");
 
     if (jsonMap[0]['name'] != null) {
       final searchResultListData = <SearchResult>[];
