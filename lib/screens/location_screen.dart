@@ -13,6 +13,8 @@ class LocationScreen extends StatefulWidget {
   State<LocationScreen> createState() => _LocationScreenState();
 }
 
+enum Menu { save, discard }
+
 class _LocationScreenState extends State<LocationScreen> {
   final searchLocationWeatherService = WeatherAPIService();
 
@@ -27,6 +29,30 @@ class _LocationScreenState extends State<LocationScreen> {
 
             return Scaffold(
               appBar: AppBar(
+                actions: [
+                  PopupMenuButton<Menu>(
+                    position: PopupMenuPosition.under,
+                    elevation: 1.0,
+                    child: const Icon(Icons.more_vert),
+                    itemBuilder: (context) => <PopupMenuEntry<Menu>>[
+                      const PopupMenuItem<Menu>(
+                        child: Text(
+                          'Save',
+                          // style: Theme.of(context).textTheme.bodyText2
+                        ),
+                        value: Menu.save,
+                      ),
+                      const PopupMenuDivider(),
+                      const PopupMenuItem<Menu>(
+                        child: Text(
+                          'Discard',
+                          // style: Theme.of(context).textTheme.bodyText2
+                        ),
+                        value: Menu.discard,
+                      ),
+                    ],
+                  )
+                ],
                 backgroundColor: Palette.primaryColor,
                 centerTitle: true,
                 title: Column(
@@ -212,7 +238,5 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 }
 
-
-//TODO follow the proposed design 
 //TODO include an option to save or discard
 //TODO Let there be an alert after 5 seconds upon loading the searched location data
