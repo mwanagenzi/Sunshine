@@ -191,7 +191,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               child: Text(snapshot.error.toString()),
             );
           }
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
             return SearchResultListView(searchResultData: searchResultData);
           } else {
             return const CircularProgressIndicator(

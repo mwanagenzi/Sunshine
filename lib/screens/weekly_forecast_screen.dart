@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sunshine/api/mock_weather_service.dart';
 import 'package:sunshine/api/weather_api_service.dart';
 import 'package:sunshine/models/weekly_forecast_model.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
