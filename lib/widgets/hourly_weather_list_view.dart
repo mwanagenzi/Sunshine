@@ -16,15 +16,15 @@ class HourlyWeatherListView extends StatelessWidget {
       itemBuilder: (context, index) {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          decoration:  BoxDecoration(
+          decoration: BoxDecoration(
             color: Palette.inactiveCardColor,
             // shape: BoxShape.rectangle,
             borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
-             border: Border.all(color: Palette.activeCardColor, width: 1.0),
+            border: Border.all(color: Palette.activeCardColor, width: 1.0),
           ),
-          child:  HourlyWeatherCard(
+          child: HourlyWeatherCard(
             weatherIconUrl: hourlyWeatherData[index].weatherIconUrl,
             hour: hourlyWeatherData[index].time,
             temperature: hourlyWeatherData[index].temperature,
@@ -37,7 +37,7 @@ class HourlyWeatherListView extends StatelessWidget {
           width: 10,
         );
       },
-      itemCount: hourlyWeatherData.length, //TODO : Supply an identifier as an index
+      itemCount: hourlyWeatherData.length,
     );
   }
 }

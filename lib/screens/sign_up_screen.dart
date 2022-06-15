@@ -83,7 +83,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           password: _passwordController.text,
         );
         Navigator.popAndPushNamed(context, AppRoutes.login);
-        
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -227,7 +226,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               onTap: () {
                                 Navigator.popAndPushNamed(
                                     context, AppRoutes.login);
-                                //TODO navigate to the registration page
                               },
                               child: const Text(
                                 'Login',

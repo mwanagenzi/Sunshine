@@ -13,21 +13,18 @@ class DailyWeatherModel {
       required this.weatherIconUrl});
 
   factory DailyWeatherModel.fromJson(Map<String, dynamic> json) {
-    //TODO some date format computations
-
     final unixTime = json['date_epoch'] as int;
     final dateTime = DateTime.fromMillisecondsSinceEpoch(unixTime * 1000);
     final shortDateFormat = DateFormat.MMMd().format(dateTime);
     final dayFormat = DateFormat.EEEE().format(dateTime);
 
-    final apiImageUrl = json['day']['condition']['icon'] ?? ''; //TODO; handle cases of null from api service
+    final apiImageUrl = json['day']['condition']['icon'] ?? '';
     String appendedImageUrl = ('https:$apiImageUrl');
 
     return DailyWeatherModel(
-      shortDate: shortDateFormat,
-      day: dayFormat,
-      averageTemperature: json['day']['avgtemp_c'] as double,
-      weatherIconUrl: appendedImageUrl
-    );
+        shortDate: shortDateFormat,
+        day: dayFormat,
+        averageTemperature: json['day']['avgtemp_c'] as double,
+        weatherIconUrl: appendedImageUrl);
   }
 }

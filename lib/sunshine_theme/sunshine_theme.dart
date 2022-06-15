@@ -26,33 +26,38 @@ class SunshineTheme {
     headline1: TextStyle(
       color: Colors.white,
       fontSize: 30,
-    ), //degrees celsius daily forecast card
+    ),
     headline2: TextStyle(
       fontSize: 20,
       color: Colors.white,
-    ), //weather element label
+    ),
     headline3: TextStyle(
       color: Colors.white,
       fontSize: 18,
-    ), //hourly weather card degrees celsius
-
+    ),
     headline4: TextStyle(
       color: Colors.white,
       fontSize: 12,
-    ), //weathericonlabel
+    ),
     headline5: TextStyle(
       color: Colors.white,
-      fontSize: 22, //TODO textTheme headline5
-    ), //location weather temperature
-    // ignore: unnecessary_const
-    bodyText1: const TextStyle(
+      fontSize: 22,
+    ),
+    headline6: TextStyle(
+      color: Colors.white,
+      fontSize: 13,
+    ),
+    bodyText1: TextStyle(
       fontWeight: FontWeight.normal,
-      fontSize: 20, //TODO textTheme - headline6
+      fontSize: 20,
       color: Colors.white,
     ),
-    // ignore: unnecessary_const
-    bodyText2: const TextStyle(
-      fontSize: 17, //TODO : textTheme body2
+    bodyText2: TextStyle(
+      fontSize: 17,
+      color: Colors.white,
+    ),
+    labelMedium: TextStyle(
+      fontSize: 15,
       color: Colors.white,
     ),
   );

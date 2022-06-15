@@ -36,19 +36,14 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
               ),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            print(
-                "Hourly Weather Data from weekly forecast screen : ${weatherData.toString()}");
             return Scaffold(
               appBar: AppBar(
-                backgroundColor:
-                    const Color(0XFF080A33), //TODO scaffold background color
                 toolbarHeight: 100,
                 centerTitle: true,
-                // ignore: prefer_const_constructors
-                title: Text('Forecast Report'),
+                title: const Text('Forecast Report'),
               ),
               body: Container(
-                color: const Color(0xFF080A33), //TODO primary color
+                color: Palette.primaryColor,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Center(
@@ -65,28 +60,20 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                             // ignore: prefer_const_literals_to_create_immutables
                             children: [
                               // ignore: prefer_const_constructors
-                              Text(
-                                'Today',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                ), //TODO textTheme headline6
-                              ),
-                              // ignore: prefer_const_constructors
+                              Text('Today',
+                                  style: Theme.of(context).textTheme.headline2),
                               InkWell(
-                                // ignore: prefer_const_constructors
                                 child: Text(
                                   DateFormat.E().add_yMMMMd().format(
                                         DateTime.now(),
                                       ),
-                                  style: const TextStyle(
-                                    fontSize: 12, //TODO textTheme - caption
-                                    color: Color(
-                                        0xFF4286E8), //TODO textTheme - highlighted text color
-                                  ),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline4
+                                      ?.copyWith(
+                                          color: Palette.highlightedTextColor),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -107,17 +94,9 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
                             // ignore: prefer_const_literals_to_create_immutables
                             children: [
                               // ignore: prefer_const_constructors
-                              Text(
-                                'This week',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 20, //TODO textTheme - headline6
-                                  color: Colors.white,
-                                ),
-                              ),
-
-                              // ignore: prefer_const_constructors
-                              Icon(
+                              Text('This week',
+                                  style: Theme.of(context).textTheme.headline2),
+                              const Icon(
                                 Icons.calendar_today,
                                 color: Colors.white,
                               ),
@@ -140,10 +119,9 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
             );
           } else {
             return Center(
-                child: Text(
-              'Still loading',
-              style: Theme.of(context).textTheme.headline3,
-            ));
+              child: Text('Still loading',
+                  style: Theme.of(context).textTheme.headline3),
+            );
           }
         });
   }

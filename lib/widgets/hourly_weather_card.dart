@@ -4,7 +4,7 @@ class HourlyWeatherCard extends StatelessWidget {
   final String hour;
   final String weatherIconUrl;
   final double temperature;
-  // String? iconUrl; //TODO implement an icon for every card
+
   const HourlyWeatherCard({
     required this.weatherIconUrl,
     required this.hour,
@@ -27,25 +27,10 @@ class HourlyWeatherCard extends StatelessWidget {
 
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          // ignore: prefer_const_literals_to_create_immutables
           children: [
-            // ignore: prefer_const_constructors
-            Text(
-              hour,
-              // ignore: prefer_const_constructors
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13), //TODO text theme - caption
-              // ignore: prefer_const_constructors
-            ),
-            // ignore: prefer_const_constructors
-            Text(
-              '$temperature\u2103',
-              // ignore: prefer_const_constructors
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18), // TODO : text theme - headline6
-            ),
+            Text(hour, style: Theme.of(context).textTheme.headline6),
+            Text('$temperature\u2103',
+                style: Theme.of(context).textTheme.headline3),
           ],
         ),
         const SizedBox(

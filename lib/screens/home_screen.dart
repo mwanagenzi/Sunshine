@@ -8,7 +8,6 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   final currentWeatherService = WeatherAPIService();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +27,6 @@ class HomeScreen extends StatelessWidget {
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
             final weatherElementData = snapshot.data?.currentWeatherData;
-            print(
-                "Accessing home screen currentWeatherData ${weatherElementData.toString()}");
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Palette.primaryColor,
@@ -47,8 +44,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Text(
                       weatherElementData?.currentDate ?? '',
-                      style: const TextStyle(
-                          fontSize: 12), //TODO : textTheme caption
+                      style: Theme.of(context).textTheme.headline4,
                     ),
                   ],
                 ),
@@ -109,13 +105,10 @@ class HomeScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                const Text(
+                                Text(
                                   "Temp",
                                   // ignore: unnecessary_const
-                                  style: const TextStyle(
-                                    fontSize: 12, //TODO textTheme - caption
-                                    color: Colors.white,
-                                  ),
+                                  style: Theme.of(context).textTheme.headline4,
                                 ),
                                 Text(
                                   '${weatherElementData?.temperature.toString() ?? 0.toString()} \u2103',
@@ -126,38 +119,24 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                const Text(
-                                  'Wind',
-                                  // ignore: unnecessary_const
-                                  style: const TextStyle(
-                                    fontSize: 12, //TODO textTheme - caption
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                Text('Wind',
+                                    style:
+                                        Theme.of(context).textTheme.headline4),
                                 Text(
                                   '${weatherElementData?.windSpeed.toString() ?? 0.toString()} kph',
-                                  // ignore: unnecessary_const
                                   style: Theme.of(context).textTheme.headline3,
                                 ),
                               ],
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                const Text(
-                                  'Humidity',
-                                  // ignore: unnecessary_const
-                                  style: const TextStyle(
-                                    fontSize: 12, //TODO textTheme - caption
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                Text('Humidity',
+                                    style:
+                                        Theme.of(context).textTheme.headline4),
                                 Text(
                                   '${weatherElementData?.humidity.toString() ?? 0.toString()}%',
-                                  // ignore: unnecessary_const
                                   style: Theme.of(context).textTheme.headline3,
                                 ),
                               ],
@@ -167,34 +146,15 @@ class HomeScreen extends StatelessWidget {
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // ignore: prefer_const_literals_to_create_immutables
                           children: [
-                            // ignore: prefer_const_constructors
-                            Text(
-                              'Today',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 20, //TODO textTheme - headline6
-                                color: Colors.white,
-                              ),
-                            ),
-                            // ignore: prefer_const_constructors
+                            Text('Today',
+                                style: Theme.of(context).textTheme.bodyText1),
                             InkWell(
-                              onTap: () {
-                                //TODO : Open week forecast screen
-                              },
-                              // ignore: prefer_const_constructors
-                              child: Text(
-                                'View full report',
-                                style: const TextStyle(
-                                  fontSize: 12, //TODO textTheme - caption
-                                  color: Color(0xFF4286E8),
-                                ),
-                              ),
+                              child: Text('View full report',
+                                  style: Theme.of(context).textTheme.headline4),
                             )
                           ],
                         ),
-                        // ignore: prefer_const_constructors
                         SizedBox(
                           height: 80,
                           child: HourlyWeatherListView(

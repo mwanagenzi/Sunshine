@@ -4,7 +4,6 @@ import 'package:sunshine/sunshine_theme/palette.dart';
 import 'package:sunshine/sunshine_theme/theme.dart';
 import 'package:sunshine/utils/constants.dart';
 import 'package:sunshine/widgets/auth_screen_svg.dart';
-
 import '../widgets/sunshine_auth_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -81,9 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (_formKey.currentState!.validate()) {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text);
-        print('Routing to home screen');
         Navigator.popAndPushNamed(context, AppRoutes.home);
-        print('Routed to home screen');
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -212,9 +209,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           buttonText: 'Continue',
                           buttonFunction: () {
                             _userLogin(context);
-
-                            //TODO: authenticate the user with firebase
-                            //TODO : then navigate to the home screen
                           },
                         ),
                         const SizedBox(height: 20),

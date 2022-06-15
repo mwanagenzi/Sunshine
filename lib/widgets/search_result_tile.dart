@@ -26,7 +26,6 @@ class SearchResultTile extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         final searchLocationCoordinates = [this.latitude, this.longitude];
-        print("Some coordinates for you to use : $searchLocationCoordinates");
         Navigator.push(
           context,
           MaterialPageRoute(

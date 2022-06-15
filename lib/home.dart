@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_const
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/provider/navbar_tab_manager.dart';
@@ -19,12 +17,6 @@ class _HomeState extends State<Home> {
     const WeeklyForecastScreen(),
     SearchLocationScreen(),
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    //TODO: Launch location service
-  }
 
   @override
   Widget build(BuildContext context) {

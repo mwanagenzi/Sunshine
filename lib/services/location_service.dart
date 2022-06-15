@@ -28,12 +28,9 @@ class LocationService {
   }
 
   Future<List<double>?> getCurrentLocationCoordinates() async {
-    print("getCurrentLocationCoordinates() is being accessed");
-
     try {
       Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy
-              .best); //TODO test location accuracy improvements on later versions
+          desiredAccuracy: LocationAccuracy.best);
       locationLatitude = position.latitude;
       locationLongitude = position.longitude;
       return [locationLatitude!, locationLongitude!];
@@ -41,14 +38,9 @@ class LocationService {
       print("getCurrentPosition() error : $e");
       return [4, 0, 4];
     } finally {
-      print("getCurrentLocationCoordinates() was accessed");
       print("${locationLatitude!},${locationLongitude!}");
       // ignore: control_flow_in_finally
       return [locationLatitude!, locationLongitude!];
     }
   }
-
-  // Future<List<double>> _getCityCoordinates() async {
-
-  // } //TODO configure location in terms of city name
 }

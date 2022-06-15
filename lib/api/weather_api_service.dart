@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sunshine/models/models.dart';
 import 'package:sunshine/models/weekly_forecast_model.dart';

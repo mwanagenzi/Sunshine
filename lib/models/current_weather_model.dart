@@ -3,8 +3,6 @@ import 'package:intl/intl.dart';
 class CurrentWeatherModel {
   String locationName;
   String currentDate;
-  //TODO Configure and set the date format
-  //TODO Configure the image from its url
   String imageUrl;
   double temperature;
   double windSpeed;

@@ -34,30 +34,12 @@ class DailyForecastCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             // ignore: prefer_const_literals_to_create_immutables
             children: [
-              Text(
-                dayOfWeek,
-                style: const TextStyle(
-                  fontSize: 20, //TODO : text theme headline6
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                date,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 13, //TODO : texttheme caption
-                ),
-              ),
+              Text(dayOfWeek, style: Theme.of(context).textTheme.headline2),
+              Text(date, style: Theme.of(context).textTheme.headline6),
             ],
           ),
-          Text(
-            '$averageTemp\u2103',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 30, //TODO : texttheme headline 4
-            ),
-          ),
-          // ignore: prefer_const_constructors
+          Text('$averageTemp\u2103',
+              style: Theme.of(context).textTheme.headline1),
           Image(
             width: 40,
             fit: BoxFit.fitHeight,

@@ -14,8 +14,7 @@ class LocationWeatherCard extends StatelessWidget {
         horizontal: 25,
       ),
       decoration: BoxDecoration(
-          color:
-              Palette.activeCardColor, // TODO : highlighted button text color
+          color: Palette.activeCardColor,
           borderRadius: BorderRadius.circular(15),
           shape: BoxShape.rectangle),
       child: Column(
@@ -32,48 +31,24 @@ class LocationWeatherCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
-
-                // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  const Text(
-                    '32\u2103',
-                    // ignore: unnecessary_const
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22, //TODO textTheme headline5
-                    ),
-                  ),
+                  Text('32\u2103',
+                      style: Theme.of(context).textTheme.headline5),
                   const SizedBox(height: 10),
-                  const Text(
-                    'Cloudy',
-                    // ignore: unnecessary_const
-                    style: const TextStyle(
-                      fontSize: 12, //TODO : textTheme caption
-                      color: Colors.white,
-                    ),
-                  ),
+                  Text('Cloudy', style: Theme.of(context).textTheme.headline4),
                 ],
               ),
-              // ignore: prefer_const_constructors
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
-              // ignore: prefer_const_constructors
-              FlutterLogo(
+              const FlutterLogo(
                 size: 35,
               ),
             ],
           ),
-          // ignore: prefer_const_constructors
-
-          const Text(
-            'Carlifornia',
-            // ignore: unnecessary_const
-            style: const TextStyle(
-              fontSize: 15, //TODO : textTheme body1
-              color: Colors.white,
-            ),
-          ),
+          Text('Carlifornia',
+              // ignore: unnecessary_const
+              style: Theme.of(context).textTheme.labelMedium),
         ],
       ),
     );

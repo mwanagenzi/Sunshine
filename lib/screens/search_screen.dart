@@ -27,7 +27,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
   @override
   void initState() {
     _searchFieldController = TextEditingController();
-    print('Running the search screen state');
     currentState = SearchScreenState.savedLocations;
     super.initState();
   }
@@ -35,9 +34,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
   @override
   void dispose() {
     _searchFieldController.dispose();
-    print('searchScreen deactivated');
     currentState = SearchScreenState.savedLocations;
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -54,8 +51,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
 
   void _handleSearchFieldSubmit() {
     if (_formKey.currentState!.validate()) {
-      //TODO: call the network service to handle search
-      //TODO: display the result
       //TODO: enum to handle switching between results and saved locations
     }
   }
@@ -66,20 +61,16 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
       builder: (context, navbarTabManager, child) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor:
-                Palette.primaryColor, //TODO : appbar background color
-
+            backgroundColor: Palette.primaryColor,
             centerTitle: true,
-            // ignore: prefer_const_constructors
-            title: Text('Pick Location'),
+            title: const Text('Pick Location'),
           ),
           body: Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Container(
                 decoration: const BoxDecoration(
-                  color:
-                      Palette.primaryColor, //TODO : scaffold background color
+                  color: Palette.primaryColor,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -185,7 +176,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
         future: searchService.getSearchResultData(_searchFieldController.text),
         builder: (context, AsyncSnapshot<List<SearchResult>> snapshot) {
           final searchResultData = snapshot.data;
-          print('This is json data from search screen : $searchResultData');
           if (snapshot.hasError) {
             return Center(
               child: Text(snapshot.error.toString()),

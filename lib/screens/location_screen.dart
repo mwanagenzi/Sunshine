@@ -68,11 +68,8 @@ class _LocationScreenState extends State<LocationScreen> {
                     SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      weatherElementData?.currentDate ?? '',
-                      style: const TextStyle(
-                          fontSize: 12), //TODO : textTheme caption
-                    ),
+                    Text(weatherElementData?.currentDate ?? '',
+                        style: Theme.of(context).textTheme.headline4)
                   ],
                 ),
               ),
@@ -129,57 +126,39 @@ class _LocationScreenState extends State<LocationScreen> {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                const Text(
-                                  "Temp",
-                                  // ignore: unnecessary_const
-                                  style: const TextStyle(
-                                    fontSize: 12, //TODO textTheme - caption
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                Text("Temp",
+                                    style:
+                                        Theme.of(context).textTheme.headline4),
                                 Text(
                                   '${weatherElementData?.temperature.toString() ?? 0.toString()} \u2103',
                                   // ignore: unnecessary_const
-                                  style: Theme.of(context).textTheme.headline3,
+                                  style: Theme.of(context).textTheme.headline4,
                                 ),
                               ],
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                const Text(
+                                Text(
                                   'Wind',
-                                  // ignore: unnecessary_const
-                                  style: const TextStyle(
-                                    fontSize: 12, //TODO textTheme - caption
-                                    color: Colors.white,
-                                  ),
+                                  style: Theme.of(context).textTheme.headline4,
                                 ),
                                 Text(
                                   '${weatherElementData?.windSpeed.toString() ?? 0.toString()} kph',
-                                  // ignore: unnecessary_const
                                   style: Theme.of(context).textTheme.headline3,
                                 ),
                               ],
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                const Text(
-                                  'Humidity',
-                                  // ignore: unnecessary_const
-                                  style: const TextStyle(
-                                    fontSize: 12, //TODO textTheme - caption
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                Text('Humidity',
+                                    // ignore: unnecessary_const
+                                    style:
+                                        Theme.of(context).textTheme.headline4),
                                 Text(
                                   '${weatherElementData?.humidity.toString() ?? 0.toString()}%',
-                                  // ignore: unnecessary_const
                                   style: Theme.of(context).textTheme.headline3,
                                 ),
                               ],
@@ -189,34 +168,15 @@ class _LocationScreenState extends State<LocationScreen> {
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          // ignore: prefer_const_literals_to_create_immutables
                           children: [
-                            // ignore: prefer_const_constructors
-                            Text(
-                              'Today',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 20, //TODO textTheme - headline6
-                                color: Colors.white,
-                              ),
-                            ),
-                            // ignore: prefer_const_constructors
+                            Text('Today',
+                                style: Theme.of(context).textTheme.bodyText1),
                             InkWell(
-                              onTap: () {
-                                //TODO : Open week forecast screen
-                              },
-                              // ignore: prefer_const_constructors
-                              child: Text(
-                                'View full report',
-                                style: const TextStyle(
-                                  fontSize: 12, //TODO textTheme - caption
-                                  color: Color(0xFF4286E8),
-                                ),
-                              ),
-                            )
+                              child: Text('View full report',
+                                  style: Theme.of(context).textTheme.headline4),
+                            ),
                           ],
                         ),
-                        // ignore: prefer_const_constructors
                         SizedBox(
                           height: 80,
                           child: HourlyWeatherListView(
