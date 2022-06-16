@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunshine/provider/navbar_tab_manager.dart';
+import 'package:sunshine/sunshine_theme/theme.dart';
 import 'screens/screens.dart';
 
 class Home extends StatefulWidget {
@@ -8,7 +9,6 @@ class Home extends StatefulWidget {
 
   @override
   State<Home> createState() => _HomeState();
-  final int index = 10;
 }
 
 class _HomeState extends State<Home> {
@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
               navbarTabManager.goToTab(index);
             },
             currentIndex: navbarTabManager.selectedTab,
-            selectedItemColor: const Color(0xFF080A33),
+            selectedItemColor: Palette.primaryColor,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                   icon: Icon(Icons.home_outlined), label: 'Home'),

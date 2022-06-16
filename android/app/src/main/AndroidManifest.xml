@@ -2,6 +2,7 @@
     package="com.example.sunshine">
      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
+        android:usesCleartextTraffic="true"
         android:label="sunshine"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

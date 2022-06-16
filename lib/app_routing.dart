@@ -43,6 +43,7 @@ Route<dynamic> generateAppRoutes(RouteSettings settings) {
       {
         return MaterialPageRoute(builder: (context) => SearchLocationScreen());
       }
+      
     default:
       {
         return MaterialPageRoute(builder: ((context) => const ErrorScreen()));

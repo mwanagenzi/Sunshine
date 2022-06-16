@@ -78,8 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
   void _userLogin(BuildContext context) async {
     try {
       if (_formKey.currentState!.validate()) {
+        print("Trying to sign in before firebase auth");
         await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text);
+        print("Trying to sign in after firebase auth");
         Navigator.popAndPushNamed(context, AppRoutes.home);
       }
     } on FirebaseAuthException catch (e) {
