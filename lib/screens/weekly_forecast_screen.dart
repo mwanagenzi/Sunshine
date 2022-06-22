@@ -21,7 +21,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
     return FutureBuilder(
         future: weeklyWeatherDataService.getWeeklyWeatherData(),
         builder: (context, AsyncSnapshot<WeeklyForecastData> snapshot) {
-          final weatherData = snapshot.data;
+          
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(
@@ -36,6 +36,7 @@ class _WeeklyForecastScreenState extends State<WeeklyForecastScreen> {
               ),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
+            final weatherData = snapshot.data;
             return Scaffold(
               appBar: AppBar(
                 toolbarHeight: 100,
