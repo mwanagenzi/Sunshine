@@ -6,10 +6,7 @@ import 'package:sunshine/services/network_helper.dart';
 import 'package:sunshine/utils/constants.dart';
 
 class WeatherAPIService {
-  late final NetworkHelperService _currentWeatherNetworkHelperService,
-      _hourlyWeatherNetworkHelperService,
-      _dailyForecastNetworkHelperService,
-      _searchLocationNetworkHelperService;
+  
   final LocationService _locationService = LocationService();
 
   Future<DailyWeatherData> getDailyWeatherData() async {
@@ -39,7 +36,7 @@ class WeatherAPIService {
 
   Future<CurrentWeatherModel> _getCurrentSearchLocationWeatherData(
       List<double> coordinates) async {
-    _currentWeatherNetworkHelperService = NetworkHelperService(
+    final _currentWeatherNetworkHelperService = NetworkHelperService(
         apiUrl:
             "$kWeatherApiUrl$kCurrentWeatherApiMethod?key=$kApiKey&q=${coordinates[0]},${coordinates[1]}&aqi=no");
 
@@ -62,7 +59,7 @@ class WeatherAPIService {
 
   Future<List<HourlyWeather>> _getsearchLocationHourlyWeatherConditions(
       List<double> coordinates) async {
-    _hourlyWeatherNetworkHelperService = NetworkHelperService(
+    final _hourlyWeatherNetworkHelperService = NetworkHelperService(
         apiUrl:
             "$kWeatherApiUrl$kForecastApiMethod?key=$kApiKey&q=${coordinates[0]},${coordinates[1]}&days=3&aqi=no&alerts=no");
 
@@ -87,7 +84,7 @@ class WeatherAPIService {
   Future<CurrentWeatherModel> _getCurrentWeatherData() async {
     List<double>? locationCoordinates =
         await _locationService.getCurrentLocationCoordinates();
-    _currentWeatherNetworkHelperService = NetworkHelperService(
+    final _currentWeatherNetworkHelperService = NetworkHelperService(
         apiUrl:
             "$kWeatherApiUrl$kCurrentWeatherApiMethod?key=$kApiKey&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&aqi=no");
 
@@ -112,7 +109,7 @@ class WeatherAPIService {
     List<double>? locationCoordinates =
         await _locationService.getCurrentLocationCoordinates();
 
-    _hourlyWeatherNetworkHelperService = NetworkHelperService(
+    final _hourlyWeatherNetworkHelperService = NetworkHelperService(
         apiUrl:
             "$kWeatherApiUrl$kForecastApiMethod?key=$kApiKey&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&days=3&aqi=no&alerts=no");
 
@@ -137,7 +134,7 @@ class WeatherAPIService {
   Future<List<DailyWeatherModel>> _getDailyForecastData() async {
     List<double>? locationCoordinates =
         await _locationService.getCurrentLocationCoordinates();
-    _dailyForecastNetworkHelperService = NetworkHelperService(
+    final _dailyForecastNetworkHelperService = NetworkHelperService(
         apiUrl:
             "$kWeatherApiUrl$kForecastApiMethod?key=$kApiKey&q=${locationCoordinates?[0]},${locationCoordinates?[1]}&days=3&aqi=no&alerts=no");
 
@@ -160,7 +157,7 @@ class WeatherAPIService {
   }
 
   Future<List<SearchResult>> getSearchResultData(String searchKeyword) async {
-    _searchLocationNetworkHelperService = NetworkHelperService(
+    final _searchLocationNetworkHelperService = NetworkHelperService(
         apiUrl:
             "$kWeatherApiUrl$kSearchApiMethod?key=$kApiKey&q=$searchKeyword");
 

@@ -133,7 +133,7 @@ class _LocationScreenState extends State<LocationScreen> {
                                 Text(
                                   '${weatherElementData?.temperature.toString() ?? 0.toString()} \u2103',
                                   // ignore: unnecessary_const
-                                  style: Theme.of(context).textTheme.headline4,
+                                  style: Theme.of(context).textTheme.headline3,
                                 ),
                               ],
                             ),

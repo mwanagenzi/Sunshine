@@ -34,6 +34,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
   @override
   void dispose() {
     _searchFieldController.dispose();
+    print('Calling dispose() from search screen');
     currentState = SearchScreenState.savedLocations;
     super.dispose();
   }
@@ -177,11 +178,14 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
         builder: (context, AsyncSnapshot<List<SearchResult>> snapshot) {
           final searchResultData = snapshot.data;
           if (snapshot.hasError) {
+            currentState = SearchScreenState.savedLocations;
             return Center(
               child: Text(snapshot.error.toString()),
             );
           }
           if (snapshot.hasData) {
+            _searchFieldController.clear();
+            currentState = SearchScreenState.savedLocations;
             return SearchResultListView(searchResultData: searchResultData);
           } else {
             return const CircularProgressIndicator(
@@ -191,4 +195,4 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
         });
   }
 }
-//TODO: debug the saved locations render issue after navaigating awawy from screen
+//TODO: debug the saved locations render issue after navigating away from screen
