@@ -149,8 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             focusColor: Palette.highlightedTextColor,
                             hintText: 'Email Address',
-                            // ignore: prefer_const_constructors
-                            hintStyle: TextStyle(
+                            hintStyle: const TextStyle(
                               color: Colors.black,
                             ),
                             border: OutlineInputBorder(
@@ -191,7 +190,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _visibilityIcon = _changePasswordSuffixIcon(
                                       _visibilityIcon);
                                 });
-                                // _changePasswordSuffixIcon(_visibilityIcon);
                               },
                               child: Icon(
                                 _visibilityIcon,
