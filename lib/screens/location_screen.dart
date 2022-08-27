@@ -46,7 +46,7 @@ class _LocationScreenState extends State<LocationScreen> {
                           'Save',
                           // style: Theme.of(context).textTheme.bodyText2
                         ),
-                        onTap: () {
+                        onTap: () async {
                           //TODO: capture the current coordinates
                           //TODO: save the coordinates on user's list of saved locations
                           Navigator.pop(context);
