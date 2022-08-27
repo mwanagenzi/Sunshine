@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunshine/api/weather_api_service.dart';
 import 'package:sunshine/models/models.dart';
@@ -17,6 +19,8 @@ enum Menu { save, discard }
 
 class _LocationScreenState extends State<LocationScreen> {
   final searchLocationWeatherService = WeatherAPIService();
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +51,8 @@ class _LocationScreenState extends State<LocationScreen> {
                           // style: Theme.of(context).textTheme.bodyText2
                         ),
                         onTap: () async {
+                          await usersCollection
+                              .doc(FirebaseAuth.instance.currentUser!.uid); //todo : continue from here
                           //TODO: capture the current coordinates
                           //TODO: save the coordinates on user's list of saved locations
                           Navigator.pop(context);
