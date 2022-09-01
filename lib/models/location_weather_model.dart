@@ -1,11 +1,11 @@
 class LocationWeatherInfo {
-  String averageTemperature;
-  String weatherElement;
-  String locationName;
-  String weatherIconUrl;
+  String? currentTemperature;
+  String? weatherElement;
+  String? locationName;
+  String? weatherIconUrl;
 
   LocationWeatherInfo({
-    required this.averageTemperature,
+    required this.currentTemperature,
     required this.weatherElement,
     required this.locationName,
     required this.weatherIconUrl,
@@ -13,19 +13,10 @@ class LocationWeatherInfo {
 
   factory LocationWeatherInfo.fromJson(Map<String, dynamic> json) {
     return LocationWeatherInfo(
-      averageTemperature: json['averageTemperature'] as String,
-      weatherElement: json['weatherElement'] as String,
-      locationName: json['locationName'] as String,
-      weatherIconUrl: json['locationWeatherUrl'] as String,
+      currentTemperature: json['current']['temp_c'] as String,
+      weatherElement: json['current']['condition']['icon'] as String,
+      locationName: json['location']['name'] as String,
+      weatherIconUrl: json["current"]["temp_c"] as String,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'averageTemperature': averageTemperature,
-      'weatherElement': weatherElement,
-      'locationName': locationName,
-      'weatherIconUrl': weatherIconUrl
-    };
   }
 }

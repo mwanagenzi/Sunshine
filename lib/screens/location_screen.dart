@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunshine/api/weather_api_service.dart';
 import 'package:sunshine/models/models.dart';
@@ -50,9 +49,7 @@ class _LocationScreenState extends State<LocationScreen> {
                           'Save',
                           // style: Theme.of(context).textTheme.bodyText2
                         ),
-                        onTap: () async {
-                          await usersCollection
-                              .doc(FirebaseAuth.instance.currentUser!.uid); //todo : continue from here
+                        onTap: () {
                           //TODO: capture the current coordinates
                           //TODO: save the coordinates on user's list of saved locations
                           Navigator.pop(context);
