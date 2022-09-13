@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sunshine/provider/providers.dart';
+import 'package:sunshine/provider/navbar_tab_manager.dart';
 import 'package:sunshine/screens/screens.dart';
 import 'package:sunshine/utils/constants.dart';
 
@@ -43,7 +43,7 @@ Route<dynamic> generateAppRoutes(RouteSettings settings) {
       {
         return MaterialPageRoute(builder: (context) => SearchLocationScreen());
       }
-      
+
     default:
       {
         return MaterialPageRoute(builder: ((context) => const ErrorScreen()));
