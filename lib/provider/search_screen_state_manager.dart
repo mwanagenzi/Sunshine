@@ -1,15 +1,20 @@
 import 'package:flutter/foundation.dart';
 
-enum SearchScreenState { searchResults, savedLocations }
+enum SearchScreenState { searchResults, savedLocations, selectedLocation }
 
 class SearchScreenStateManager extends ChangeNotifier {
-  SearchScreenState currentState = SearchScreenState.savedLocations;
+  SearchScreenState _currentState = SearchScreenState.savedLocations;
+
+  // SearchScreenState _currentState;
+  SearchScreenState get state => _currentState;
 
   void toggleScreenState(SearchScreenState requestedState) {
     if (requestedState == SearchScreenState.savedLocations) {
-      currentState = requestedState;
+      _currentState = requestedState;
     } else if (requestedState == SearchScreenState.searchResults) {
-      currentState = requestedState;
+      _currentState = requestedState;
+    } else if (requestedState == SearchScreenState.selectedLocation) {
+      _currentState = requestedState;
     }
     notifyListeners();
   }

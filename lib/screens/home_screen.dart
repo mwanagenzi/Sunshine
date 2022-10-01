@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sunshine/api/weather_api_service.dart';
 import 'package:sunshine/models/daily_weather_data.dart';
 import 'package:sunshine/sunshine_theme/palette.dart';
+import 'package:sunshine/sunshine_theme/theme.dart';
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -37,6 +38,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Text(
                       weatherElementData?.locationName ?? '',
+                      style: Theme.of(context).textTheme.headline5,
                     ),
                     // ignore: prefer_const_constructors
                     SizedBox(
@@ -44,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Text(
                       weatherElementData?.currentDate ?? '',
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ],
                 ),

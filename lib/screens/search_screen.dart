@@ -22,6 +22,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
   late TextEditingController _searchFieldController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final searchService = WeatherAPIService();
+
   // late SearchScreenState currentState;
 
   @override
@@ -43,6 +44,10 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
     if (searchFieldValue == null || searchFieldValue.isEmpty) {
       return 'This field requires a value';
     } else {
+      Provider.of<SearchScreenStateManager>(context, listen: false)
+          .toggleScreenState(
+        SearchScreenState.searchResults,
+      );
       // setState(() {
       //   currentState = SearchScreenState.searchResults;
       // });
@@ -144,8 +149,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                   Flexible(
                     flex: 5,
                     child: buildSearchScreenState(
-                        Provider.of<SearchScreenStateManager>(context)
-                            .currentState),
+                       searchScreenStateManager.state),
                   ),
                 ],
               ),

@@ -6,11 +6,14 @@ class SunshineTheme {
     return ThemeData(
       // ignore: prefer_const_constructors
       appBarTheme: AppBarTheme(
-        color: Palette.primaryColor,
-        elevation: 2.0,
-        shadowColor: Palette.activeCardColor,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
+          color: Palette.primaryColor,
+          elevation: 2.0,
+          shadowColor: Palette.activeCardColor,
+          iconTheme: const IconThemeData(color: Colors.white),
+          titleTextStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+          )),
       scaffoldBackgroundColor: Palette.primaryColor,
       textTheme: SunshineTheme.textTheme,
 

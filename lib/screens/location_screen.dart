@@ -18,8 +18,16 @@ enum Menu { save, discard }
 
 class _LocationScreenState extends State<LocationScreen> {
   final searchLocationWeatherService = WeatherAPIService();
-  CollectionReference usersCollection =
-      FirebaseFirestore.instance.collection('users');
+  // CollectionReference usersCollection =
+  //     FirebaseFirestore.instance.collection('users').doc('');
+  CollectionReference savedLocationsCollection = FirebaseFirestore.instance
+      .collection('/users/wMsQRNLUbV2fsOKxTfNh/chosenLocations');
+  Future<void> addLocation() {
+    return savedLocationsCollection.add({
+      'latitude': -1.2961689,
+      'longitude': 36.7116952,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +57,8 @@ class _LocationScreenState extends State<LocationScreen> {
                           'Save',
                           // style: Theme.of(context).textTheme.bodyText2
                         ),
-                        onTap: () {
+                        onTap: () async {
+                          await addLocation();
                           //TODO: capture the current coordinates
                           //TODO: save the coordinates on user's list of saved locations
                           Navigator.pop(context);

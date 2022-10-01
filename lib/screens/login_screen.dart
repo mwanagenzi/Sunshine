@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context)
             .showSnackBar(_showErrorSnackBar('No user found for that email.'));
-      } else if (e.code == 'wrong-pasword') {
+      } else if (e.code == 'wrong-password') {
         ScaffoldMessenger.of(context).showSnackBar(
             _showErrorSnackBar('Wrong password provided for that user.'));
       }
