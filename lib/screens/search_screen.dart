@@ -40,21 +40,6 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
     super.dispose();
   }
 
-  String? _searchFieldValidator(String? searchFieldValue) {
-    if (searchFieldValue == null || searchFieldValue.isEmpty) {
-      return 'This field requires a value';
-    } else {
-      Provider.of<SearchScreenStateManager>(context, listen: false)
-          .toggleScreenState(
-        SearchScreenState.searchResults,
-      );
-      // setState(() {
-      //   currentState = SearchScreenState.searchResults;
-      // });
-      return null;
-    }
-  }
-
   void _handleSearchFieldSubmit() {
     if (_formKey.currentState!.validate()) {
       //TODO: enum to handle switching between results and saved locations
@@ -91,7 +76,20 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                           child: Form(
                             key: _formKey,
                             child: TextFormField(
-                              validator: _searchFieldValidator,
+                              validator: (String? searchFieldValue) {
+                                if (searchFieldValue == null ||
+                                    searchFieldValue.isEmpty) {
+                                  return 'This field requires a value';
+                                } else {
+                                  searchScreenStateManager.toggleScreenState(
+                                    SearchScreenState.searchResults,
+                                  );
+                                  // setState(() {
+                                  //   currentState = SearchScreenState.searchResults;
+                                  // });
+                                  return null;
+                                }
+                              },
                               controller: _searchFieldController,
                               onFieldSubmitted: (value) {
                                 _handleSearchFieldSubmit();
@@ -148,8 +146,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                   ),
                   Flexible(
                     flex: 5,
-                    child: buildSearchScreenState(
-                       searchScreenStateManager.state),
+                    child:
+                        buildSearchScreenState(searchScreenStateManager.state),
                   ),
                 ],
               ),
